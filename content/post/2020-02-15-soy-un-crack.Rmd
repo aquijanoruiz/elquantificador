@@ -1,0 +1,25 @@
+---
+title: Soy un crack
+author: Alonso Quijano
+date: '2020-02-15'
+slug: soy-un-crack
+categories:
+  - golang
+tags:
+  - CSS
+  - go
+description: ''
+thumbnail: ''
+---
+
+Left-sided neglect usually occurs after an injury to the right hemisphere of the brain. Patients with left-sided visual neglect fail to copy the left part of a drawing when drawing on of a sheet of paper. Many stroke survivors experience left sided neglect. Some may experience it more extreme than others. The aim of this experiment was to study the effect of different types of passive stimulation in stroke patients with left-sided visual neglect. 
+
+Fourteen right-handed patients with left-sided visual neglect (mean age, 57 years) were recruited for the study soon after the onset of the stroke. They were randomized into different treatment arms: no stimulation at all, tactile stimulation (repetitive taps with the smooth part of a pencil on the cheek), verbal auditory stimulation (description of a landscape), and nonverbal auditory stimulation (listening to music and white noise). The test consisted of copying six drawings: a flower, a cube, a bicycle, a clock, a house, and three men. The instruction was to copy the drawings as accurately as possible on the same sheet of paper. 
+
+Tactile stimulation and verbal auditory stimulation did not have any effect on visual neglect. However, the musical auditory stimuli and white noise auditory stimuli produced an obvious improvement in visual neglect. The drawing below is taken from Hommel, et al. (1990). It shows the improvement of music listening on visual neglect. The results from this experiment demonstrated that the improvement in neglect does not depended on the presence of an auditory stimulus, but on the nature of the stimulus. While verbal stimuli did not produce any improvement in visual neglect, nonverbal stimuli through music and white noise did. As cited in Hommel, et al. (1990), an increase in cerebral blood flow and metabolism has been proved to occur while listening to music. However, the extent of this improvement depends on the characteristics of the stimulus.
+
+```{r}
+library(car)
+str(mtcars)
+hist(mtcars$mpg)
+```
