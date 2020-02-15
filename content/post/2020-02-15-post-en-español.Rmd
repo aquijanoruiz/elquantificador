@@ -1,0 +1,14 @@
+---
+title: Post en espa??ol
+author: Alonso Quijano
+date: '2020-02-15'
+slug: post-en-espa??ol
+categories:
+  - Development
+tags:
+  - development
+  - golang
+description: ''
+thumbnail: ''
+---
+Para saber si R puede leer espa??ol y puede reconocer tildes. Cami??n, c??mara, am??, viv??, ??nico.
