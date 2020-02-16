@@ -10,7 +10,7 @@ tags:
 description: ''
 thumbnail: ''
 ---
-hola mundo
+hola mundo. Lo logramos
 ```{r}
 2^2
 ```
