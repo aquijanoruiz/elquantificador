@@ -1,0 +1,16 @@
+---
+title: Marco's prueba
+author: Marco
+date: '2020-02-16'
+slug: marco-s-prueba
+categories:
+  - Gender
+tags:
+  - Gender
+description: ''
+thumbnail: ''
+---
+```{r}
+2^2
+```
+
