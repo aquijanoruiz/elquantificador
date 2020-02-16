@@ -10,6 +10,7 @@ tags:
 description: ''
 thumbnail: ''
 ---
+hola mundo
 ```{r}
 2^2
 ```
