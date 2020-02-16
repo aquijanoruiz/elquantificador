@@ -10,8 +10,8 @@ tags:
 description: ''
 thumbnail: ''
 ---
-hola mundo. Lo logramos
+hola mundo. Lo logramos 2+5
 ```{r}
-2^2
+2^3
 ```
 
