@@ -1,16 +1,29 @@
 baseurl = "/"
 title = "El Quantificador"
+
 languageCode = "en-us"
 paginate = "10" # Number of posts per page
 theme = "Mainroad"
+
+# enable staticman comments (staticman.net)
+# StaticmanComments = "true"
+
 disqusShortname = "" # Enable comments by entering your Disqus shortname
 googleAnalytics = "" # Enable Google Analytics by entering your tracking id
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-[Author]
-  name = "John Doe"
-  bio = "John Doe's true identity is unknown. Maybe he is a successful blogger or writer. Nobody knows it."
-  avatar = "img/avatar.png"
+# rssLimit = 20 # max nbr of entries shown in rss feed
+
+# Taxonomies (si no funciona quitar)
+[taxonomies]
+  author = "authors"
+  tag = "tags"
+  category = "categories"
+
+[Author] # Ya no es necesario llenar
+  name = ""
+  bio = ""
+  avatar = ""
 
 [Params]
   subtitle = "Just another site" # Subtitle of your site

@@ -14,3 +14,12 @@
 	</span>
 </div>
 {{- end }}
+<div class="meta__item-categories meta__item">
+	{{ partial "svg/telegram.svg" (dict "class" "meta__icon") }}
+	<span class="meta__text">
+    {{- range $index, $element := .Params.authors }}
+    {{ if gt $index 0 }} / {{ end }}
+      {{ . }}
+    {{ end }}
+	</span>
+</div>
