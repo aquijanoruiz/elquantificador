@@ -385,6 +385,7 @@ select {
 
 .logo {
 	padding: 25px;
+	text-align: center;
 }
 
 .logo__link {
@@ -597,10 +598,6 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 }
 
 .meta__text {
-	vertical-align: middle;
-}
-
-.meta__text__bold {
 	vertical-align: middle;
 }
 
