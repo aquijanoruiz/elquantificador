@@ -1,3 +1,14 @@
+{{- if .Params.authors }}
+<div class="meta__item-categories meta__item">
+	<span class="meta__text">
+	  <strong> Por </strong>
+    {{- range $index, $element := .Params.authors }}
+    {{ if gt $index 0 }} | {{ end }}
+      {{ . }}
+    {{ end }}
+	</span>
+</div>
+{{ end }}
 {{- $root := . -}}
 {{- with .Param "post_meta" -}}
 	{{- range $field := . -}}

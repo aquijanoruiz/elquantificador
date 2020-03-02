@@ -593,9 +593,14 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 	margin-right: 5px;
 	vertical-align: middle;
 	fill: #c4c4c4;
+	margin: 0 5px 0 0;
 }
 
 .meta__text {
+	vertical-align: middle;
+}
+
+.meta__text__bold {
 	vertical-align: middle;
 }
 
