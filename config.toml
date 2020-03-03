@@ -34,6 +34,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   authorbox = true
   post_navigation = true
   post_meta = ["date", "categories"] # Order of post meta information
+  menu = ["main", "side", "footer"]
 
 [Params.sidebar]
   home = "right"   # Configure layout for home page

@@ -1,10 +1,6 @@
 ---
 date: "2014-03-10"
 linktitle: Migrating from Jekyll
-menu:
-  main:
-    name: Jekyll migration
-    weight: 10
 title: Migrate to Hugo from Jekyll
 ---
 
@@ -12,15 +8,15 @@ title: Migrate to Hugo from Jekyll
 Jekyll has a rule that any directory not starting with `_` will be copied as-is to the `_site` output. Hugo keeps all static content under `static`. You should therefore move it all there.
 With Jekyll, something that looked like
 
-    ▾ <root>/
-        ▾ images/
+    ??? <root>/
+        ??? images/
             logo.png
 
 should become
 
-    ▾ <root>/
-        ▾ static/
-            ▾ images/
+    ??? <root>/
+        ??? static/
+            ??? images/
                 logo.png
 
 Additionally, you'll want any files that should reside at the root (such as `CNAME`) to be moved to `static`.
