@@ -1,4 +1,4 @@
 ---
-name: Marco Faytong
-bio: Marco Faytong es un estudiante de doctorado de Penn State University. Tiene un perro odioso que se llama Memo.
+name: Marco Faytong Haro
+bio: Marco Faytong Haro es candidato a Doctor en Sociolog??a y Demograf??a por Penn State University. Se considera un investigador social en curva de aprendizaje (y siempre estar?? en curva de aprendizaje). Es un "quantificador" obsesivo y siente atracci??n (investigativa) por la desigualdad en el micronivel. Tiene una maestr??a en New York University en investigaci??n cuantitativa aplicada a las ciencias sociales y un pregrado en Econom??a en la UEES. Sus preguntas de investigaci??n lo han llevado a trabajar o presentar sus proyectos en varios sitios, entre esos: Suiza, India, Singapur, Vietnam, Inglaterra, entre otros. Aprovecha sus viajes acad??micos para hacer turismo. Tiene un perro llamado Nemo.
 ---
