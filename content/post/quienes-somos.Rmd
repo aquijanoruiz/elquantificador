@@ -1,5 +1,5 @@
 ---
-title: Quiénes somos
+title: ¿Quiénes somos?
 author: ''
 date: ''
 slug: quienes-somos
@@ -9,7 +9,7 @@ description: ''
 thumbnail: ''
 menu: 
   main: 
-    name: Quiénes somos
+    name: ¿Quiénes somos?
     weight: 1
 ---
 
