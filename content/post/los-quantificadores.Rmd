@@ -13,8 +13,10 @@ menu:
     weight: 3
 ---
 La idea de este sitio web surge cuando, sorprendidos por la creciente propagación de información falsa y sesgada a través de medios de comunicación y redes sociales, nos propusimos desafiar la inadecuada cultura informativa del Ecuador y promover una basada en datos. Nosotros, de aquí en adelante "los quantificadores", aplicaremos el método científico para examinar temas coyunturales de ámbito social y proveer de análisis  libres de sesgos, con rigurosidad metodológica.
-
-### Marco Faytong Haro
+		
+<h3>
+<a  href="https://elquantificador.org/authors/marco-faytong/">Marco Faytong Haro</a>
+</h3>
 
 <div class="authorbox clearfix">
 <figure class="authorbox__avatar">
@@ -23,7 +25,9 @@ La idea de este sitio web surge cuando, sorprendidos por la creciente propagaci�
 <div class="authorbox__description">Marco Faytong Haro es candidato a Doctor en Sociología y Demografía por Penn State University. Se considera un investigador social en curva de aprendizaje (y siempre estará en curva de aprendizaje). Es un "quantificador" obsesivo y siente atracción (investigativa) por la desigualdad en el micronivel. Posee una maestría en New York University en investigación cuantitativa aplicada a las ciencias sociales y un pregrado en Economía en la UEES. Sus preguntas de investigación lo han llevado a trabajar o presentar sus proyectos en varios sitios, entre esos: Suiza, India, Singapur, Vietnam e Inglaterra. Aprovecha sus viajes académicos para hacer turismo. Tiene un perro llamado Nemo.</div>
 </div>
 
-### Alonso Quijano
+<h3>
+<a href="https://elquantificador.org/authors/alonso-quijano/">Alonso Quijano</a>
+</h3>
 
 <div class="authorbox clearfix">
 <figure class="authorbox__avatar">
