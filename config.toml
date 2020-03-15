@@ -35,7 +35,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   post_navigation = true
   post_meta = ["date", "categories"] # Order of post meta information
   menu = ["main", "side", "footer"]
-  images = ["placeholder.png"]
+  images = ["prueba-economia.jpg"]
 
 [Params.sidebar]
   home = "right"   # Configure layout for home page
