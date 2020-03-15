@@ -11,6 +11,8 @@ tags:
 description: 'Este es un pequeño texto que no debería aparecer dentro del post, sino afuera en la página de inicio'
 lead: 'Este pequeño texto debería aparecer en cursiva en la parte de inicio'
 thumbnail: '/post/economia-finanzas/prueba-economia.jpg'
+images: 
+  - img/og_image.jpg
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mattis pellentesque id nibh tortor id aliquet lectus proin. Ut tellus elementum sagittis vitae et leo duis ut diam. Elit scelerisque mauris pellentesque pulvinar pellentesque. A pellentesque sit amet porttitor eget dolor. Amet risus nullam eget felis eget. Non sodales neque sodales ut etiam sit. Nisl purus in mollis nunc sed id semper risus. Mi bibendum neque egestas congue quisque. Ullamcorper velit sed ullamcorper morbi tincidunt ornare. At elementum eu facilisis sed odio morbi quis commodo odio. In tellus integer feugiat scelerisque varius morbi enim nunc faucibus.
