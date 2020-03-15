@@ -27,7 +27,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [Params]
   subtitle = "La verdad se cuenta con datos." # Subtitle of your site
-  description = "Analizamos temas coyunturales de ámbito social de forma sencilla, académica, transparente y reproducible." # Description of your site
+  description = "Analizamos temas coyunturales de ámbito social de forma sencilla, académica, y transparente." # Description of your site
   opengraph = true
   twitter_cards = true
   readmore = false # Show "Read more" button in list if true
@@ -35,7 +35,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   post_navigation = true
   post_meta = ["date", "categories"] # Order of post meta information
   menu = ["main", "side", "footer"]
-  og_image = "img/og_image.jpg"
+  images = ["img/og_image.jpg"]
 
 [Params.sidebar]
   home = "right"   # Configure layout for home page
