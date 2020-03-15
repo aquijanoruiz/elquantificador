@@ -35,7 +35,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   post_navigation = true
   post_meta = ["date", "categories"] # Order of post meta information
   menu = ["main", "side", "footer"]
-  images = ["https://github.com/aquijanoruiz/elquantificador/blob/master/themes/Mainroad/static/img/og_image.jpg?raw=true"]
+  images = ["placeholder.png"]
 
 [Params.sidebar]
   home = "right"   # Configure layout for home page
