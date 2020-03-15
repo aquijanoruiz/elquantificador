@@ -1,0 +1,15 @@
+---
+title: Nuevo post en español
+author: Alonso Quijano
+date: '2020-02-27'
+slug: nuevo-post-en-español
+categories:
+  - Development
+tags:
+  - CSS
+  - go
+description: ''
+thumbnail: ''
+---
+
+Este es un post en español para ver si los caracteres en español funcionan. áéíóúñ¿¡.....

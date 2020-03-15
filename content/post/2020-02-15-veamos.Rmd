@@ -1,0 +1,19 @@
+---
+title: Veamos
+author: Alonso Quijano
+date: '2020-02-15'
+slug: veamos
+categories:
+  - Development
+tags:
+  - CSS
+  - go
+description: ''
+thumbnail: ''
+---
+Funciona?
+
+```{r}
+
+1+1
+```

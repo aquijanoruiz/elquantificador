@@ -1,0 +1,14 @@
+---
+title: Otra prueba
+author: 'Alonso '
+date: '2020-02-16'
+slug: otra-prueba
+categories:
+  - golang
+tags:
+  - CSS
+  - go
+description: ''
+thumbnail: ''
+---
+Esta es una prueba.
