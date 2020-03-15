@@ -1,7 +1,7 @@
 baseurl = "/"
 title = "El Quantificador"
 
-languageCode = "en-us"
+languageCode = "es-es"
 paginate = "10" # Number of posts per page
 theme = "Mainroad"
 
