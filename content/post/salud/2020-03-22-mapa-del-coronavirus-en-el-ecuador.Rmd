@@ -15,7 +15,7 @@ images:
   - 'https://elquantificador.org/post/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador.png'
 ---
 
-Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de lugar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país.
+Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de lugar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al Martes, 22 de marzo de 2020.
 
 ```{r, echo=FALSE, include=FALSE}
 # --------- these are the packages used to create the map ---------
@@ -84,9 +84,9 @@ covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We tr
 }
 </style>
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align = "center", fig.height = 8, fig.width = 7}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align = "center", fig.height = 7, fig.width = 6}
 covid19_confirmed_today_map %>% removeLayersControl() %>%
-  setView(lng = -78.50374, lat = -1.289527, zoom = 7) %>% fitBounds(-80.0, -4.2, -77.0, 0.8) # We center the map in Tungurahua
+  setView(lng = -78.50374, lat = -1.289527, zoom = 5) %>% fitBounds(-79.6, -4.2, -77.0, 0.8) # We center the map in Tungurahua
 ```
 
 
