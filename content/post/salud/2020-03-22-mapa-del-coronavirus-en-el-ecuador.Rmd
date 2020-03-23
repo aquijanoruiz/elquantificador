@@ -90,5 +90,6 @@ covid19_confirmed_today_map %>% removeLayersControl() %>%
   setView(lng = -78.50374, lat = -1.289527, zoom = 5) %>% fitBounds(-79.6, -4.2, -77.0, 0.8) # We center the map in Tungurahua
 ```
 
+Fuente: Ministerio de Salud del Ecuador
 
 
