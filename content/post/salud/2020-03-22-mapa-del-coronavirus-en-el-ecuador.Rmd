@@ -90,6 +90,6 @@ covid19_confirmed_today_map %>% removeLayersControl() %>%
   setView(lng = -78.50374, lat = -1.289527, zoom = 5) %>% fitBounds(-79.6, -4.2, -77.0, 0.8) # We center the map in Tungurahua
 ```
 
-Fuente: Ministerio de Salud del Ecuador
+Fuente: Ministerio de Salud Pública del Ecuador
 
 Este mapa fue elaborado utilizando lenguaje R a través los paquetes `tmap` y `leaflet`. Si estás interesado en reproducir este código y la metodología empleada, visita nuestra página en [github](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador/2020-03-22-mapa-del-coronavirus-en-el-ecuador.Rmd).
