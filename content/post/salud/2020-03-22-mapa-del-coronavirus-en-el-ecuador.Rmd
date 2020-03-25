@@ -119,7 +119,7 @@ Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align = "center", fig.height = 7, fig.width = 6}
 covid19_confirmed_today_map %>% removeLayersControl() %>%
-  setView(lng = -78.50374, lat = -1.289527, zoom = 6) %>% fitBounds(-80.0, -4.2, -77.0, 0.8) # We center the map in Tungurahua
+  setView(lng = -78.50374, lat = -1.289527, zoom = 6) %>% fitBounds(-80.0, -4.2, -76.6, 0.8) # We center the map in Tungurahua
 ```
 
 Fuente: Ministerio de Salud Pública del Ecuador
