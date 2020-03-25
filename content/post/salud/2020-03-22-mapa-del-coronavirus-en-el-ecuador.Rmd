@@ -72,7 +72,7 @@ confirmed_p <- read_csv("confirmed_provincia.csv")
 # We need to transform the data from wide to long
 confirmed_p <- confirmed_p %>% gather(Fecha, Casos, -Provincia) %>% 
   mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y")) %>%
-  filter(Fecha >= as.Date("2020-03-05")) %>% # We only have data by province from May 16th
+  filter(Fecha >= as.Date("2020-03-16")) %>% # We only have data by province from May 16th
   replace_na(list(Casos = 0))
 
 confirmed_p$Provincia <- factor(confirmed_p$Provincia, levels = levels(ecu_map_p$Provincia))
@@ -98,12 +98,12 @@ covid19_nozeros_c <- covid19_confirmed_c[!covid19_confirmed_c$Casos == 0,]
 covid19_nozeros_p <- covid19_confirmed_p[!covid19_confirmed_p$Casos == 0,]
 
 covid19_confirmed_today_map <-
-  tm_shape(ecu_map_p) + tm_borders(col = "grey", lwd = 2, alpha = 0.4) +
+  tm_shape(ecu_map_p) + tm_borders(col = "grey", lwd = 2, alpha = 0.4) + # This is the province sf file
   tm_polygons(col = "skyblue", alpha = 0.2) + 
-  tm_shape(covid19_confirmed_p) + # We add a second tm_shape with the coronavirus data
-  tm_fill(col = "Casos", alpha = 0, legend.show = FALSE) +
-  tm_shape(covid19_nozeros_c) + # We add a second tm_shape with the coronavirus data
-  tm_bubbles(size = "Casos", col = "red", alpha = 0.6, scale = 4, border.lwd = NA)
+  tm_shape(covid19_confirmed_p) +  # We add a second tm_shape with the province data stored in the sf file
+  tm_fill(col = "Casos", alpha = 0, legend.show = FALSE) + # We set transparency to 0 because we don't want any colors, just the data
+  tm_shape(covid19_nozeros_c) + # We add a third tm_shape with the canton data stored in the sf file
+  tm_bubbles(size = "Casos", col = "red", alpha = 0.6, scale = 4, border.lwd = NA) # We add the bubbles
   
 covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We transform the map into a leaflet map
 ```
