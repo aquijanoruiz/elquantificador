@@ -100,7 +100,7 @@ covid19_nozeros_p <- covid19_confirmed_p[!covid19_confirmed_p$Casos == 0,]
 covid19_confirmed_today_map <-
   tm_shape(ecu_map_p) + tm_borders(col = "grey", lwd = 2, alpha = 0.4) +
   tm_polygons(col = "skyblue", alpha = 0.2) + 
-  tm_shape(covid19_nozeros_p) + # We add a second tm_shape with the coronavirus data
+  tm_shape(covid19_confirmed_p) + # We add a second tm_shape with the coronavirus data
   tm_fill(col = "Casos", alpha = 0, legend.show = FALSE) +
   tm_shape(covid19_nozeros_c) + # We add a second tm_shape with the coronavirus data
   tm_bubbles(size = "Casos", col = "red", alpha = 0.6, scale = 4, border.lwd = NA)
