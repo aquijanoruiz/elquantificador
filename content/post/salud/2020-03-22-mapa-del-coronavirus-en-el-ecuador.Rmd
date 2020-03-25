@@ -42,9 +42,10 @@ ecu_map_c <- ms_simplify(ecu_map_c, keep=0.01) # We keep the 0.4% of the polygon
 
 # We keep only the variables we need
 ecu_map_c <- ecu_map_c %>% select(-c(ID_0, ISO, NAME_0, NAME_1, ID_1, ID_2, TYPE_2, ENGTYPE_2, NL_NAME_2, VARNAME_2)) %>%
-  rename(Cantón = NAME_2) # We only keep the province names and the geometry
-
-plot(ecu_map_c)
+  rename(Cantón = NAME_2) %>% # We only keep the province names and the geometry
+  filter(!Cantón == "Bolívar") # We take out the canton Bolivar beacuse there are two catons with the same name,
+  # one in Manabi and one in Carchi. This duplicate creates a problem when illustrating the map. As there are very few
+  # cases in Bolivar in Manabi, we will remove them.
 
 # --------- preparing province map ---------
 # We simplify the data
@@ -60,9 +61,9 @@ confirmed_c <- read_csv("confirmed_canton.csv")
 
 # We need to transform the data from wide to long
 confirmed_c <- confirmed_c %>% select(-Provincia) %>% gather(Fecha, Casos, -Cantón) %>% 
-  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y")) %>%
+  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y"), Casos = as.numeric(Casos)) %>%
   filter(Fecha >= as.Date("2020-03-16")) %>% # We only have data by province from May 16th
-  replace_na(list(Casos = 0))
+  replace_na(list(Casos = 0)) %>% filter(!Cantón == "Bolívar")
 
 confirmed_c$Cantón <- factor(confirmed_c$Cantón, levels = levels(ecu_map_c$Cantón))
 
@@ -84,7 +85,7 @@ centroid[23,] # We use Tungurahua province as the center of our map
 # The canton data
 covid19_confirmed_c <- inner_join(ecu_map_c, confirmed_c, by = "Cantón") # We merge the map data with the coronavirus data
 
-today <- "2020-03-24"
+today <- "2020-03-25"
 covid19_confirmed_c <- covid19_confirmed_c %>% filter(Fecha == today) %>% select(-Fecha)
 
 # The province data
@@ -95,7 +96,6 @@ covid19_confirmed_p <- covid19_confirmed_p %>% filter(Fecha == today) %>% select
 # --------- creating the interactive map ---------
 # We filter the data and take out the nonzero elements
 covid19_nozeros_c <- covid19_confirmed_c[!covid19_confirmed_c$Casos == 0,]
-covid19_nozeros_p <- covid19_confirmed_p[!covid19_confirmed_p$Casos == 0,]
 
 covid19_confirmed_today_map <-
   tm_shape(ecu_map_p) + tm_borders(col = "grey", lwd = 2, alpha = 0.4) + # This is the province sf file
@@ -108,7 +108,7 @@ covid19_confirmed_today_map <-
 covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We transform the map into a leaflet map
 ```
 
-Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al martes, 24 de marzo de 2020.
+Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al lunes, 25 de marzo de 2020.
 
 
 <style>
