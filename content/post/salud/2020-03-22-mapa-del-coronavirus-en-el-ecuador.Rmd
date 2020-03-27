@@ -108,7 +108,7 @@ covid19_confirmed_today_map <-
 covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We transform the map into a leaflet map
 ```
 
-Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al jueves, 26 de marzo de 2020.
+Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al **jueves, 26 de marzo de 2020**.
 
 
 <style>
