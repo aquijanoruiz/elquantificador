@@ -10,7 +10,7 @@
 		{{ . }}
 	</div>
 	{{- end }}
-	{{- range .Paginator.Pages }}
+	{{- range where .Paginator.Pages "Params.hidden" "ne" "true"}}
 		{{- .Render "summary" }}
 	{{- end }}
 </main>

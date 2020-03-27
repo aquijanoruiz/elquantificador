@@ -9,6 +9,7 @@ description: 'La OMS ha declarado pandemia al brote de Covid-19. Te mostramos un
 thumbnail: '/post/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador-cantones.png'
 images: 
   - 'https://elquantificador.org/post/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador-cantones.png'
+hidden: true
 ---
 
 ```{r, echo=FALSE, include=FALSE}

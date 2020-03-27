@@ -1,3 +1,4 @@
+{{ if ne .Params.hidden true }}
 <article class="list__item post">
 	{{- if .Params.thumbnail }}
     	<figure class="list__thumbnail">
@@ -36,3 +37,4 @@
 	{{- end }}
 	{{- end }}
 </article>
+{{- end }}
