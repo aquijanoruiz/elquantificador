@@ -112,7 +112,7 @@ Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align = "center", fig.height = 7, fig.width = 6}
 library(kableExtra)
-table <-c(1823, 48, 3, 1772, 6402)
+table <-c(1835, 48, 3, 1784, 6402)
 names(table) <- c("Confirmados", "Fallecidos", "Recuperados", "Activos", "Pruebas hechas")
 table <- t(table)
 
