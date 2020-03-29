@@ -107,6 +107,17 @@ covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We tr
 
 Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al **sábado, 28 de marzo de 2020**.
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align = "center", fig.height = 7, fig.width = 6}
+library(kableExtra)
+table <-c(1823, 48, 3, 1772, 6402)
+names(table) <- c("Confirmados", "Fallecidos", "Recuperados", "Activos", "Pruebas hechas")
+table <- t(table)
+
+kable(table) %>% kable_styling() %>% column_spec(1, bold = T) %>%
+  column_spec(2, color = "brown", bold = T) %>% column_spec(3, color = "green", bold = T) %>% 
+  column_spec(4, color = "orange", bold = T) %>% 
+  column_spec(5, color = "skyblue", bold = T)
+```
 
 <style>
 .html-widget {
