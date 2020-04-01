@@ -58,7 +58,7 @@ confirmed_c <- read_csv("confirmed_canton.csv")
 
 # We need to transform the data from wide to long
 confirmed_c <- confirmed_c %>% select(-Provincia) %>% gather(Fecha, Casos, -Cantón) %>% 
-  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y"), Casos = as.numeric(Casos)) %>%
+  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%y"), Casos = as.numeric(Casos)) %>%
   filter(Fecha >= as.Date("2020-03-16")) %>% # We only have data by province from May 16th
   replace_na(list(Casos = 0)) %>% filter(!Cantón == "Bolívar")
 
@@ -69,7 +69,7 @@ confirmed_p <- read_csv("confirmed_provincia.csv")
 
 # We need to transform the data from wide to long
 confirmed_p <- confirmed_p %>% gather(Fecha, Casos, -Provincia) %>% 
-  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y")) %>%
+  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%y")) %>%
   filter(Fecha >= as.Date("2020-03-16")) %>% # We only have data by province from May 16th
   replace_na(list(Casos = 0))
 
@@ -82,7 +82,7 @@ centroid[23,] # We use Tungurahua province as the center of our map
 # The canton data
 covid19_confirmed_c <- inner_join(ecu_map_c, confirmed_c, by = "Cantón") # We merge the map data with the coronavirus data
 
-today <- "2020-03-30"
+today <- "2020-03-31"
 covid19_confirmed_c <- covid19_confirmed_c %>% filter(Fecha == today) %>% select(-Fecha)
 
 # The province data
@@ -105,11 +105,11 @@ covid19_confirmed_today_map <-
 covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We transform the map into a leaflet map
 ```
 
-Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al **lunes, 30 de marzo de 2020**.
+Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al **martes, 31 de marzo de 2020**.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align = "center", fig.height = 7, fig.width = 6}
 library(kableExtra)
-table <-c(1962, 60, 3, 1899, 7268)
+table <-c(2302, 79, 58, 2165, 8251)
 names(table) <- c("Confirmados", "Fallecidos", "Recuperados", "Activos", "Pruebas hechas")
 table <- t(table)
 
