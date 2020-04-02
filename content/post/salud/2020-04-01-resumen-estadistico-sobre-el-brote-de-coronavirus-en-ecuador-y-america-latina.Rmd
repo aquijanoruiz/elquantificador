@@ -9,7 +9,7 @@ categories:
 tags:
   - Coronavirus
   - Mapas
-description: 'La rápida propagación del Covid-19 en América Latina y el mundo ya ha alcanzado 18513 casos en América Latina. Te mostramos un resumen estadístico sobre el brote de coronavirus en Ecuador y América Latina. Hemos incluido tablas, gráficos y mapas para mejor ilustrar cómo ha afectado esta pandemia a nuestra región.'
+description: 'La rápida propagación del Covid-19 en Ecuador y América Latina ya ha alcanzado 18513 casos confirmados. Te mostramos un resumen estadístico sobre el brote de coronavirus en Ecuador y América Latina. Hemos incluido tablas, gráficos y mapas para mejor ilustrar cómo ha afectado esta pandemia a nuestra región.'
 thumbnail: '/post/salud/2020-04-01-resumen-estadistico-sobre-el-brote-de-coronavirus-en-ecuador-y-america-latina.png'
 images: 
   - 'https://elquantificador.org/post/salud/2020-04-01-resumen-estadistico-sobre-el-brote-de-coronavirus-en-ecuador-y-america-latina.png'
