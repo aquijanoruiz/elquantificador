@@ -1,15 +1,15 @@
 ---
-title: Resumen estadístico sobre el coronavirus en Ecuador y América Latina (Marzo)
+title: Resumen estadístico actualizado sobre el coronavirus en Ecuador y América Latina
 authors: 
   - Alonso Quijano
-date: '2020-04-01'
+
 slug: post/salud/resumen-estadistico-brote-coronavirus-ecuador-america-latina.md
 categories:
   - Salud
 tags:
   - Coronavirus
   - Mapas
-description: 'La rápida propagación del Covid-19 en Ecuador y América Latina ya ha alcanzado 18513 casos confirmados. Te mostramos un resumen estadístico sobre el brote de coronavirus en Ecuador y América Latina. Hemos incluido tablas, gráficos y mapas para mejor ilustrar cómo ha afectado esta pandemia a nuestra región.'
+description: 'La rápida propagación del Covid-19 en Ecuador y América Latina ya ha afectado a todos los países de la región. Te mostramos un resumen estadístico sobre el brote de coronavirus en Ecuador y América Latina. Hemos incluido tablas, gráficos y mapas para mejor ilustrar cómo nos está afectando esta pandemia.'
 thumbnail: '/post/salud/2020-04-01-resumen-estadistico-sobre-el-brote-de-coronavirus-en-ecuador-y-america-latina.png'
 images: 
   - 'https://elquantificador.org/post/salud/2020-04-01-resumen-estadistico-sobre-el-brote-de-coronavirus-en-ecuador-y-america-latina.png'
@@ -93,7 +93,7 @@ covid19_la <- confirmed_la %>% left_join(deaths_la, by = c("País" = "País", "F
   left_join(recovered_la, by = c("País" = "País", "Fecha" = "Fecha")) 
 
 # ---------- Data summary
-today <- "2020-03-31"
+today <- "2020-04-02"
 
 covid19_la_0331 <- covid19_la %>% filter(Fecha == today) %>% select(-Fecha) %>% arrange(desc(`Casos confirmados`))
 
@@ -101,9 +101,11 @@ covid19_la_0331_sum <- summarize(covid19_la_0331, total_confirmed = sum(`Casos c
                                  total_deaths = sum(Fallecidos), total_recovered = sum(Recuperados))
 ```
 
-El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en América Latina en confirmar su primer caso de Covid-19. Brasil y México fueron los primeros. En tan solo un mes, el virus logró propagarese en todos los países de la región y hasta ayer, 31 de marzo de 2020, se contabilizaron `r covid19_la_0331_sum$total_confirmed` casos confirmados, `r covid19_la_0331_sum$total_deaths` fallecidos y `r covid19_la_0331_sum$total_recovered` recuperados.
+El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en América Latina en confirmar su primer caso de Covid-19. Brasil y México fueron los primeros. En tan solo un mes, el virus logró propagarese en todos los países de la región y hasta ayer, `r today`, se contabilizaron `r covid19_la_0331_sum$total_confirmed` casos confirmados, `r covid19_la_0331_sum$total_deaths` fallecidos y `r covid19_la_0331_sum$total_recovered` recuperados.
 
-**Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país al 31 de marzo de 2020**
+**NOTA:** Todas las estadísticas están actualizadas al **jueves, 2 de abril de 2020**. Los datos se actualizan automáticamente todos los día en la mañana con los datos del día anterior.
+
+**Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país**
 
 ```{r, echo=FALSE}
 datatable(covid19_la_0331, options = list(pageLength = 5, lengthMenu = c(5, 10, 15, 20)))
@@ -128,8 +130,8 @@ confirmed_la_march_map_nozero <- confirmed_la_march_map_nozero[!confirmed_la_mar
 confirmed_la_map <- 
 tm_shape(la_countries_plus_map) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
   tm_shape(confirmed_la_march_map_nozero) +
-  tm_fill(col = "Casos confirmados", palette = "OrRd", style = "fixed", 
-          breaks = c(1, 10, 50, 100, 500, 1000, 2000, 3000, 4000, 6000),
+  tm_fill(col = "Casos confirmados", palette = "OrRd", style = "log10_pretty", 
+    
           legend.format = list(digits = 0), legend.show = TRUE) +
   tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
   tm_facets(by = "Fecha", ncol = 1, nrow = 1, free.coords = FALSE)
@@ -145,8 +147,7 @@ deaths_la_march_map_nozero <- deaths_la_march_map_nozero[!deaths_la_march_map_no
 deaths_la_map <- 
   tm_shape(la_countries_plus_map) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
   tm_shape(deaths_la_march_map_nozero) +
-  tm_fill(col = "Fallecidos", palette = "OrRd", style = "fixed", 
-          breaks = c(1, 10, 25, 50, 100, 200),
+  tm_fill(col = "Fallecidos", palette = "OrRd", style = "log10_pretty", 
           legend.format = list(digits = 0), legend.show = TRUE) +
   tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
   tm_facets(by = "Fecha", ncol = 1, nrow = 1, free.coords = FALSE)
@@ -156,13 +157,13 @@ deaths_la_map <-
 A pesar de las medidas que impuso el gobierno ecuatoriano a inicios de marzo, es difícil afirmar que estas has sido los suficientemente efectivas para desacelerar el crecimiento de casos confirmados y muertes por Covid-19. Otros países también han tomado medidas, pero aún así el virus ha logrado esparcirse en toda la región. Aquí te mostramos dos mapas.
 
 **Mapa 1. Evolución de número de casos confirmados en América Latina**
-```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.3, warning=FALSE, echo=FALSE}
+```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.4, warning=FALSE, echo=FALSE}
 confirmed_la_map
 ```
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University
 
 **Mapa 2. Evolución de número de fallecidos en América Latina**
-```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.3, warning=FALSE, echo=FALSE}
+```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.4, warning=FALSE, echo=FALSE}
 deaths_la_map
 ```
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University
