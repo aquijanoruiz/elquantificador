@@ -85,7 +85,7 @@ centroid[23,] # We use Tungurahua province as the center of our map
 # The canton data
 covid19_confirmed_c <- inner_join(ecu_map_c, confirmed_c, by = "Cantón") # We merge the map data with the coronavirus data
 
-today <- "2020-04-03"
+today <- "2020-04-04"
 covid19_confirmed_c <- covid19_confirmed_c %>% filter(Fecha == today) %>% select(-Fecha)
 
 # The province data
@@ -108,11 +108,11 @@ covid19_confirmed_today_map <-
 covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We transform the map into a leaflet map
 ```
 
-Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al **viernes, 3 de abril de 2020**.
+Después que la OMS haya declarado pandemia al brote de Covid-19, el presidente del Ecuador, Lenín Moreno, declaró emergencia sanitaria a todo el país. A fin de luchar contra la propagación del coronavirus, es imporante permanecer en casa, obedeciendo a las medidas de prevención y manteniéndonos informados de cómo avanza la situación sanitaria. Te presentamos un mapa interactivo para que sigas día a día el número de casos confirmados de coronavirus en el país. El mapa está actualizado al **sábado, 4 de abril de 2020**.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align = "center", fig.height = 7, fig.width = 6}
 library(kableExtra)
-table <-c(3268, 144, 71, 3053, 10317)
+table <-c(3465, 172, 100, 3193, 11309)
 names(table) <- c("Confirmados", "Fallecidos", "Recuperados", "Activos", "Pruebas hechas")
 table <- t(table)
 
