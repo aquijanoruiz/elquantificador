@@ -12,7 +12,7 @@ description: ''
 thumbnail: ''
 hidden: true
 ---
-```{r, echo=TRUE, warning=FALSE}
+```{r, echo=TRUE, warning=FALSE, comment=FALSE}
 # --------- these are the packages used to create the map ---------
 library(tidyverse)
 library(sf)
