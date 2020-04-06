@@ -220,4 +220,4 @@ datatable(covid19_la_0331_percap, options = list(pageLength = 5, lengthMenu = c(
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University (datos del Covid-19) y Banco Mundial (datos poblacionales proyectados al 2018)
 
 ### Metodología
-Para más detalle sobre la metodología empleada en este artículo y para consultar el código utilizado, te invitamos a consultar este [vínculo](https://elquantificador.org/post/rmarkdown/resumen-estadistico-brote-coronavirus-ecuador-america-latina-rmarkdown).
+Para más detalle sobre la metodología empleada en este artículo y para reproducir el código utilizado, te invitamos a consultar este [vínculo](https://elquantificador.org/post/rmarkdown/resumen-estadistico-brote-coronavirus-ecuador-america-latina-rmarkdown).

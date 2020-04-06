@@ -101,7 +101,7 @@ El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en Améric
 
 **Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país**
 
-```{r, echo=TRUE, warning=FALSE}
+```{r, echo=TRUE}
 datatable(covid19_la_0331, options = list(pageLength = 5, lengthMenu = c(5, 10, 15, 20)))
 ```
 
@@ -213,7 +213,7 @@ covid19_la_0331_percap <- covid19_la_0331 %>%
 Panamá, Chile y Ecuador son los países con mayor número de casos confirmados por cada millón de habitantes. Así mismo, Panamá y República Dominicana y Ecuador cuentan con el mayor número de fallecidos por cada millón de habitantes. En Ecuador, por cada millón de habitantes, existen `r covid19_la_0331_percap[3,4]` casos confirmados y `r covid19_la_0331_percap[3,5]` fallecidos. Te ofrecemos más detalle en la siguiente tabla.
 
 **Tabla 2. Número de casos confirmados y fallecidos por cada millón de habitantes**
-```{r, echo=TRUE, warning=FALSE}
+```{r, echo=TRUE}
 datatable(covid19_la_0331_percap, options = list(pageLength = 5, lengthMenu = c(5, 10, 15, 20)))
 ```
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University (datos del Covid-19) y Banco Mundial (datos poblacionales proyectados al 2018)
