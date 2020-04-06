@@ -12,7 +12,7 @@ description: ''
 thumbnail: ''
 hidden: true
 ---
-```{r, echo=TRUE}
+```{r, echo=TRUE, warning=FALSE}
 # --------- these are the packages used to create the map ---------
 library(tidyverse)
 library(sf)
@@ -23,7 +23,7 @@ library(DT)
 options(scipen=999)
 ```
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, warning=FALSE}
 # We create two sets of countries. la_countries which only include Latinamercian countries, and la_countries_plus, which
 # include Latinamerican countries plus other Caribean countries and non-Spanish speaking countries.
 
@@ -101,11 +101,11 @@ El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en Améric
 
 **Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país**
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, warning=FALSE}
 datatable(covid19_la_0331, options = list(pageLength = 5, lengthMenu = c(5, 10, 15, 20)))
 ```
 
-```{r, echo=TRUE, }
+```{r, echo=TRUE, warning=FALSE}
 # ---------- Loading map
 # Now, we need to load Americas's shapefile
 url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/salud/2020-04-01-resumen-estadistico-sobre-el-coronavirus-en-ecuador-y-america-latina/americas.zip"
@@ -193,7 +193,7 @@ covid19_la %>% semi_join(covid19_la_0331_top10, by = "País") %>% filter(Fecha >
 ```
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University
 
-```{r, echo=TRUE }
+```{r, echo=TRUE, warning=FALSE }
 world_population_country_url <- "https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-04-01-resumen-estadistico-sobre-el-coronavirus-en-ecuador-y-america-latina/wb_population_country.csv"
 population_country <- read_csv(world_population_country_url, skip = 3)
 
@@ -213,7 +213,7 @@ covid19_la_0331_percap <- covid19_la_0331 %>%
 Panamá, Chile y Ecuador son los países con mayor número de casos confirmados por cada millón de habitantes. Así mismo, Panamá y República Dominicana y Ecuador cuentan con el mayor número de fallecidos por cada millón de habitantes. En Ecuador, por cada millón de habitantes, existen `r covid19_la_0331_percap[3,4]` casos confirmados y `r covid19_la_0331_percap[3,5]` fallecidos. Te ofrecemos más detalle en la siguiente tabla.
 
 **Tabla 2. Número de casos confirmados y fallecidos por cada millón de habitantes**
-```{r, echo=TRUE}
+```{r, echo=TRUE, warning=FALSE}
 datatable(covid19_la_0331_percap, options = list(pageLength = 5, lengthMenu = c(5, 10, 15, 20)))
 ```
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University (datos del Covid-19) y Banco Mundial (datos poblacionales proyectados al 2018)
