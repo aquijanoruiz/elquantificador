@@ -24,12 +24,193 @@ hidden: true
 <script src="2020-04-06-resumen-estadístico-actualizado-sobre-el-coronavirus-en-ecuador-y-américa-latina_files/crosstalk/js/crosstalk.min.js"></script>
 
 
+<pre class="r"><code># --------- these are the packages used to create the map ---------
+library(tidyverse)</code></pre>
+<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.4
+## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Warning: package &#39;stringr&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Warning: package &#39;forcats&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(sf)</code></pre>
+<pre><code>## Warning: package &#39;sf&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0</code></pre>
+<pre class="r"><code>library(rmapshaper)</code></pre>
+<pre><code>## Warning: package &#39;rmapshaper&#39; was built under R version 3.5.2</code></pre>
+<pre class="r"><code>library(tmap)</code></pre>
+<pre><code>## Warning: package &#39;tmap&#39; was built under R version 3.5.2</code></pre>
+<pre class="r"><code>library(DT)</code></pre>
+<pre><code>## Warning: package &#39;DT&#39; was built under R version 3.5.2</code></pre>
+<pre class="r"><code>options(scipen=999)</code></pre>
+<pre class="r"><code># We create two sets of countries. la_countries which only include Latinamercian countries, and la_countries_plus, which
+# include Latinamerican countries plus other Caribean countries and non-Spanish speaking countries.
+
+la_countries &lt;- c(&quot;Brazil&quot;, &quot;Mexico&quot;, &quot;Colombia&quot;, &quot;Argentina&quot;, &quot;Peru&quot;, &quot;Venezuela&quot;, &quot;Chile&quot;, &quot;Ecuador&quot;, &quot;Guatemala&quot;, 
+                  &quot;Cuba&quot;, &quot;Haiti&quot;, &quot;Bolivia&quot;, &quot;Dominican Republic&quot;, &quot;Honduras&quot;, &quot;Paraguay&quot;, &quot;El Salvador&quot;, &quot;Nicaragua&quot;, &quot;Costa Rica&quot;, 
+                  &quot;Panama&quot;, &quot;Uruguay&quot;)
+
+la_countries_plus &lt;- c(&quot;Brazil&quot;, &quot;Mexico&quot;, &quot;Colombia&quot;, &quot;Argentina&quot;, &quot;Peru&quot;, &quot;Venezuela&quot;, &quot;Chile&quot;, &quot;Ecuador&quot;, 
+                       &quot;Guatemala&quot;, &quot;Cuba&quot;, &quot;Haiti&quot;, &quot;Bolivia&quot;, &quot;Dominican Republic&quot;, &quot;Honduras&quot;, &quot;Paraguay&quot;, 
+                       &quot;El Salvador&quot;, &quot;Nicaragua&quot;, &quot;Costa Rica&quot;, &quot;Panama&quot;, &quot;Uruguay&quot;, &quot;Guyana&quot;, &quot;Suriname&quot;, 
+                       &quot;Puerto Rico&quot;, &quot;Bahamas&quot;, &quot;Belize&quot;, &quot;Antigua and Barbuda&quot;, &quot;Barbados&quot;, &quot;Jamaica&quot;, 
+                       &quot;Saint Kitts and Nevis&quot;, &quot;Saint Lucia&quot;, &quot;Trinidad and Tobago&quot;, &quot;Grenanda&quot;, &quot;Dominica&quot;,
+                       &quot;French Guiana (France)&quot;)
+
+# ---------- Confirmed cases
+
+confirmed_global_url &lt;- &quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv&quot;
+confirmed_global &lt;- read_csv(confirmed_global_url)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   `Province/State` = col_character(),
+##   `Country/Region` = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>confirmed_la &lt;- semi_join(confirmed_global, as.data.frame(la_countries), 
+                          by = c(&quot;Country/Region&quot; = &quot;la_countries&quot;))</code></pre>
+<pre><code>## Warning: Column `Country/Region`/`la_countries` joining character vector and
+## factor, coercing into character vector</code></pre>
+<pre class="r"><code>confirmed_la &lt;- confirmed_la %&gt;% select(-c(`Province/State`, Lat, Long)) %&gt;% rename(País = `Country/Region`)
+
+# Wide to long
+confirmed_la &lt;- confirmed_la %&gt;% gather(Fecha, `Casos confirmados`, - País) %&gt;% 
+  mutate(Fecha = as.Date(Fecha, format = &quot;%m/%d/%y&quot; ))
+
+
+# ---------- Confirmed deaths
+
+deaths_global_url &lt;- &quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv&quot;
+deaths_global &lt;- read_csv(deaths_global_url)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   `Province/State` = col_character(),
+##   `Country/Region` = col_character()
+## )
+## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>deaths_la &lt;- semi_join(deaths_global, as.data.frame(la_countries), 
+                          by = c(&quot;Country/Region&quot; = &quot;la_countries&quot;))</code></pre>
+<pre><code>## Warning: Column `Country/Region`/`la_countries` joining character vector and
+## factor, coercing into character vector</code></pre>
+<pre class="r"><code>deaths_la &lt;- deaths_la %&gt;% select(-c(`Province/State`, Lat, Long)) %&gt;% rename(País = `Country/Region`)
+
+# Wide to long
+deaths_la &lt;- deaths_la %&gt;% gather(Fecha, Fallecidos, - País) %&gt;% 
+  mutate(Fecha = as.Date(Fecha, format = &quot;%m/%d/%y&quot; ))
+
+# ---------- Recovered
+
+recovered_global_url &lt;- &quot;https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv&quot;
+recovered_global &lt;- read_csv(recovered_global_url)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   `Province/State` = col_character(),
+##   `Country/Region` = col_character()
+## )
+## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>recovered_la &lt;- semi_join(recovered_global, as.data.frame(la_countries), 
+                          by = c(&quot;Country/Region&quot; = &quot;la_countries&quot;))</code></pre>
+<pre><code>## Warning: Column `Country/Region`/`la_countries` joining character vector and
+## factor, coercing into character vector</code></pre>
+<pre class="r"><code>recovered_la &lt;- recovered_la %&gt;% select(-c(`Province/State`, Lat, Long)) %&gt;% rename(País = `Country/Region`)
+
+# Wide to long
+recovered_la &lt;- recovered_la %&gt;% gather(Fecha, Recuperados, - País) %&gt;% 
+  mutate(Fecha = as.Date(Fecha, format = &quot;%m/%d/%y&quot; )) 
+
+# ---------- Covid-19 data for all LA countries in one data frame
+
+covid19_la &lt;- confirmed_la %&gt;% left_join(deaths_la, by = c(&quot;País&quot; = &quot;País&quot;, &quot;Fecha&quot; = &quot;Fecha&quot;)) %&gt;% 
+  left_join(recovered_la, by = c(&quot;País&quot; = &quot;País&quot;, &quot;Fecha&quot; = &quot;Fecha&quot;)) 
+
+# ---------- Data summary
+today &lt;- &quot;2020-04-05&quot;
+
+covid19_la_0331 &lt;- covid19_la %&gt;% filter(Fecha == today) %&gt;% select(-Fecha) %&gt;% arrange(desc(`Casos confirmados`))
+
+covid19_la_0331_sum &lt;- summarize(covid19_la_0331, total_confirmed = sum(`Casos confirmados`), 
+                                 total_deaths = sum(Fallecidos), total_recovered = sum(Recuperados))</code></pre>
 <p>El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en América Latina en confirmar su primer caso de Covid-19. Brasil y México fueron los primeros. En tan solo un mes, el virus logró propagarese en todos los países de la región y hasta ayer, 2020-04-05, se contabilizaron 31912 casos confirmados, 1133 fallecidos y 3079 recuperados.</p>
 <p><strong>NOTA:</strong> Todas las estadísticas están actualizadas al <strong>domingo, 5 de abril de 2020</strong>. Los datos se actualizan automáticamente todos los día en la mañana con los datos del día anterior.</p>
 <p><strong>Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país</strong></p>
 <pre class="r"><code>datatable(covid19_la_0331, options = list(pageLength = 5, lengthMenu = c(5, 10, 15, 20)))</code></pre>
 <div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],["Brazil","Chile","Ecuador","Peru","Mexico","Panama","Dominican Republic","Colombia","Argentina","Costa Rica","Uruguay","Cuba","Honduras","Venezuela","Bolivia","Paraguay","El Salvador","Guatemala","Haiti","Nicaragua"],[11130,4471,3646,2281,1890,1801,1745,1485,1451,454,400,320,268,159,157,104,62,61,21,6],[486,34,180,83,79,46,82,35,44,2,5,8,22,7,10,3,3,2,1,1],[127,618,100,989,633,13,17,88,280,16,93,15,6,52,2,12,2,15,1,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>País<\/th>\n      <th>Casos confirmados<\/th>\n      <th>Fallecidos<\/th>\n      <th>Recuperados<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"lengthMenu":[5,10,15,20],"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code># ---------- Loading map
+# Now, we need to load Americas&#39;s shapefile
+url &lt;- &quot;https://github.com/aquijanoruiz/elquantificador_posts/raw/master/salud/2020-04-01-resumen-estadistico-sobre-el-coronavirus-en-ecuador-y-america-latina/americas.zip&quot;
+td &lt;- tempdir() # We create a temporary directory
+tf &lt;- tempfile(tmpdir=td, fileext = &quot;.zip&quot;) # We create the placeholder file
+download.file(url,tf) # We download the data into the placeholder file
+
+# We get the name of the file inside the zip file that contains the demographic and economic data, 
+# unzip it, get the full path name of it, and finally load it
+shp.file.name &lt;- unzip(tf, list=TRUE)$Name[5] # The shp file name
+shx.file.name &lt;- unzip(tf, list=TRUE)$Name[7] # The shx file name
+dbf.fine.name &lt;- unzip(tf, list=TRUE)$Name[9] # The dbf file name
+prf.fine.name &lt;- unzip(tf, list=TRUE)$Name[2] # The prf file name
+
+unzip(tf, files=c(shp.file.name, shx.file.name, dbf.fine.name, prf.fine.name), exdir=td, overwrite=TRUE)
+shp.file.path &lt;- file.path(td, shp.file.name)
+
+Americas &lt;- st_read(shp.file.path)</code></pre>
+<pre><code>## Reading layer `Americas&#39; from data source `/private/var/folders/mc/c2xw517j1md41nw908wnbmvh0000gn/T/Rtmpss9bBs/Americas/Americas.shp&#39; using driver `ESRI Shapefile&#39;
+## Simple feature collection with 53 features and 1 field
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -186.5396 ymin: -58.49861 xmax: -12.15764 ymax: 83.6236
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs</code></pre>
+<pre class="r"><code>Americas &lt;- ms_simplify(Americas, keep=0.1)
+
+la_countries_plus_map &lt;- inner_join(Americas, as.data.frame(la_countries_plus), 
+                                             by =c(&quot;COUNTRY&quot; = &quot;la_countries_plus&quot;))</code></pre>
+<pre><code>## Warning: Column `COUNTRY`/`la_countries_plus` joining factors with different
+## levels, coercing to character vector</code></pre>
+<pre class="r"><code># ---------- Confirmed cases gift map 
+march &lt;- &quot;2020-03-01&quot;
+confirmed_la_march &lt;- confirmed_la %&gt;% filter(Fecha &gt;= march  &amp; Fecha &lt;= today)
+
+confirmed_la_march_map_nozero &lt;- inner_join(la_countries_plus_map, confirmed_la_march, by = c(&quot;COUNTRY&quot; = &quot;País&quot;)) %&gt;%
+  filter(Fecha &gt;= march &amp; Fecha &lt;= today)
+confirmed_la_march_map_nozero &lt;- confirmed_la_march_map_nozero[!confirmed_la_march_map_nozero$`Casos confirmados`==0,]
+
+confirmed_la_map &lt;- 
+tm_shape(la_countries_plus_map) + tm_borders(col = &quot;grey25&quot;, lwd = 1, alpha = 0.4) +
+  tm_shape(confirmed_la_march_map_nozero) +
+  tm_fill(col = &quot;Casos confirmados&quot;, palette = &quot;OrRd&quot;, style = &quot;log10_pretty&quot;, 
+    
+          legend.format = list(digits = 0), legend.show = TRUE) +
+  tm_borders(col = &quot;grey25&quot;, lwd = 1, alpha = 0.4) +
+  tm_facets(by = &quot;Fecha&quot;, ncol = 1, nrow = 1, free.coords = FALSE)
+
+# ---------- Deaths gift map 
+
+deaths_la_march &lt;- deaths_la %&gt;% filter(Fecha &gt;= march &amp; Fecha &lt;= today)
+
+deaths_la_march_map_nozero &lt;- inner_join(la_countries_plus_map, deaths_la_march, by = c(&quot;COUNTRY&quot; = &quot;País&quot;)) %&gt;%
+  filter(Fecha &gt;= march &amp; Fecha &lt;= today)
+deaths_la_march_map_nozero &lt;- deaths_la_march_map_nozero[!deaths_la_march_map_nozero$Fallecidos==0,]
+
+deaths_la_map &lt;- 
+  tm_shape(la_countries_plus_map) + tm_borders(col = &quot;grey25&quot;, lwd = 1, alpha = 0.4) +
+  tm_shape(deaths_la_march_map_nozero) +
+  tm_fill(col = &quot;Fallecidos&quot;, palette = &quot;OrRd&quot;, style = &quot;log10_pretty&quot;, 
+          legend.format = list(digits = 0), legend.show = TRUE) +
+  tm_borders(col = &quot;grey25&quot;, lwd = 1, alpha = 0.4) +
+  tm_facets(by = &quot;Fecha&quot;, ncol = 1, nrow = 1, free.coords = FALSE)</code></pre>
 <p>A pesar de las medidas que impuso el gobierno ecuatoriano a inicios de marzo, es difícil afirmar que estas has sido los suficientemente efectivas para desacelerar el crecimiento de casos confirmados y muertes por Covid-19. Otros países también han tomado medidas, pero aún así el virus ha logrado esparcirse en toda la región. Aquí te mostramos dos mapas.</p>
 <p><strong>Mapa 1. Evolución de número de casos confirmados en América Latina</strong></p>
 <pre class="r"><code>confirmed_la_map # You must add the following code to your markdown: fig.show=&#39;animate&#39;, ffmpeg.format=&#39;gif&#39;, dev=&#39;jpeg&#39;, interval=0.4</code></pre>
@@ -47,6 +228,30 @@ covid19_la %&gt;% semi_join(covid19_la_0331_top10, by = &quot;País&quot;) %&gt;
   ggplot(aes(x=Fecha, y=`Casos confirmados`, col = País)) + geom_line() + 
   labs(x=&quot;&quot;)</code></pre>
 <p><img src="/post/rmarkdown/2020-04-06-resumen-estad%C3%ADstico-actualizado-sobre-el-coronavirus-en-ecuador-y-am%C3%A9rica-latina_files/figure-html/unnamed-chunk-7-1.png" width="672" /> Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University</p>
+<pre class="r"><code>world_population_country_url &lt;- &quot;https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-04-01-resumen-estadistico-sobre-el-coronavirus-en-ecuador-y-america-latina/wb_population_country.csv&quot;
+population_country &lt;- read_csv(world_population_country_url, skip = 3)</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X65&#39; [65]</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   `Country Name` = col_character(),
+##   `Country Code` = col_character(),
+##   `Indicator Name` = col_character(),
+##   `Indicator Code` = col_character(),
+##   `2019` = col_logical(),
+##   X65 = col_logical()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre class="r"><code>population_country &lt;- population_country %&gt;%   mutate(Population = `2018`) %&gt;%
+  select(`Country Name`, Population)
+
+population_country$`Country Name`[population_country$`Country Name`==&quot;Venezuela, RB&quot;] &lt;- &quot;Venezuela&quot; # We change the country name of Venezuela
+
+covid19_la_0331_percap &lt;- covid19_la_0331 %&gt;% 
+  left_join(population_country, by = c(&quot;País&quot; = &quot;Country Name&quot;)) %&gt;%
+  mutate(`Casos por cada millón` = round(`Casos confirmados`/Population * 1000000,1),
+         `Fallecidos por cada millón` = round(Fallecidos/Population * 1000000,1)) %&gt;% 
+  select(-c(Recuperados, Population))</code></pre>
 <p>Panamá, Chile y Ecuador son los países con mayor número de casos confirmados por cada millón de habitantes. Así mismo, Panamá y República Dominicana y Ecuador cuentan con el mayor número de fallecidos por cada millón de habitantes. En Ecuador, por cada millón de habitantes, existen 213.4 casos confirmados y 10.5 fallecidos. Te ofrecemos más detalle en la siguiente tabla.</p>
 <p><strong>Tabla 2. Número de casos confirmados y fallecidos por cada millón de habitantes</strong></p>
 <pre class="r"><code>datatable(covid19_la_0331_percap, options = list(pageLength = 5, lengthMenu = c(5, 10, 15, 20)))</code></pre>
