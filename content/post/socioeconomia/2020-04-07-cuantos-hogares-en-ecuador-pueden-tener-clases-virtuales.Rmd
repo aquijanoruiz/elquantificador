@@ -3,7 +3,7 @@ title: "¿Cuántos hogares en Ecuador pueden tener clases virtuales? Respuesta c
 date: '2020-04-07'
 slug: cuantos-hogares-en-ecuador-pueden-tener-clases-virtuales
 categories:
-  - Socioeconomía
+  - Educación
 tags:
   - Coronavirus
   - Mapas
