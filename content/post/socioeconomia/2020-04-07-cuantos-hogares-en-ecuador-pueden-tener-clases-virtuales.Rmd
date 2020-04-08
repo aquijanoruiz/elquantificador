@@ -1,0 +1,184 @@
+---
+title: "¿Cuántos hogares en Ecuador pueden tener clases virtuales? Respuesta corta: no muchos"
+date: '2020-04-07'
+slug: cuantos-hogares-en-ecuador-pueden-tener-clases-virtuales
+categories:
+  - Socioeconomía
+tags:
+  - Coronavirus
+  - Mapas
+  - Desigualdad
+description: 'Muchos estudiantes están transicionando a clases virtuales, pero, todo el mundo tienen computadora en su casa? Hice un pequeño sondeo en mi Facebook, la mayoría de gente piensa que casi toda casa en Ecuador tiene computadora e Internet. Mira en nuestro mapa el porcentaje de hogares que tienen computadora, Internet,  o ambos en Ecuador por provincia.'
+thumbnail: '/post/socioeconomia/2020-04-07-cuantos-hogares-en-ecuador-pueden-tener-clases-virtuales.jpg'
+images: 
+  - 'https://elquantificador.org/post/socioeconomia/2020-04-07-cuantos-hogares-en-ecuador-pueden-tener-clases-virtuales.jpg'
+authors:
+- Marco Faytong
+- Alonso Quijano
+---
+
+En época de cuarentena veo muchas universidades, tecnológicos, y otros centros de educación llevando las clases a las aulas virtuales. La educación” online” es diferente por supuesto a la educación en aulas. Estudiar en línea no es para todos, pero con estas circunstancias, no estamos tratando de adaptar. ¿Quién no tiene oportunidad de adaptarse? Los que no tienen Internet, computadora, o ambos. Siendo sincero, se necesita ambos elementos para tomar clases por Internet (al menos yo no puedo tener clases virtuales por el celular).
+
+En los siguientes mapas te mostramos el porcentaje de hogares en Ecuador por provincia que tienen al menos una computadora, acceso a Internet, y más importante, ambos. Tú mismo puedes sacar tus conclusiones, pero si tú y todos tus vecinos tienen una laptop e Internet, verás que esa no es la realidad de la mayoría.
+
+```{r, include=FALSE}
+
+#Este es todo el código usado para realizar los mapas.
+
+library(tidyverse)
+library(sf)
+library(rmapshaper)
+library(tmap)
+library(RColorBrewer)
+library(grid)
+
+setwd("C:/Users/mfayt/Google Drive/Quantificador Marco/Porcentaje de hogares con computadores e Internet/coronavirus_map_canton")
+
+
+# --------- preparing the st data ---------
+# Ecuador's political division (*.shp) data
+ecu_map <- st_read("ECU_adm1.shp")
+head(ecu_map)
+
+# We simplify the data
+ecu_map <- ms_simplify(ecu_map, keep=0.01) # We keep the 0.4% of the polygon
+
+# We keep only the variables we need
+ecu_map <- ecu_map %>% select(-c(ID_0, ISO, NAME_0, ID_1, TYPE_1, ENGTYPE_1, NL_NAME_1, VARNAME_1)) %>%
+  rename(Provincia = NAME_1) # We only keep the province names and the geometry
+
+# --------- loading the input data ---------
+
+hog_compu <- read_csv("hog_compu_04052020.csv")
+hog_compu$provincia <- factor(hog_compu$provincia, levels = levels(ecu_map$Provincia)) # Coverting provincia into factor
+hog_compu <- hog_compu %>% mutate(porc_comp = porc_comp * 100, porc_internet = porc_internet * 100,
+                                  porc_compeint = porc_compeint * 100)
+
+hog_compu <- hog_compu %>% mutate(porc_comp_per = as.character(paste0(formatC(hog_compu$porc_comp,
+                                                                              format = "f", digits = 0), " %")),
+                                  porc_internet_per = as.character(paste0(formatC(hog_compu$porc_internet,
+                                                                            format = "f", 
+                                                                            digits = 0), " %")),
+                                  porc_compeint_per = as.character(paste0(formatC(hog_compu$porc_compeint,
+                                                                            format = "f", 
+                                                                            digits = 0), " %")))
+
+hog_compu_geom <- inner_join(ecu_map, hog_compu, by = c("Provincia" = "provincia"))
+
+hog_compu_geom$Provincia <- plyr::revalue(hog_compu_geom$Provincia, 
+                                          c("Santo Domingo de los Tsáchilas" = "Sto Dom Tsáchilas", 
+                                            "Manabi" = "Manabí"))
+
+# --------- Creating the maps ---------
+  
+# porc_comp ---------
+
+hog_compu_map_ecu <- # Continental Ecuador
+tm_shape(hog_compu_geom %>% filter(!Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_fill(col = "porc_comp", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), 
+          title = "Hogares con computadora",legend.show = TRUE) +
+  tm_text("porc_comp_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_comp", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = F)
+
+hog_compu_map_gal <- # Galapagos
+  tm_shape(hog_compu_geom %>% filter(Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_comp", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), legend.show = FALSE) +
+  tm_text("porc_comp_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_comp", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = "white")
+
+# porc_internet ---------
+
+hog_internet_map_ecu <- # Continental Ecuador
+  tm_shape(hog_compu_geom %>% filter(!Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_fill(col = "porc_internet", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), 
+          title = "Hogares con internet",legend.show = TRUE) +
+  tm_text("porc_internet_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_internet", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = F)
+
+hog_internet_map_gal <- # Galapagos
+  tm_shape(hog_compu_geom %>% filter(Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_internet", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), legend.show = FALSE) +
+  tm_text("porc_internet_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_internet", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = "white")
+
+# porc_compeint ---------
+
+hog_compeint_map_ecu <- # Continental Ecuador
+  tm_shape(hog_compu_geom %>% filter(!Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_fill(col = "porc_compeint", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), 
+          title = "Hogares con computadora e internet",legend.show = TRUE) +
+  tm_text("porc_compeint_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_compeint", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = F)
+
+hog_compeint_map_gal <- # Galapagos
+  tm_shape(hog_compu_geom %>% filter(Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_compeint", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), legend.show = FALSE) +
+  tm_text("porc_compeint_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_compu_geom) +
+  tm_fill(col = "porc_compeint", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = "white")
+```
+
+A continuación presento el porcentaje de hogares que tienen al menos una computador (por provincia):
+```{r, echo=FALSE}
+grid.newpage()
+print(hog_compu_map_ecu, vp = viewport(x = 0.6, y = 0.5,
+                                        height = 0.9))
+print(hog_compu_map_gal, vp = viewport(x = 0.15, y = 0.8,
+                                        height = 0.22))
+```
+
+Aquí está el porcentaje de hogares que tienen acceso a Internet (por provincia):
+```{r, echo=FALSE}
+grid.newpage()
+print(hog_internet_map_ecu, vp = viewport(x = 0.6, y = 0.5,
+                                           height = 0.9))
+print(hog_internet_map_gal, vp = viewport(x = 0.15, y = 0.8,
+                                           height = 0.22))
+```
+
+Finalmente, para hacer deberes encesitas dos cosas: computadora e Internet. Veamos por provincia los porcentajes de hogares que tienen ambos, al menos una computadora y acceso a Internet:
+
+```{r, echo=FALSE}
+grid.newpage()
+print(hog_compeint_map_ecu, vp = viewport(x = 0.6, y = 0.5,
+                                           height = 0.9))
+print(hog_compeint_map_gal, vp = viewport(x = 0.15, y = 0.8,
+                                           height = 0.22))
+```
+
+Saqué estas proporciones usando la Encuesta Multiporósito de Hogares recoelctada por el INEC en el 2018. Lo podrás encontrar en este [vínculo](https://www.ecuadorencifras.gob.ec/encuesta-nacional-multiproposito-de-hogares/).
+
+Pueden encontrar en este link la sintaxis del cálculo: 
+Si hay alguna pregunta, me pueden escribir a marco@elquantificador.org
