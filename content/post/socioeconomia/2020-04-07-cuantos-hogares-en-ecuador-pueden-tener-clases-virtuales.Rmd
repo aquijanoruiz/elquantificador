@@ -178,7 +178,7 @@ print(hog_compeint_map_gal, vp = viewport(x = 0.15, y = 0.8,
                                            height = 0.22))
 ```
 
-Saqué estas proporciones usando la Encuesta Multiporósito de Hogares recoelctada por el INEC en el 2018. Lo podrás encontrar en este [vínculo](https://www.ecuadorencifras.gob.ec/encuesta-nacional-multiproposito-de-hogares/).
+Saqué estas proporciones usando la Encuesta Multiporósito de Hogares recolectada por el INEC en el 2018. Lo podrás encontrar en este [vínculo](https://www.ecuadorencifras.gob.ec/encuesta-nacional-multiproposito-de-hogares/).
 
 Pueden encontrar en este link la sintaxis del cálculo: 
 Si hay alguna pregunta, me pueden escribir a marco@elquantificador.org
