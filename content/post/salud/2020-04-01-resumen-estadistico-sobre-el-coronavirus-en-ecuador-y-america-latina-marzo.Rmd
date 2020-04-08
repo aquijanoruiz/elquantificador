@@ -88,7 +88,7 @@ covid19_la <- confirmed_la %>% left_join(deaths_la, by = c("País" = "País", "F
   left_join(recovered_la, by = c("País" = "País", "Fecha" = "Fecha")) 
 
 # ---------- Data summary
-today <- "2020-04-05"
+today <- "2020-04-07"
 
 covid19_la_0331 <- covid19_la %>% filter(Fecha == today) %>% select(-Fecha) %>% arrange(desc(`Casos confirmados`))
 
@@ -98,7 +98,7 @@ covid19_la_0331_sum <- summarize(covid19_la_0331, total_confirmed = sum(`Casos c
 
 El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en América Latina en confirmar su primer caso de Covid-19. Brasil y México fueron los primeros. En tan solo un mes, el virus logró propagarese en todos los países de la región y hasta ayer, `r today`, se contabilizaron `r covid19_la_0331_sum$total_confirmed` casos confirmados, `r covid19_la_0331_sum$total_deaths` fallecidos y `r covid19_la_0331_sum$total_recovered` recuperados.
 
-**NOTA:** Todas las estadísticas están actualizadas al **domingo, 5 de abril de 2020**. Los datos se actualizan automáticamente todos los día en la mañana con los datos del día anterior.
+**NOTA:** Todas las estadísticas están actualizadas al **martes, 7 de abril de 2020**. Los datos se actualizan automáticamente todos los día en la mañana con los datos del día anterior.
 
 **Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país**
 
@@ -220,4 +220,4 @@ datatable(covid19_la_0331_percap, options = list(pageLength = 5, lengthMenu = c(
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University (datos del Covid-19) y Banco Mundial (datos poblacionales proyectados al 2018)
 
 ### Metodología
-Para más detalle sobre la metodología empleada en este artículo y para reproducir el código utilizado, te invitamos a consultar este [vínculo](https://elquantificador.org/post/rmarkdown/resumen-estadistico-brote-coronavirus-ecuador-america-latina-rmarkdown).
+Los análisis y mapas fueron creados usando lenguaje `R`. Para más detalle sobre la metodología empleada en este artículo y para reproducir el código utilizado, te invitamos a consultar este [vínculo](https://elquantificador.org/post/rmarkdown/resumen-estadistico-brote-coronavirus-ecuador-america-latina-rmarkdown). Si tienes duda sobre la metodología o el código, escríbeme a alonso@elquantificador.org.
