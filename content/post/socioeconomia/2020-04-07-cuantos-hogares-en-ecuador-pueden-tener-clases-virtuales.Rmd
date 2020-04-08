@@ -17,7 +17,7 @@ authors:
 - Alonso Quijano
 ---
 
-En época de cuarentena veo muchas universidades, tecnológicos, y otros centros de educación llevando las clases a las aulas virtuales. La educación” online” es diferente por supuesto a la educación en aulas. Estudiar en línea no es para todos, pero con estas circunstancias, no estamos tratando de adaptar. ¿Quién no tiene oportunidad de adaptarse? Los que no tienen Internet, computadora, o ambos. Siendo sincero, se necesita ambos elementos para tomar clases por Internet (al menos yo no puedo tener clases virtuales por el celular).
+En época de cuarentena veo muchas universidades, tecnológicos, y otros centros de educación llevando las clases a las aulas virtuales. La educación "online" es diferente por supuesto a la educación en aulas. Estudiar en línea no es para todos, pero con estas circunstancias, estamos tratando de adaptarnos. ¿Quién no tiene oportunidad de adaptarse? Los que no tienen Internet, computadora, o ambos. Siendo sincero, se necesita ambos elementos para tomar clases por Internet (al menos yo no puedo tener clases virtuales por el celular).
 
 En los siguientes mapas te mostramos el porcentaje de hogares en Ecuador por provincia que tienen al menos una computadora, acceso a Internet, y más importante, ambos. Tú mismo puedes sacar tus conclusiones, pero si tú y todos tus vecinos tienen una laptop e Internet, verás que esa no es la realidad de la mayoría.
 
@@ -168,7 +168,7 @@ print(hog_internet_map_gal, vp = viewport(x = 0.15, y = 0.8,
                                            height = 0.22))
 ```
 
-Finalmente, para hacer deberes encesitas dos cosas: computadora e Internet. Veamos por provincia los porcentajes de hogares que tienen ambos, al menos una computadora y acceso a Internet:
+Finalmente, para hacer deberes necesitas dos cosas: computadora e Internet. Veamos por provincia los porcentajes de hogares que tienen ambos, al menos una computadora y acceso a Internet:
 
 ```{r, echo=FALSE}
 grid.newpage()
