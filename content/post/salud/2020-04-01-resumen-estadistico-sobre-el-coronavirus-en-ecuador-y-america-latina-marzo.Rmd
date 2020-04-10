@@ -88,7 +88,7 @@ covid19_la <- confirmed_la %>% left_join(deaths_la, by = c("País" = "País", "F
   left_join(recovered_la, by = c("País" = "País", "Fecha" = "Fecha")) 
 
 # ---------- Data summary
-today <- "2020-04-08"
+today <- "2020-04-09"
 
 covid19_la_0331 <- covid19_la %>% filter(Fecha == today) %>% select(-Fecha) %>% arrange(desc(`Casos confirmados`))
 
