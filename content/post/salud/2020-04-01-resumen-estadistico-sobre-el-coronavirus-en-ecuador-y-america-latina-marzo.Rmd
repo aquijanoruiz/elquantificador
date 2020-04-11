@@ -88,7 +88,7 @@ covid19_la <- confirmed_la %>% left_join(deaths_la, by = c("País" = "País", "F
   left_join(recovered_la, by = c("País" = "País", "Fecha" = "Fecha")) 
 
 # ---------- Data summary
-today <- "2020-04-10"
+today <- "2020-04-11"
 
 covid19_la_0331 <- covid19_la %>% filter(Fecha == today) %>% select(-Fecha) %>% arrange(desc(`Casos confirmados`))
 
@@ -98,7 +98,7 @@ covid19_la_0331_sum <- summarize(covid19_la_0331, total_confirmed = sum(`Casos c
 
 El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en América Latina en confirmar su primer caso de Covid-19. Brasil y México fueron los primeros. En tan solo un mes, el virus logró propagarese en todos los países de la región y hasta ayer, `r today`, se contabilizaron `r covid19_la_0331_sum$total_confirmed` casos confirmados, `r covid19_la_0331_sum$total_deaths` fallecidos y `r covid19_la_0331_sum$total_recovered` recuperados.
 
-**NOTA:** Todas las estadísticas están actualizadas al **viernes, 10 de abril de 2020**. Los datos se actualizan automáticamente todos los día en la mañana con los datos del día anterior.
+**NOTA:** Todas las estadísticas están actualizadas al **sábado, 11 de abril de 2020**. Los datos se actualizan automáticamente todos los día en la mañana con los datos del día anterior.
 
 **Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país**
 
