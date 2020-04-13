@@ -1,6 +1,6 @@
 ---
-title: 'Pruebas aleatorias de coronavirus: ¿cómo obtener estadísticas confiables para
-  la toma decisiones?'
+title: 'Pruebas aleatorias de coronavirus: ¿cómo obtener estadísticas confiables para   la
+  toma decisiones?'
 authors:
   - Alonso Quijano
 date: '2020-04-12'
@@ -143,5 +143,3 @@ A continuación te mostramos el número de muestas necesarias por cada parroquia
 ```{r, echo=FALSE}
 datatable(sample, options = list(pageLength = 10, lengthMenu = c(5, 10, 15, 20)))
 ```
-
-
