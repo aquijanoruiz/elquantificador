@@ -57,89 +57,24 @@ ecu_prev <- round((global %>% filter(alpha3 == "ECU"))$prevalence * 100,2)
 isl_prev <- round((global %>% filter(alpha3 == "ISL"))$prevalence * 100, 1)
 ```
 
-El jueves pasado, la ministra María Paula Romo dio a conocer que a partir del lunes 13 de abril se empezaría a implementar un semáforo de colores rojo, naranja y verde que limitará o permitirá la movilización y actividades. La pregunta que nos hacemos es ¿con qué calidad de información (estadística) el gobierno tomará la decisión de flexibilizar la cuarentena en ciertas provincias, ciudades o parroquias? Hace pocos días, el vicepresidente Otto Sonnenholzner admitió que el número de contagiados era mucho más alto que el medido e incluso dijo en una entrevista que nunca se sabrá el número exacto de contagiados. Ciertamente, la capacidad de las autoridades de realizar pruebas es mucho más baja que la de otros países, lo cual genera menor calidad de datos. Mientras Alemania ha logrado hacer más de 1.3 millones de pruebas, en Ecuador el número de pruebas a penas supera los 20 mil. La actual cifra de casos confirmados (que ya ha alcanzado los siete mil) excluye aquellos contagiados que no han logrado acceder a una prueba habiendo presentado síntomas, aquellos que no presentan síntomas y, por ende, aún desconocen que portan la enfermedad, e incluso aquellos que habiendo presentado síntomas no se han acercado a pedir una prueba ya sea por desconocimiento, temor o falta de recursos. Lo cierto es que es una tarea muy difícil estimar cuánto es el número real de contagios en cada provincia y ciudad.
+El jueves pasado la ministra María Paula Romo dio a conocer que a partir de hoy, lunes 13 de abril, se empezaría a implementar un semáforo de colores rojo, naranja y verde que limitará o permitirá la movilización y actividades. La pregunta que nos hacemos es ¿con qué calidad de información (estadística) el gobierno tomará la decisión de flexibilizar la cuarentena en ciertas provincias, ciudades o sectores? En este artículo te presentaremos una solución viable que, de aplicar rigurosidad científica, permitirá recolectar estadísticas más confiables. Estoy hablando de las pruebas aleatorias utilizadas en estudios de prevalencia y que consisten en tomar una muestra significativa de individuos y realizar pruebas a modo de “lotería".
 
-Dicho lo anterior, creo que dejo claro por qué me preocupa la capacidad del gobierno de tomar decisiones bien informadas con la calidad de datos que dispone. La decisión de flexibilizar la cuarentena a través del mencionado semáforo debería depender, al menos, de dos variables: el porcentaje actual (real) de contagios y el número de nuevos contagios que se vayan generando periódicamente. En epidemiología al primero se lo conoce como prevalencia y al segundo como incidencia. El problema es que no cantamos con un indicador confiable de alguna de estas dos variables. Si tomamos el número actual de casos confirmados y lo dividimos para el total de población, obtenemos una prevalencia de `r ecu_prev`%. Es decir, `r ecu_prev`% de la población ecuatoriana estaría contagiada. Esta cifra es muy poco realista, tomando en cuenta que Islandia, país que ha sido elogiado por su éxito en realizar pruebas a casi la mitad de su población y capacidad de controlar la pandemia, tiene una prevalencia de `r isl_prev`%, o `r round(isl_prev/ecu_prev)` veces mayor a la de Ecuador. Es que, en realidad, la el número de casos confirmados está altamente correlacionada al número de pruebas hechas. Lo mismo sucede con el número de fallecidos. El siguiente gráfico ilustra mejor a lo que me refiero. La pendiente positiva del gráfico delata el hecho.
+Ciertamente, la capacidad de las autoridades de realizar pruebas es mucho más baja que la de otros países, lo cual genera menor calidad de datos. Mientras Alemania ha logrado hacer más de 1.3 millones de pruebas, en Ecuador el número de pruebas a penas supera los 20 mil. La actual cifra de casos confirmados (que ya ha alcanzado los siete mil) excluye aquellos contagiados que no han logrado acceder a una prueba habiendo presentado síntomas, aquellos que no presentan síntomas y, por ende, aún desconocen que portan la enfermedad, e incluso aquellos que habiendo presentado síntomas no se han acercado a pedir una prueba ya sea por desconocimiento, temor o falta de recursos.
 
-```{r, echo=FALSE}
-# Tests Vs Cases plot
-intercept_cases <- global %>% summarize (rate = sum(cases_per_million)/sum(test_per_million)) %>% pull(.)
+Dicho lo anterior, creo que dejo claro por qué me preocupa la capacidad del gobierno de tomar decisiones bien informadas con la calidad de datos que dispone. Estoy de acuerdo en que no sencillo estimar cuánto es el número real de contagios en el país. Sin embargo, la decisión de flexibilizar la cuarentena a través del mencionado semáforo debería depender, al menos, de un indicador confiable dos variables: el porcentaje actual (real) de contagios y el número de nuevos contagios que se vayan generando periódicamente. En epidemiología al primero se lo conoce como prevalencia y al segundo como incidencia. 
 
-ggplot(global) + geom_text(aes(x = test_per_million, y = cases_per_million, label = alpha3), size = 3) +
-  scale_x_continuous(trans = "log10") +
-  scale_y_continuous(trans = "log10") +
-  geom_abline(intercept = log10(intercept_cases)) +
-  labs(title = "Relación número de pruebas Vs número de casos confirmados",x = "Casos por cada millón", y = "Pruebas por cada millón")
-```
 
-Fuente: Foundation for Innovative New Diagnostics y JHU
-Nota: Los ejes están expresados en escala logarítmica para mejor ilustraciónd de los datos
+El desafío se encuentra en hallar este indicador de prevalencia e incidencia. Si usáramos cifras oficiales dividimos el número actual de casos confirmados para el total de población, obtenemos una prevalencia de `r ecu_prev`%. Es decir, `r ecu_prev`% de la población ecuatoriana estaría contagiada. Esta cifra es muy poco realista e incluso ingenua, tomando en cuenta que Islandia, país que ha sido elogiado por su éxito en realizar pruebas a casi la mitad de su población y capacidad de controlar la pandemia, tiene una prevalencia de `r isl_prev`%, o `r round(isl_prev/ecu_prev)` veces mayor a la de Ecuador.
 
-Tomar a Alemania o Islandia como ejemplos me sirve para clarificar mi punto de vista, pero compararnos con estos dos o más países no ofrece una solución al problema. Ecuador no cuenta con la capacidad económica de adquirir tantas pruebas como la tienen los mencionados países. Tampoco son el indicado para criticar el por qué se debería o no tener los recursos para invertir más en salud pública. Mi trabajo es “quantificar” y aprovechar las técnicas que nos ofrece el método científico para entender mejor este fenómeno y combatirlo. Una mejor alternativa a las cifras de contagio disponibles (que ya he mencionado subestiman el número real de contagios) es un estudio de prevalencia a través de pruebas aleatorias. Un estudio de prevalencia consiste en obtener una muestra aleatoria de individuos (es decir, en forma de lotería) en una determinada provincia, ciudad o parroquia (dependiendo de la unidad donde se quiera medir el porcentaje de contagio) y realizar pruebas de coronavirus. De ser válidos los resultados, podríamos utilizar los resultados obtenidos por medio de la muestra para inferir sobre la población. Gracias a la aleatorización, podemos asegurarnos que la probabilidad de escoger a un contagiado sintomático sea la misma a la de un contagiado asintomático o un no contagiado.
+Una mejor alternativa a las cifras disponibles (que ya he mencionado subestiman el número real de contagios) es un estudio de prevalencia a través de pruebas aleatorias. Un estudio de prevalencia consiste en obtener una muestra aleatoria de individuos en una determinada provincia, ciudad o parroquia (dependiendo de la unidad donde se quiera medir el porcentaje de contagio) y realizar pruebas de coronavirus. Gracias a la aleatorización, podemos asegurarnos que la probabilidad de escoger a un contagiado sintomático sea la misma a la de un contagiado asintomático o un no contagiado. De esta forma, podremos utilizar los resultados obtenidos por medio de la muestra para inferir sobre la población.
 
-Hasta la fecha, son muy pocos los países que están realizando pruebas aleatorias a sus habitantes. Australia ha empezado a realizar pruebas aleatorias a medida que la demanda de pruebas iba disminuyendo. España ya anunció que va a hacer lo mismo. Por su parte, el gobierno ecuatoriano acaba de anunciar que está ampliando su capacidad de realizar pruebas. El alcalde de Quito, Jorge Yunda, también anunció la adquisición de 200 mil pruebas PCR de coronavirus para la capital. Tal parece, poco a poco es más factible la idea de empezar a realizar pruebas aleatorias. La pregunta que me surgió después es ¿cuál es el tamaño indicado de la muestra con la que se deberían realizar el estudio de prevalencia? Incluso, en el escenario más optimista, es necesario considerar las limitaciones con las que cuenta el sistema de salud pública.
+Hasta la fecha, son muy pocos los países que están realizando pruebas aleatorias a sus habitantes. Australia ha empezado a realizar pruebas aleatorias a medida que la demanda de pruebas iba disminuyendo. España ya anunció que va a hacer lo mismo. Por su parte, el gobierno ecuatoriano acaba de anunciar que está ampliando su capacidad de realizar pruebas. El alcalde de Quito, Jorge Yunda, también anunció la adquisición de 200 mil pruebas PCR de coronavirus para la capital. Tal parece, poco a poco es más factible la idea de empezar a realizar pruebas aleatorias. Para calcular el tamaño de la muestra se necesitan considerar variar variables, como el tamaño de la población que se va a estimar y el porcentaje esperado de contagio. En una pronta entrega, detallaré la metodología para calcular un adecuado tamaño de muestra.
 
-Los resultados de una muestra son representativos de la unidad donde se la calcula. Es decir, una muestra (por ejemplo, de 385 personas) del distrito metropolitano de Quito no nos permiten inferir sobre parroquias específicas como Iñaquito o Calderón. Para poder inferir sobre estas parroquias, necesitaríamos realizar un muestreo de cada una de ellas, considerándolas como una solo unidad. Hice el ejercicio para el cantón Quito, y traté de responder la pregunta de cuántas pruebas aleatorias se necesitarían para obtener un indicador confiable del porcentaje de contagio en la capital.
+Creo que, como todo ecuatoriano, deseo que las autoridades gubernamentales tomen las mejores decisiones y así asegurar la salud de todos los ecuatorianos. Una mala decisión podría costarles la vida a más personas y eso es lo que debemos evitar. Por esto, realizo las siguientes recomendaciones:
 
-En estadística, tamaño de la muestra depende de cuatro variables, el tamaño de la población, el nivel de confianza, la precisión y la prevalencia esperada. Para este cálculo utilicé apliqué un nivel de confianza `Z` del 95% y una precisión `d` de `P/2`. La población `N` la tomé del Instituto Nacional de Estadística y Censo. Dado el Covid-19 es una enfermedad nueva, la prevalencia esperada `P` la aproximaré utilizando como referencia el porcentaje de contagio de países que han logrado realizar la prueba a un gran número de sus habitantes. Para más detalle sobre estos supuestos y la metodología empleada, te invitamos a ver nuestro github.
+1.	No declarar a ninguna provincia en “naranja” o “verde” sin antes realizar pruebas aleatorias utilizando a la provincia como unidad de muestreo.
+2.	En el caso de cantones con altos índices de contagio como Guayaquil, Samborondón y Daule deberán realizarse pruebas aleatorias utilizando estos cantones como unidad de muestreo para generar una estimación más precisa. Yo recomendaría incluso utilizar las parroquias como unidad de muestreo para entender a detalle el grado de contagio por diferentes sectores dentro de un cantón.
+3.	Dado que las pruebas son escasas, las pruebas aleatorias deberían utilizarse cuando la demanda de pruebas empiece a disminuir. En aquellas provincias o cantones donde la demanda ya ha disminuido, podrían ya realizarse pruebas aleatorias para determinar el porcentaje exacto de contagio (prevalencia).
+4.	Periódicamente se deberá medir los nuevos contagios (incidencia). En Singapur, Japón y Hong Kong se están reportando nuevos casos después de haber considerado la pandemia ya “controlada”. Por lo menos cada dos semanas, se deberán realizar pruebas aleatorias para calcular la incidencia de la enfermedad. De hallarse un nuevo brote de coronavirus, las autoridades deberán considerar retomar la cuarentena.
 
-```{r, echo=FALSE, warning=FALSE, comment=FALSE, message=FALSE}
-# We create a function to calculate the sample size
-sample_size <- function(z = 1.96, P = 0.5, d = 0.05, N = 100000) {
-  # We set a default of z = 1.96, expercter prevalence (P) = 0.5, 
-  # precision (d) = 0.05, and population size (N) = 100000
-  
-  d = ifelse(P >= 0.9, (1-P)/2, # For common cases, we consider d = (1 -p)/2
-             ifelse(P <= 0.1, P/2, d)) # For rare cases, we consider d = p/2
-  
-  # Formula considering infinite population:
-  n = z^2 * P * (1 - P) / d^2
- 
-  # If n > N * 0.05, we consider a finite population
-  if(n > N * 0.05){
-    n = N * z^2 * P * (1 - P) / 
-      ( d^2 * (N - 1) + z^2 * P * (1 - P))
-    return(round(n))
-  } else {
-    return(round(n))
-  }
-}
-
-sample_size <- Vectorize(sample_size) # We vectorize the arguments of the function
-
-quito_parish_url <- "https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-04-12-pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones.Rmd/QUITO_POPULATION.csv"
-quito_parish <- read_csv(quito_parish_url)
-
-prev <- seq(from = 0.025, to = 0.005, by = -0.005)
-sample <- sapply(prev, function(l){
-  sample_parish <- sample_size(P = l, N = quito_parish$Población)
-  return(sample_parish)
-})
-
-colnames(sample) <- paste("P = ", prev * 100, "%")
-rownames(sample) <- quito_parish$Parroquia
-```
-
-El tamaño de la muestra requerida para estimar número real de contagios está directamente proporcionado al propio porcentaje de contagios que esperamos identificar. ¿Qué quiere decir esto? Mientras más rara sea la enfermedad, mayor será el tamaño de muestra. No es lo mismo estimar del porcentaje de hombres fumadores (lo cual es más común) que el porcentaje de contagiados de coronavirus. A pesar que el coronavirus se propaga rápidamente, sigue siendo "relativamente" rara. Dicho en otras palabras, si el número real de contagiados en Quito fuera del 1% (eso sería miles de habitantes), una muestra de 385 pruebas aleatorias, en promedio, identificaría 3 o 4 casos positivos o, en su defecto, quizá ninguno. Una muestra más grande sería capa de identificar más casos y darnos un mejor estimado. 
-
-Usando los supuestos ya mencionados, calculamos el número total de muestras necesarias para el cantón Quito, tomando a cada parroquia como unidad de muestreo. Hemos modelado diferentes prevalencias esperadas. En el peor de los casos (y mejor de los casos a la vez), si el número de contagios esperados en Quito es muy bajo (menor al 1%), se necesitarán muchas muestras aleatorias. En tal caso, serviría cambiar la unidad de muestreo y considerar a Quito como una única unidad de muestro. Esto nos permitiría inferir sobre el total de la población, pero no cada una de sus parroquias individuales.
-
-```{r, echo=FALSE, warning=FALSE, fig.width=7, fig.align='center'}
-# We create a plot to illustrate the sample size needed as a function of the expected prevalence
-lambda <- seq(from = 0.05, to = 0.005, by = -0.005)
-
-muestra_acumulativa <- sapply(lambda, function(l){
-  sample_parish <- sample_size(P = l, N = quito_parish$Población)
-  total <- sum(sample_parish)
-  return(total)
-})
-
-model <- data_frame(P = lambda, Muestra = muestra_acumulativa)
-ggplot(model) + geom_point(aes(x = P, y = Muestra)) + labs( x = "Prevalencia esperada", title = "Tamaño de la muestra en función de la prevalenica esperada")
-```
-
-A continuación te mostramos el número de muestas necesarias por cada parroquia en función de la prevalencia esperada.
-
-```{r, echo=FALSE}
-datatable(sample, options = list(pageLength = 10, lengthMenu = c(5, 10, 15, 20)))
-```
+Espero que esta solución sea considerada por las autoridades y que quienes estén de acuerdo también puedan compartir para presionar a los hacedores de política pública a que tomen decisiones basándose en estadísticas libre de sesgos.
