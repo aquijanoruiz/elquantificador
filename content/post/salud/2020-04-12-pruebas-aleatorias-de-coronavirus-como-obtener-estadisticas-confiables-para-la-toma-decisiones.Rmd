@@ -10,7 +10,7 @@ categories:
 tags:
   - Coronavirus
 description: 'A partir del lunes 13 de abril se aplicará un semáforo que categorizará a las provincias de acuerdo al grado de contagio y de acuerdo a esto flexibilizar la cuarentena. Nos preguntamos, ¿con qué calidad de datos dispone el gobierno para tomar decisiones bien informadas? En este artículo discutimos el uso de pruebas aleatorias, un método que permite estimar el número real de contagios por provincia, cantón o parroquia.'
-thumbnail: '/post/salud/2020-04-12-pruebas-aleatorias-de-coronavirus-cómo-obtener-estadísticas-confiables-para-la-toma-decisiones.jpeg'
+thumbnail: '/post/salud/2020-04-12-pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones.jpeg'
 images: 
   - "https://elquantificador.org/post/salud/2020-04-12-pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones.jpeg"
 ---
