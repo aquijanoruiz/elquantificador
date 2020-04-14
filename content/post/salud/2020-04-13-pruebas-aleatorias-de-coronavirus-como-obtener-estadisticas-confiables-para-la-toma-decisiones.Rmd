@@ -1,16 +1,18 @@
 ---
-title: 'Pruebas aleatorias de coronavirus: ¿cómo obtener estadísticas confiables para la toma decisiones'
+title: 'Pruebas aleatorias de coronavirus: ¿cómo obtener estadísticas confiables para la toma decisiones?'
 author: ''
 date: '2020-04-13'
-slug: pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones-3
+slug: pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones-4
+authors:
+  - Alonso Quijano
 categories:
   - Salud
 tags:
   - Coronavirus
 description: 'A partir del lunes 13 de abril se aplicará un semáforo que categorizará a las provincias de acuerdo al grado de contagio y de acuerdo a esto flexibilizar la cuarentena. Nos preguntamos, ¿con qué calidad de datos dispone el gobierno para tomar decisiones bien informadas? En este artículo discutimos el uso de pruebas aleatorias, un método que permite estimar el número real de contagios por provincia, cantón o parroquia.'
-thumbnail: '/post/salud/2020-04-13-pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones-3.jpeg'
+thumbnail: '/post/salud/2020-04-13-pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones-4.jpeg'
 images: 
-  - "https://elquantificador.org/post/salud/2020-04-13-pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones-3.jpeg"
+  - "https://elquantificador.org/post/salud/2020-04-13-pruebas-aleatorias-de-coronavirus-como-obtener-estadisticas-confiables-para-la-toma-decisiones-4.jpeg"
 ---
 
 ```{r, include=FALSE}
