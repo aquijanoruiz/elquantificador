@@ -12,15 +12,24 @@ thumbnail: ''
 hidden: true
 ---
 
-En un artículo anterior mencioné que es necesario hacer estudios de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir su demanda en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio y, a su vez, corroborar si este ha disminuido. Esto, a su vez, permitirá a las autoridades gubernamentales tomar decisiones basadas en estadísticas libre de sesgo.
+En un artículo anterior mencioné que es necesario hacer estudios de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir su demanda en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio (formalmente conocido como prevalencia) y, a su vez, corroborar si este ha disminuido. Esto, a su vez, permitirá a las autoridades gubernamentales tomar decisiones basadas en estadísticas libre de sesgo.
 
 La pregunta qué tal vez tienen algunos es cuál es el tamaño de muestra apropiado para hacer un estudio de prevalencia en el Ecuador, considerando las limitaciones que posee el sistema de salud pública en atender la demanda de pruebas de quienes más las necesitan. Para ello, aplicaremos la siguiente metodología.
 
-En estadística, el tamaño de la muestra depende de cuatro variables: el tamaño de la población $N$, el nivel de confianza del parámetro $z$, la precisión $d$ y la prevalencia esperada $P$. La fórmula es la siguiente:
+En estadística, el tamaño de la muestra depende esencialmente de tres variables: el nivel de confianza del parámetro $z$, la precisión (margen de error) $d$ y la prevalencia esperada $P$. La fórmula es la siguiente:
 
-<center>$\large n = \frac{z^2P(1-P)}{d^2}$</center>
+<center>$\large n = \frac{z^2P(1-P)}{d^2}$, donde $d = P/2$</center>
 <br />
-Esta fórmula considera que la población es "infinita"; es decir, que el tamaño de muestra calucado es relativamente pequeño en comparación a la población, o si $n/N < 5\%$. Asumimos que $z = 1.96$ (95% de confianza), $d = P/2$ si $P < 10\%$ y $(1-P)/2$ si $P > 10\%$. Para poblaciones más pequeñas o "finitas"; es decir,  $n/N > 5\%$, la fórmula será la siguiente:
+
+Para entender las variables anteriores plantearemos un ejercicio hipotético. Imaginemos que deseamos cálcular el procentaje de fumadores hombres en Ecuador, y utilizármos un nivel de confianza $z$ del 95% y un margen de error $d$ del 5%. Si, por ejemplo, después de realizar el estudio hallamos que el 20% de nuestra muestra es fumadora, un margen de error del 5% significaría que el porcentaje de fumadores de la población estaría en un margen del 15% al 25% (20% ± 5%). Por otra parte un nivel de confianza del 95% significaría que si repitiéramos este ejercicio infinitamente, el 95% de los casos el porcentaje de fumadores caería en el intervalo de 15% y 25%.
+
+Un detalle importante que no incluimos en la fórmula es que la precisión $d$ dependerá de la prevalencia esperada $P$.
+
+Esta fórmula asume que la población es "infinita" o suficientemente grande; es decir, que el tamaño de muestra calucado no supera el 15% de la población, o si $n/N < 5\%$. Asumimos un nivel de confianza $z = 1.96$ (95% de confianza), un margen de error equivalente $d = P/2$ . Para poblaciones más pequeñas o "finitas"; es decir, cuando $n/N > 5\%$, la fórmula será la siguiente:
 
 <center>$\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}$</center>
 <br />
+
+
+
+Dado que la precisión $d$
