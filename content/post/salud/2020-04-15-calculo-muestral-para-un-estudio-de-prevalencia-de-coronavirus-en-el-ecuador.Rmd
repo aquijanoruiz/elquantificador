@@ -20,7 +20,7 @@ En estadística, el tamaño de la muestra depende de cuatro variables: el tamañ
 
 <center>$\large n = \frac{z^2P(1-P)}{d^2}$</center>
 <br />
-considerando que la muestra es relativamente pequeña en comparación a la población, es decir si $n/N < 5\%$. Asumimos que $z = 1.96$ (95% de confianza), $d = P/2$ si $P < 10\%$ y $(1-P)/2$ si $P > 10\%$.
-<br />
-<center>$\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}$</center> 
+Esta fórmula considera que la población es "infinita"; es decir, que el tamaño de muestra calucado es relativamente pequeño en comparación a la población, o si $n/N < 5\%$. Asumimos que $z = 1.96$ (95% de confianza), $d = P/2$ si $P < 10\%$ y $(1-P)/2$ si $P > 10\%$. Para poblaciones más pequeñas o "finitas"; es decir,  $n/N > 5\%$, la fórmula será la siguiente:
 
+<center>$\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}$</center>
+<br />
