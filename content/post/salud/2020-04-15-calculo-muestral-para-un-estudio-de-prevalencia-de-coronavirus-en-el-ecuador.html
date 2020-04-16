@@ -14,9 +14,13 @@ hidden: true
 
 
 
-<p>En un artículo anterior mencioné que es necesario hacer estudios de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir la demanda de pruebas en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio y, a su vez, corroborar si este ha disminuido. Esto, a su vez, permitirá a las autoridades gubernamentales tomar decisiones basadas en estadísticas libre de sesgo.</p>
+<p>En un artículo anterior mencioné que es necesario hacer estudios de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir su demanda en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio y, a su vez, corroborar si este ha disminuido. Esto, a su vez, permitirá a las autoridades gubernamentales tomar decisiones basadas en estadísticas libre de sesgo.</p>
 <p>La pregunta qué tal vez tienen algunos es cuál es el tamaño de muestra apropiado para hacer un estudio de prevalencia en el Ecuador, considerando las limitaciones que posee el sistema de salud pública en atender la demanda de pruebas de quienes más las necesitan. Para ello, aplicaremos la siguiente metodología.</p>
 <p>En estadística, el tamaño de la muestra depende de cuatro variables: el tamaño de la población <span class="math inline">\(N\)</span>, el nivel de confianza del parámetro <span class="math inline">\(z\)</span>, la precisión <span class="math inline">\(d\)</span> y la prevalencia esperada <span class="math inline">\(P\)</span>. La fórmula es la siguiente:</p>
+<center>
+<span class="math inline">\(\large n = \frac{z^2P(1-P)}{d^2}\)</span>
+</center>
+<br /> considerando que la muestra es relativamente pequeña en comparación a la población, es decir si <span class="math inline">\(n/N &lt; 5\%\)</span>. Asumimos que <span class="math inline">\(z = 1.96\)</span> (95% de confianza), <span class="math inline">\(d = P/2\)</span> si <span class="math inline">\(P &lt; 10\%\)</span> y <span class="math inline">\((1-P)/2\)</span> si <span class="math inline">\(P &gt; 10\%\)</span>. <br />
 <center>
 <span class="math inline">\(\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}\)</span>
 </center>

@@ -12,14 +12,15 @@ thumbnail: ''
 hidden: true
 ---
 
-En un artículo anterior mencioné que es necesario hacer estudios de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir la demanda de pruebas en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio y, a su vez, corroborar si este ha disminuido. Esto, a su vez, permitirá a las autoridades gubernamentales tomar decisiones basadas en estadísticas libre de sesgo.
+En un artículo anterior mencioné que es necesario hacer estudios de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir su demanda en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio y, a su vez, corroborar si este ha disminuido. Esto, a su vez, permitirá a las autoridades gubernamentales tomar decisiones basadas en estadísticas libre de sesgo.
 
 La pregunta qué tal vez tienen algunos es cuál es el tamaño de muestra apropiado para hacer un estudio de prevalencia en el Ecuador, considerando las limitaciones que posee el sistema de salud pública en atender la demanda de pruebas de quienes más las necesitan. Para ello, aplicaremos la siguiente metodología.
 
 En estadística, el tamaño de la muestra depende de cuatro variables: el tamaño de la población $N$, el nivel de confianza del parámetro $z$, la precisión $d$ y la prevalencia esperada $P$. La fórmula es la siguiente:
 
-
-<center>
-$\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}$
-</center> 
+<center>$\large n = \frac{z^2P(1-P)}{d^2}$</center>
+<br />
+considerando que la muestra es relativamente pequeña en comparación a la población, es decir si $n/N < 5\%$. Asumimos que $z = 1.96$ (95% de confianza), $d = P/2$ si $P < 10\%$ y $(1-P)/2$ si $P > 10\%$.
+<br />
+<center>$\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}$</center> 
 
