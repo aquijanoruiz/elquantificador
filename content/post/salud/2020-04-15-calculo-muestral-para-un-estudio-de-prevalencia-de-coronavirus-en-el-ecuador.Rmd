@@ -9,27 +9,135 @@ tags:
   - Coronavirus
 description: ''
 thumbnail: ''
-hidden: true
 ---
+```{r, include=FALSE}
+# We load the libraries
+library(tidyverse)
+library(DT)
+library(knitr)
+options(scipen=999)
+knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=",")
+})
 
-En un artículo anterior mencioné que es necesario hacer estudios de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir su demanda en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio (formalmente conocido como prevalencia) y, a su vez, corroborar si este ha disminuido. Esto, a su vez, permitirá a las autoridades gubernamentales tomar decisiones basadas en estadísticas libre de sesgo.
+sample_size <- function(z = 1.96, P = 0.5, d = 0.05, N = 100000) {
+  # We set a default of z = 1.96, expercter prevalence (P) = 0.5, 
+  # precision (d) = 0.05, and population size (N) = 100000
+  
+  d = ifelse(P > 0.9, (1-P)/2, # For common cases, we consider d = (1 -p)/2
+             ifelse(P < 0.1, P/2, d)) # For rare cases, we consider d = p/2
+  
+  # Formula considering infinite population:
+  n = z^2 * P * (1 - P) / d^2
+ 
+  # If n > N * 0.05, we consider a finite population
+  if(n > N * 0.05){
+    n = N * z^2 * P * (1 - P) / 
+      ( d^2 * (N - 1) + z^2 * P * (1 - P))
+    return(round(n))
+  } else {
+    return(round(n))
+  }
+}
 
-La pregunta qué tal vez tienen algunos es cuál es el tamaño de muestra apropiado para hacer un estudio de prevalencia en el Ecuador, considerando las limitaciones que posee el sistema de salud pública en atender la demanda de pruebas de quienes más las necesitan. Para ello, aplicaremos la siguiente metodología.
+sample_size <- Vectorize(sample_size) # We vectorize the arguments of the function
+
+# Sample size for each province in Ecuador ----------
+
+# We load the population data
+prov_population_url <- "https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-04-12-calculo-muestral-de-pruebas-aleatorias-de-coronavirus.Rmd/PROVINCES_POPULATION.csv"
+prov_population <- read_csv(prov_population_url)
+
+prev <- seq(from = 0.025, to = 0.005, by = -0.005) # We will calculate for different expected prevalences
+
+muestra <- sapply(prev, function(l){
+  sample_parish <- sample_size(P = l, N = prov_population$Población)
+  return(sample_parish)
+})
+
+colnames(muestra) <- paste("P = ", prev * 100, "%")
+rownames(muestra) <- prov_population$Provincia
+
+# Simulation of the sample size as a function of the expected prevalence ----------
+
+lambda <- seq(from = 0.05, to = 0.002, by = -0.001) # expected prevalence
+
+muestra_acumulativa <- sapply(lambda, function(l){
+  sample_parish <- sample_size(P = l)
+  total <- sum(sample_parish)
+  return(total)
+})
+
+model <- data_frame(P = lambda, Muestra = muestra_acumulativa) # data frame to create the plot
+```
+
+En un artículo anterior mencioné que es necesario hacer un estudio de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir su demanda en las distintas provincias. Las pruebas aleatorias permitirán obtener un mejor estimado del porcentaje de contagio (formalmente conocido como prevalencia) y, a su vez, corroborar si el número de casos poritivos realmente ha disminuido o no. Utilizando métodos estadísticos utilizados en medicina y otras ciencias, calculamos que en el escenario "menos conservador", el gobierno debería hacer al menos `r model[[which(model$P == "0.015"),2]]` pruebas aleatorias por provincia, lo que suma un total de `r model[[which(model$P == "0.015"),2]] * 24` pruebas en todo el país.
+
+Solo a través de un estudio prevalencia, la autoridades gubernamentales podrán estimar el porcentaje real de casos de coronavirus en el Ecuador y basarse en estadísticas reales para la toma de decisiones. Desde el lunes se aplica un semáforo que indicará si puede o no flexibilizarse la cuarentena en ciertas provinicas o cantonces. De subestimarse el grado de contagio en cierto sector del país y flexibilizar el distanciamiento social, ponemos poner en riesgo la vida de quienes viven ahí y empeorar el grado de contagio. 
+
+Es cierto que ya, de por sí, existe una escasez de pruebas en el país. Sin embargo, soy optimista en que con la política de distanciamiento social implementada desde hace un mes, poco a poco disminuirá la demana de pruebas de coronavirus. Cuando eso empiece a suceder, el gobierno deberá inmediatamente realizar pruebas aleatorias por provincia o cantón antes de anunciar el cese a la cuarentena. Adicionalmente, poco a poco ha empezado el gobierno central a aumentar su capacidad de hacer pruebas, mientras que los gobiernos locales también empiezan a adquirir pruebas rápidas para sus habitantes.
+
+Cuando mencioné que debería realizarse al menos `r model[[which(model$P == "0.015"),2]]` pruebas por provincia en el escenario "menos conservador", quise denotar que tal número tal vez no produzca una estimación óptima del procentaje real de casos. Hasta cierto punto, más pruebas generan una mejor estimación. En el óptimo de los escenarios, se deberían hacer más pruebas aleatorias por provinica e incluso realizar estudios de prevalencia a nivel de cantones (por lo menos en aquellos más afectados como Guayaquil, Samborondón y Daule). ¿Cuántas pruebas son necesarias? Te invitamos a leer la metodología en la siguiente sección y a reproducir los resultados descargándote el código en nuestro github.
+
+#### Metodología
 
 En estadística, el tamaño de la muestra depende esencialmente de tres variables: el nivel de confianza del parámetro $z$, la precisión (margen de error) $d$ y la prevalencia esperada (porcentaje esperado de contagio) $P$. La fórmula es la siguiente:
 
-<center>$\large n = \frac{z^2P(1-P)}{d^2}$&nbsp;, donde $d = P/2$</center>
-<br />
+<center>$\large n = \frac{z^2P(1-P)}{d^2}$&nbsp;, donde $d = P/2$</center><br />
 
 Para entender las variables anteriores plantearemos un ejercicio hipotético. Imaginemos que deseamos cálcular el procentaje de fumadores hombres en Ecuador, y utilizármos un nivel de confianza $z$ del 95% y un margen de error $d$ del 5%. Si al final del estudio hallamos que el 20% de nuestra muestra es fumadora, un margen de error del 5% significaría que el porcentaje de fumadores de la población estaría en un margen del 15% al 25% (20% ± 5%). Por otra parte un nivel de confianza del 95% significaría que si repitiéramos este ejercicio infinitamente, el 95% de los casos el porcentaje de fumadores caería en el intervalo de 15% y 25%.
 
 Volviendo al cálculo de prevalencia de coronavirus, un detalle importante que incluimos en la fórmula es que el margen de error $d$ dependerá del porcentaje esperado de contagio $P$ (el cual es un valor que nosotros mismos asignamos basándonos en una hipótesis o conjetura). Por ejemplo, si asumimos para el cálculo muestral que el 2% de los habitantes de la provinicia del Guayas están contagiados ($P = 2\%$), necesitaremos usar una precisión del 1% $d = 2\%/2$.
 
+Si colocamos diferentes valores de $P$ en la formula anteriormente descrita, optendremos los siguientes tamaños de muestra:
+
+```{r, echo=FALSE, fig.width=5, fig.align='center'}
+ggplot(model) + geom_point(aes(x = P, y = Muestra)) + labs( x = "Prevalencia esperada", title = "Relación tamaño de muestra - prevalencia esperada")
+```
+
+No debería sorpendernos que mientras menor porcentaje de contagio esperamos, mayor debe ser el tamaño de la muestras, pues se hace cada vez más difícil encontrar una aguja en un pajar. Asimismo, mientras mayor es el porcentaje esperado, menor es el tamaño de muestra necesario para inferir correctamente sobre la población total. Podemos notar también que a partir del 1.5% hacia abajo, el número se empieza a tener al infinito. Incluso para valores muy pequeños de $P$, una muestra muy grande se vuelve incesaria y costosa. Mi recomendación (y esta es ya mi opinión) es apuntar a una $P$ entre 0.5% y 1.5% (es decir, una muestra por provincia de entre 1000 y 3000 individuos). Utilicemos una $P$ de 1.5% para ver cómo se aplica la fórmula.
+
+<center>$\large n = \frac{1.96^20.015(1-0.015)}{0.0075^2} = 1009$</center><br />
+
+Para construir un mejor estimado de $P$, podríamos ver el porcentaje de contagio en otros países y compararlo con el número de pruebas hechas. Sin embargo, son muy pocos los países que han logrado hacer un significativo número de pruebas a sus habitantes y esos pocos países poseen una porcentaje de contagio muy bajo. Esto se puede ver más claramente en el siguiente gráfico, el cual también demuestra que el número de casos confirmados depende del número de prubeas hechas.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
+# ---------- We need to "guess" the prevalence using data from other countries ----------
+# The global cases and test datasets are obtained from the Foundation for Innovative New Diagnostics (https://finddx.shinyapps.io/FIND_Cov_19_Tracker/)
+global_cases_url <- "https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-04-12-calculo-muestral-de-pruebas-aleatorias-de-coronavirus.Rmd/COVID19_GLOBAL_CASES.csv"
+global_cases <- read_csv(global_cases_url)
+
+global_tests_url <- "https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-04-12-calculo-muestral-de-pruebas-aleatorias-de-coronavirus.Rmd/COVID19_GLOBAL_TESTS.csv"
+global_tests <- read_csv(global_tests_url)
+
+today <- "2020-04-10"
+
+global_cases <- global_cases %>% filter(date == today) %>% select(jhu_ID.x, alpha3, date, cases, population) %>% rename(country = jhu_ID.x)
+global_tests <- global_tests %>% filter(date == today) %>% select(alpha3, tests_cumulative) 
+
+# Tests Vs Cases plot
+global <- global_cases %>% inner_join(global_tests, by = "alpha3") %>% 
+  mutate(cases_per_million = cases/population * 1e6,
+         test_per_million = tests_cumulative/population * 1e6,
+         prevalence = cases/population)
+
+intercept_cases <- global %>% summarize (rate = sum(cases_per_million)/sum(test_per_million)) %>% pull(.)
+
+global_cases_plot <-
+ggplot(global) + geom_text(aes(x = test_per_million, y = cases_per_million, label = alpha3), size = 3) +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  geom_abline(intercept = log10(intercept_cases)) +
+  labs(title = "Relación número de pruebas Vs número de casos confirmados",x = "Casos por cada millón", y = "Pruebas por cada millón")
+```
+
+```{r, echo=FALSE}
+global_cases_plot
+```
+
+El desafío muchas veces es inferir correctamente el la prevalencia esperada $P$, que en este caso representa porcentaje esperado de población contagiada por coronavirus. Usualmente los estadísticos utilizan los resultados de estudios de prevalencia previamente. Sin embargo, dado que esta es una pandemia nueva que recién estamos tratando de comprender, no contamos con ningún estimado de
+
 Esta fórmula asume que la población es "infinita" o suficientemente grande; es decir, que el tamaño de muestra calucado no supera el 15% de la población, o si $n/N < 5\%$. Asumimos un nivel de confianza $z = 1.96$ (95% de confianza), un margen de error equivalente $d = P/2$ . Para poblaciones más pequeñas o "finitas"; es decir, cuando $n/N > 5\%$, la fórmula será la siguiente:
 
 <center>$\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}$</center>
 <br />
-
-
-
-Dado que la precisión $d$
