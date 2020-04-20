@@ -44,7 +44,7 @@ p + geom_line() + xlab("") +  geom_area(fill="#69b3a2", alpha=0.5) + geom_line(c
 p <- ggplotly(p)
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
 p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
 ```
@@ -60,7 +60,7 @@ google.trends$coronavirus_EC <- as.numeric(google.trends$coronavirus_EC)
 ```
 
 Ahora veamos coronavirus y síntomas. Es una tendencia muy similar a solo coronavirus. 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
 p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
 ```
@@ -76,7 +76,7 @@ google.trends$coronavirus_EC <- as.numeric(google.trends$coronavirus_EC)
 ```
 
 El siguiente gráfico es coronavirus con muerte. Se parece mucho a los anteriores.
-```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
 p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
 ```
