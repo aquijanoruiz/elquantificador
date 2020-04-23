@@ -9,6 +9,7 @@ categories:
 tags:
   - Coronavirus
 description: ''
+hidden: true
 ---
 ```{r, include=FALSE}
 # We load the libraries /post/salud/
