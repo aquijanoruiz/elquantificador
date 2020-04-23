@@ -2,13 +2,13 @@
 title: Cálculo muestral para un estudio de prevalencia de coronavirus en el Ecuador
 authors: 
   - Alonso Quijano
-date: '2020-04-15'
+date: '2020-04-23'
 slug: calculo-muestral-para-un-estudio-de-prevalencia-de-coronavirus-en-el-ecuador
 categories:
   - Salud
 tags:
   - Coronavirus
-description: ''
+description: 'Utilizando métodos estadísticos, calculamos que el gobierno debería realizar de 1500 a 3000 pruebas aleatorias por población de estudio (provincia o cantón). Solo a través de un estudio prevalencia, las autoridades gubernamentales pueden estimar el porcentaje real de casos de coronavirus en el Ecuador y basarse en estadísticas reales para la toma de decisiones.'
 references:
   - id: naing2006practical
     title: Practical issues in calculating the sample size for prevalence studies
@@ -26,6 +26,9 @@ references:
     issued:
       year: 2006
 link-citations: true
+thumbnail: '/post/salud/2020-04-15-calculo-muestral-para-un-estudio-de-prevalencia-de-coronavirus-en-el-ecuador.png'
+images: 
+  - 'https://elquantificador.org/post/salud/2020-04-15-calculo-muestral-para-un-estudio-de-prevalencia-de-coronavirus-en-el-ecuador.png'
 ---
 ```{r, include=FALSE}
 # We load the libraries /post/salud/
@@ -90,7 +93,7 @@ model <- data_frame(P = lambda, Muestra = muestra_acumulativa) # data frame to c
 
 En un artículo anterior mencioné que era necesario hacer un estudio de prevalencia a través de pruebas aleatorias de coronavirus una vez que empiece a disminuir su demanda en las distintas provincias. Las pruebas aleatorias permiten obtener un mejor estimado del porcentaje de contagio (formalmente conocido como prevalencia) y, a su vez, corroborar si el número de casos positivos realmente está disminuyendo o no. Afortunadamente, la capacidad del gobierno de hacer pruebas ha aumentado y ellos mismos ya han empezado a realizar pruebas aleatorias a través de un muestreo probabilístico en cada cantón. 
 
-Utilizando métodos estadísticos utilizados en medicina y otras ciencias, calculamos que en el escenario "menos conservador", el gobierno debería hacer al menos 1500 pruebas aleatorias por población de estudio (provincia o cantón), y en un escenario "más conservador" hasta 3000 pruebas. Solo a través de un estudio prevalencia, las autoridades gubernamentales pueden estimar el porcentaje real de casos de coronavirus en el Ecuador y basarse en estadísticas reales para la toma de decisiones. Desde el lunes se aplica un semáforo que indicará si puede o no flexibilizarse la cuarentena en ciertas provincias o cantones. De subestimarse el grado de contagio en cierto sector del país y flexibilizar el distanciamiento social, ponemos poner en riesgo la vida de quienes viven ahí y empeorar el grado de contagio. 
+Utilizando métodos estadísticos, calculamos que en el escenario "menos conservador" el gobierno debería hacer al menos 1500 pruebas aleatorias por población de estudio (provincia o cantón), y en un escenario "más conservador" hasta 3000 pruebas. Solo a través de un estudio prevalencia, las autoridades gubernamentales pueden estimar el porcentaje real de casos de coronavirus en el Ecuador y basarse en estadísticas reales para la toma de decisiones. Desde el lunes 13 de abril se aplica un semáforo que indicará si puede o no flexibilizarse la cuarentena en ciertas provincias o cantones. De subestimarse el grado de contagio en cierto sector del país y flexibilizar el distanciamiento social, ponemos poner en riesgo la vida de quienes viven ahí y empeorar el grado de contagio. 
 
 Cuando mencioné que debería realizarse al menos 1500 pruebas por cantón en el escenario "menos conservador", quise denotar que tal número tal vez no produzca una estimación óptima del porcentaje real de casos. Ciertamente, más pruebas generan una mejor estimación. Sin embargo, más allá de 3000 pruebas no logramos disminuir significativamente el margen de error y estaríamos generando un desperdicio. Te invitamos a leer la metodología en la siguiente sección y a reproducir los resultados utilizando el código al final del este artículo.
 
