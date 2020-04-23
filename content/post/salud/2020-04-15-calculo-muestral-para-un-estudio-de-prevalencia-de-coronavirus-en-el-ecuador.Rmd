@@ -146,8 +146,3 @@ La fórmula que usamos anteriormente $n = \frac{z^2P(1-P)}{d^2}$ asume que el ta
 <center>$\large n = \frac{N(z^2)P(1-P)}{d^2(N-1)+z^2P(1-P)}$</center><br />
 
 Digamos que deseamos realizar pruebas aleatorias en el cantón Baños de la provincia de Tungurahua. Este cantón tiene aproximadamente 25000 habitantes. Primero intentamos utilizar la primera fórmula que presentamos, la cual considera a la población como "infinita". Considerando una prevalencia esperada $P$ de 0.5%, obtenemos una muestra $n = \frac{1.96^20.005(1-0.005)}{0.0025^2}$ equivalente a `r sample_size(P = 0.005)`. Sin embargo, si dividimos este valor para el tamaño de la población, nos damos cuenta que el la muestra es `r round(sample_size(P = 0.005)/25000,2) * 100`% de la población, mayor al umbral del 5% que habíamos establecido. En esta caso, nos tocaría utilizar la segunda fórmula $n = \frac{25000(1.96^2)0.005(1-0.005)}{0.0025^2(25000-1)+1.96^20.005(1-0.005)}$, de la cual obtenemos una muestra de `r sample_size(P = 0.005, N = 25000)` individuos.
-
-#### Bibliografía
-
-\bibliographystyle{plain}
-\bibliography{2020-04-15-calculo-muestral-para-un-estudio-de-prevalencia-de-coronavirus-en-el-ecuador.bib}
