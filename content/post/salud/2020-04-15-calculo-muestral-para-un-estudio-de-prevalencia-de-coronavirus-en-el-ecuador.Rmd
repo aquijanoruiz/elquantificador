@@ -9,7 +9,6 @@ categories:
 tags:
   - Coronavirus
 description: ''
-hidden: true
 ---
 ```{r, include=FALSE}
 # We load the libraries /post/salud/
@@ -151,4 +150,4 @@ Digamos que deseamos realizar pruebas aleatorias en el cantón Baños de la prov
 #### Bibliografía
 
 \bibliographystyle{plain}
-\bibliography{/post/salud/2020-04-15-calculo-muestral-para-un-estudio-de-prevalencia-de-coronavirus-en-el-ecuador.bib}
+\bibliography{2020-04-15-calculo-muestral-para-un-estudio-de-prevalencia-de-coronavirus-en-el-ecuador.bib}
