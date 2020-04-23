@@ -17,7 +17,7 @@ images:
 ---
 Me hice una pregunta rápida. ¿Désde cuándo comenzamos a preocuparnos por el coronavirus? Hace unos cántos meses pensar que se convertiría en una crisis tan grave en Ecuador era una entelequia. Con la herramienta [Google trends](https://trends.google.com/trends/?geo=EC) al menos podemos saber qué palabras fueron las más buscadas por los ecuatorianos en determinados tiempos (por supuesto, esto solo sirve para ecuatorianos usando Google). La aplicación funciona muy parecido a Google. Pones palabras, estableces fechas, otras opciones, y listo. En este post pequeño voy a hacer ciertas búsquedas relacionadas con el coronavirus. Puse como fecha de búsqueda de noviembre a abril 15.
 
-La variable graficada es el **interés a lo largo del timepo**.  Según Google, este número "representan el interés de búsqueda en relación con el valor máximo de la lista correspondiente a la región y el período especificados. El valor 100 indica la popularidad máxima del término, 50 implica la mitad de popularidad, y 0 significa que no hubo suficientes datos para este término".
+La variable graficada es el **interés a lo largo del tiempo**.  Según Google, este número "representan el interés de búsqueda en relación con el valor máximo de la lista correspondiente a la región y el período especificados. El valor 100 indica la popularidad máxima del término, 50 implica la mitad de popularidad, y 0 significa que no hubo suficientes datos para este término".
 
 ```{r, include=FALSE}
 library(ggplot2)
@@ -44,7 +44,7 @@ p + geom_line() + xlab("") +  geom_area(fill="#69b3a2", alpha=0.5) + geom_line(c
 p <- ggplotly(p)
 ```
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
 p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
 ```
@@ -60,7 +60,7 @@ google.trends$coronavirus_EC <- as.numeric(google.trends$coronavirus_EC)
 ```
 
 Ahora veamos coronavirus y síntomas. Es una tendencia muy similar a solo coronavirus. 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
 p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
 ```
@@ -76,11 +76,11 @@ google.trends$coronavirus_EC <- as.numeric(google.trends$coronavirus_EC)
 ```
 
 El siguiente gráfico es coronavirus con muerte. Se parece mucho a los anteriores.
-```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
 p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
 ```
 
-Esta es una herramienta fácil de usar e interesantes. ¿Qué otras palabras claves crees que se buscaron más en este tiempo?
+Esta es una herramienta fácil de usar e interesante. ¿Qué otras palabras claves crees que se buscaron más en este tiempo?
 
 *Gracias a Pablo Crespo por enseñarme la herramienta.*
