@@ -20,8 +20,13 @@ library(sf)
 library(rmapshaper)
 library(tmap)
 library(DT)
+library(knitr)
 
 options(scipen=999)
+
+knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=",")
+})
 ```
 
 ```{r, echo=FALSE, include=FALSE}
@@ -88,7 +93,7 @@ covid19_la <- confirmed_la %>% left_join(deaths_la, by = c("País" = "País", "F
   left_join(recovered_la, by = c("País" = "País", "Fecha" = "Fecha")) 
 
 # ---------- Data summary
-today <- "2020-04-14"
+today <- "2020-04-24"
 
 covid19_la_0331 <- covid19_la %>% filter(Fecha == today) %>% select(-Fecha) %>% arrange(desc(`Casos confirmados`))
 
@@ -98,7 +103,7 @@ covid19_la_0331_sum <- summarize(covid19_la_0331, total_confirmed = sum(`Casos c
 
 El 29 de febrero de 2020, el Ecuador se convirtió en el tercer país en América Latina en confirmar su primer caso de Covid-19. Brasil y México fueron los primeros. En tan solo un mes, el virus logró propagarese en todos los países de la región y hasta ayer, `r today`, se contabilizaron `r covid19_la_0331_sum$total_confirmed` casos confirmados, `r covid19_la_0331_sum$total_deaths` fallecidos y `r covid19_la_0331_sum$total_recovered` recuperados.
 
-**NOTA:** Todas las estadísticas están actualizadas al **martes, 14 de abril de 2020**. Los datos se actualizan automáticamente todos los día en la mañana con los datos del día anterior.
+**NOTA:** Todas las estadísticas están actualizadas al **viernes, 25 de abril de 2020**.
 
 **Tabla 1. Número de casos confirmados, fallecidos, y recuperados por país**
 
@@ -165,21 +170,17 @@ deaths_la_map <-
 
 ```
 
-A pesar de las medidas que impuso el gobierno ecuatoriano a inicios de marzo, es difícil afirmar que estas has sido los suficientemente efectivas para desacelerar el crecimiento de casos confirmados y muertes por Covid-19. Otros países también han tomado medidas, pero aún así el virus ha logrado esparcirse en toda la región. Aquí te mostramos dos mapas.
-
 **Mapa 1. Evolución de número de casos confirmados en América Latina**
-```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.4, warning=FALSE, echo=FALSE}
+```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.3, warning=FALSE, echo=FALSE}
 confirmed_la_map
 ```
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University
 
 **Mapa 2. Evolución de número de fallecidos en América Latina**
-```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.4, warning=FALSE, echo=FALSE}
+```{r, fig.show='animate', ffmpeg.format='gif', dev='jpeg', interval=0.3, warning=FALSE, echo=FALSE}
 deaths_la_map
 ```
 Fuente: Center for Systems Science and Engineering (CSSE) de Johns Hopkins University
-
-El 14 de marzo, el vicepresidente Otto Sonnenholzner anunció el cierre de fronteras a partir del lunes 16 de marzo a las 13:59. Otros países también han tomado medidas similares. A mediados de marzo, Perú también cerró sus fronteras. Colombia lo hizo 23 de marzo. Sin embargo, a finales de marzo Brazil ya alcanza casi seis mil casos confirmados, Chile los tres mil y Ecuador ya supera los dos mil.
 
 **Gráfico 1. Evolución del número de casos confirmados por país en América Latina**
 
@@ -209,9 +210,6 @@ covid19_la_0331_percap <- covid19_la_0331 %>%
          `Fallecidos por cada millón` = round(Fallecidos/Population * 1000000,1)) %>% 
   select(-c(Recuperados, Population))
 ```
-
-
-Panamá, Chile y Ecuador son los países con mayor número de casos confirmados por cada millón de habitantes. Así mismo, Panamá y República Dominicana y Ecuador cuentan con el mayor número de fallecidos por cada millón de habitantes. En Ecuador, por cada millón de habitantes, existen `r covid19_la_0331_percap[3,4]` casos confirmados y `r covid19_la_0331_percap[3,5]` fallecidos. Te ofrecemos más detalle en la siguiente tabla.
 
 **Tabla 2. Número de casos confirmados y fallecidos por cada millón de habitantes**
 ```{r, echo=FALSE}
