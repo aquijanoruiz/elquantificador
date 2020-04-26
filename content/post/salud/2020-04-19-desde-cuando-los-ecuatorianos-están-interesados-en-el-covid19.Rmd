@@ -10,9 +10,9 @@ tags:
   - Desigualdad
   - Coronavirus
 description: 'Vemos de forma muy rápida las tendencias de búsqueda en Google relacionadas a temas de coronavirus. En nuestra búsqueda exploramos las siguientes palabras claves: coronavirus, coronavirus síntomas, y coronavirus muerte También te enseñamos a usar la herramienta para hacer tus propias búsquedas.'
-thumbnail: '/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.jpg'
+thumbnail: '/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.png'
 images: 
-  - 'https://elquantificador.org/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.jpg'
+  - 'https://elquantificador.org/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.png'
 
 ---
 Me hice una pregunta rápida: ¿desde cuándo comenzamos a preocuparnos por el coronavirus? Hace unos cuántos meses pensar que se convertiría en una crisis tan grave en Ecuador era una entelequia. Con la herramienta [Google Trends](https://trends.google.com/trends/?geo=EC) al menos podemos saber qué palabras fueron las más buscadas por los ecuatorianos en determinados tiempos (por supuesto, esto solo sirve para ecuatorianos usando Google).
