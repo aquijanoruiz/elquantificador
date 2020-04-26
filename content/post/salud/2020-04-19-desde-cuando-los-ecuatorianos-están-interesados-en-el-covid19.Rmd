@@ -37,7 +37,7 @@ google.trends$increase <- google.trends$coronavirus_EC/lag(google.trends$coronav
 
 ```{r, echo=FALSE}
 # We plot the data and add annotations ----------
-p <- ggplot(data = google.trends, aes(x=date, y=coronavirus_EC)) + 
+plot <- ggplot(data = google.trends, aes(x=date, y=coronavirus_EC)) + 
   geom_line(color="#69b3a2", size = 0.8) + 
   geom_area(fill="#69b3a2", alpha=0.50) +
   labs(title = "Interés de los ecuatorianos en el covid19", x = "", y = "Interés a lo largo del tiempo") +
@@ -52,8 +52,8 @@ p <- ggplot(data = google.trends, aes(x=date, y=coronavirus_EC)) +
   annotate("text", x = as.Date("2020-01-26"), y = 25, label = "bolditalic('Primer caso \n sospechoso')", parse = TRUE, size = 2.8, hjust = 0)
 ```
 
-```{r, echo=FALSE}
-p
+```{r plot, echo=FALSE}
+plot
 ```
 <p style="line-height:80%"><font size="1"><i>La variable graficada es el "interés a lo largo del tiempo".  Según Google, este número "representan el interés de búsqueda en relación con el valor máximo de la lista correspondiente a la región y el período especificados. El valor 100 indica la popularidad máxima del término, 50 implica la mitad de popularidad, y 0 significa que no hubo suficientes datos para este término".</i></font></p>
 
