@@ -64,6 +64,6 @@ Mirando los datos me di cuenta de cuatro eventos importantes que llamaron la ate
 
 **8 de abril – Se reportan muertos en las calles de Guayaquil:** Sin duda el momento más culminante de esta tragedia hasta ahora. Lo que más temíamos finalmente aconteció. Los servicios de salud y funerarios de la capital económica del Ecuador, Guayaquil, colapsaron completamente. El hecho llamó la atención de la presa a nivel mundial. Incluso el New York Times resaltó diciendo: *“El aumento de las muertes en Guayaquil, y las imágenes que circulan en las redes sociales de los cuerpos envueltos en plástico en las puertas, han expuesto el potencial impacto de la pandemia en los pobres de los países en desarrollo, donde el acceso a la atención médica y otros recursos es defectuoso incluso en el mejor de los momentos.”*
 
-Google Trends es una herramienta fácil de usar e interesante. ¿Qué otras palabras claves crees que se buscaron más en este tiempo?
+Google Trends es una herramienta fácil de usar e interesante. ¿Qué otras palabras claves crees que se buscaron más en este tiempo? Si deseas aprender a usar esta herramienta en `R`, revisa el código en nuestro [github](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/salud/2020-04-19-desde-cuando-los-ecuatorianos-est%C3%A1n-interesados-en-el-covid19/2020-04-19-desde-cuando-los-ecuatorianos-est%C3%A1n-interesados-en-el-covid19.Rmd).
 
 *Gracias a Pablo Crespo por enseñarme la herramienta.*
