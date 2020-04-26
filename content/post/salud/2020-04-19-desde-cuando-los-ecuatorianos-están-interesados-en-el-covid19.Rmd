@@ -48,7 +48,7 @@ ggplot(data = google.trends, aes(x=date, y=coronavirus_EC)) +
   theme(axis.text.y = element_text(size = 10), axis.text.x = element_text(angle = 35, hjust = 1, size = 10)) +
   annotate("text", x = as.Date("2020-03-1"), y = 75, label = "bolditalic('Primer caso \n confirmado')", parse = TRUE, size = 2.8, hjust = 0) +
   annotate("text", x = as.Date("2020-03-16"), y = 86, label = "bolditalic('Se anuncia el cierre \n de fronteras')", parse = TRUE, size = 2.8, hjust = 0) +
-  annotate("text", x = as.Date("2020-04-8"), y = 90, label = "bolditalic('Se reportan muertos \n en las calles de \n Guayaquil')", parse = TRUE, size = 2.8, hjust = 0) +
+  annotate("text", x = as.Date("2020-04-8"), y = 85, label = "bolditalic('Se reportan \n muertos en las \n calles de \n Guayaquil')", parse = TRUE, size = 2.8, hjust = 0) +
   annotate("text", x = as.Date("2020-01-26"), y = 25, label = "bolditalic('Primer caso \n sospechoso')", parse = TRUE, size = 2.8, hjust = 0)
 
 ```
