@@ -1,9 +1,9 @@
 ---
-title: '¿Desde cuándo los ecuatorianos están interesados en el COVID19? '
+title: ¿Desde cuándo los ecuatorianos están interesados en el COVID19?
 authors:
   - Marco Faytong 
 date: '2020-04-19'
-slug: desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19
+slug: desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2
 categories:
   - Salud
 tags:
@@ -13,8 +13,8 @@ description: 'Vemos de forma muy rápida las tendencias de búsqueda en Google r
 thumbnail: '/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.png'
 images: 
   - 'https://elquantificador.org/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.png'
-hidden: true
 ---
+
 Me hice una pregunta rápida: ¿desde cuándo comenzamos a preocuparnos por el coronavirus? Hace unos cuántos meses pensar que se convertiría en una crisis tan grave en Ecuador era una entelequia. Con la herramienta [Google Trends](https://trends.google.com/trends/?geo=EC) al menos podemos saber qué palabras fueron las más buscadas por los ecuatorianos en determinados tiempos (por supuesto, esto solo sirve para ecuatorianos usando Google).
 
 ```{r, include=FALSE}
