@@ -10,9 +10,9 @@ tags:
   - Desigualdad
   - Coronavirus
 description: 'Vemos de forma muy rápida las tendencias de búsqueda en Google relacionadas a temas de coronavirus. En nuestra búsqueda exploramos las siguientes palabras claves: coronavirus, coronavirus síntomas, y coronavirus muerte También te enseñamos a usar la herramienta para hacer tus propias búsquedas.'
-thumbnail: '/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19.jpg'
+thumbnail: '/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.jpg'
 images: 
-  - 'https://elquantificador.org/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19.jpg'
+  - 'https://elquantificador.org/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19-2.jpg'
 
 ---
 Me hice una pregunta rápida: ¿desde cuándo comenzamos a preocuparnos por el coronavirus? Hace unos cuántos meses pensar que se convertiría en una crisis tan grave en Ecuador era una entelequia. Con la herramienta [Google Trends](https://trends.google.com/trends/?geo=EC) al menos podemos saber qué palabras fueron las más buscadas por los ecuatorianos en determinados tiempos (por supuesto, esto solo sirve para ecuatorianos usando Google).
@@ -47,7 +47,7 @@ ggplot(data = google.trends, aes(x=date, y=coronavirus_EC)) +
                date_labels = "%b %d") + theme_ipsum() +
   theme(axis.text.y = element_text(size = 10), axis.text.x = element_text(angle = 35, hjust = 1, size = 10)) +
   annotate("text", x = as.Date("2020-03-1"), y = 75, label = "bolditalic('Primer caso \n confirmado')", parse = TRUE, size = 2.8, hjust = 0) +
-  annotate("text", x = as.Date("2020-03-14"), y = 86, label = "bolditalic('Se anuncia el cierre \n de fronteras')", parse = TRUE, size = 2.8, hjust = 0) +
+  annotate("text", x = as.Date("2020-03-16"), y = 86, label = "bolditalic('Se anuncia el cierre \n de fronteras')", parse = TRUE, size = 2.8, hjust = 0) +
   annotate("text", x = as.Date("2020-04-8"), y = 90, label = "bolditalic('Se reportan muertos \n en las calles de \n Guayaquil')", parse = TRUE, size = 2.8, hjust = 0) +
   annotate("text", x = as.Date("2020-01-26"), y = 25, label = "bolditalic('Primer caso \n sospechoso')", parse = TRUE, size = 2.8, hjust = 0)
 
