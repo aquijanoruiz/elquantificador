@@ -15,72 +15,55 @@ images:
   - 'https://elquantificador.org/post/salud/2020-04-19-desde-cuando-los-ecuatorianos-estan-interesados-en-el-covid19.jpg'
 
 ---
-Me hice una pregunta rápida. ¿Désde cuándo comenzamos a preocuparnos por el coronavirus? Hace unos cántos meses pensar que se convertiría en una crisis tan grave en Ecuador era una entelequia. Con la herramienta [Google trends](https://trends.google.com/trends/?geo=EC) al menos podemos saber qué palabras fueron las más buscadas por los ecuatorianos en determinados tiempos (por supuesto, esto solo sirve para ecuatorianos usando Google). La aplicación funciona muy parecido a Google. Pones palabras, estableces fechas, otras opciones, y listo. En este post pequeño voy a hacer ciertas búsquedas relacionadas con el coronavirus. Puse como fecha de búsqueda de noviembre a abril 15.
-
-La variable graficada es el **interés a lo largo del tiempo**.  Según Google, este número "representan el interés de búsqueda en relación con el valor máximo de la lista correspondiente a la región y el período especificados. El valor 100 indica la popularidad máxima del término, 50 implica la mitad de popularidad, y 0 significa que no hubo suficientes datos para este término".
+Me hice una pregunta rápida: ¿desde cuándo comenzamos a preocuparnos por el coronavirus? Hace unos cuántos meses pensar que se convertiría en una crisis tan grave en Ecuador era una entelequia. Con la herramienta [Google Trends](https://trends.google.com/trends/?geo=EC) al menos podemos saber qué palabras fueron las más buscadas por los ecuatorianos en determinados tiempos (por supuesto, esto solo sirve para ecuatorianos usando Google).
 
 ```{r, include=FALSE}
-library(ggplot2)
-library(dplyr)
-library(plotly)
+library(tidyverse)
+library(gtrendsR)
+library(reshape2)
 library(hrbrthemes)
-```
 
-```{r, include=FALSE}
-library(gtrendsR)
-library(reshape2)
-google.trends = gtrends(c("coronavirus"), geo = c("EC"),gprop = "web", time = "2019-10-01 2020-04-15")[[1]]
+# We download the data from 2020-1-10 to 2020-04-25 ----------
+google.trends = gtrends(c("coronavirus"), geo = c("EC"), gprop = "web", time = "2020-1-10 2020-04-25")[[1]]
+
+# We manipulate the data to be able to plot it ----------
 google.trends = dcast(google.trends, date ~ keyword + geo, value.var = "hits")
-rownames(google.trends) = google.trends$date
-google.trends$date = as.Date(as.character(as.POSIXct(google.trends$date)))
 google.trends$coronavirus_EC <- as.numeric(google.trends$coronavirus_EC)
+google.trends$coronavirus_EC <- ifelse(is.na(google.trends$coronavirus_EC), 0, 
+                                       google.trends$coronavirus_EC)
+google.trends$date = as.Date(google.trends$date)
+google.trends$increase <- google.trends$coronavirus_EC/lag(google.trends$coronavirus_EC) - 1
 ```
 
-Comencé con la palabra "coronavirus". Lo curioso de este gráfico es que el interés relativo no comienza a alzarse hasta mediados de enero (cuando ya había al menos un mes de epidemia en Wuhan). El mayor pico fue del 15 al 21 de marzo. Las siguinetes dos búsquedas arrojan resultados muy similares a esta, pero te invitamos a que explores la herramienta.
+```{r, echo=FALSE}
+# We plot the data and add annotations ----------
+ggplot(data = google.trends, aes(x=date, y=coronavirus_EC)) + 
+  geom_line(color="#69b3a2", size = 0.8) + 
+  geom_area(fill="#69b3a2", alpha=0.5) +
+  labs(title = "Interés de los ecuatorianos en el covid19", x = "", y = "Interés a lo largo del tiempo") +
+  theme_minimal() +
+  scale_x_date(date_breaks = "10 days", 
+               date_minor_breaks = "5 days",
+               date_labels = "%b %d") + theme_ipsum() +
+  theme(axis.text.y = element_text(size = 10), axis.text.x = element_text(angle = 35, hjust = 1, size = 10)) +
+  annotate("text", x = as.Date("2020-03-1"), y = 75, label = "bolditalic('Primer caso \n confirmado')", parse = TRUE, size = 2.8, hjust = 0) +
+  annotate("text", x = as.Date("2020-03-14"), y = 86, label = "bolditalic('Se anuncia el cierre \n de fronteras')", parse = TRUE, size = 2.8, hjust = 0) +
+  annotate("text", x = as.Date("2020-04-8"), y = 90, label = "bolditalic('Se reportan muertos \n en las calles de \n Guayaquil')", parse = TRUE, size = 2.8, hjust = 0) +
+  annotate("text", x = as.Date("2020-01-26"), y = 25, label = "bolditalic('Primer caso \n sospechoso')", parse = TRUE, size = 2.8, hjust = 0)
 
-```{r, include=FALSE}
-p <- ggplot(data = google.trends, aes(x=date, y=coronavirus_EC))
-p + geom_line() + xlab("") +  geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del timepo") + theme_ipsum() 
-p <- ggplotly(p)
 ```
+<p style="line-height:80%"><font size="1"><i>La variable graficada es el "interés a lo largo del tiempo".  Según Google, este número "representan el interés de búsqueda en relación con el valor máximo de la lista correspondiente a la región y el período especificados. El valor 100 indica la popularidad máxima del término, 50 implica la mitad de popularidad, y 0 significa que no hubo suficientes datos para este término".</i></font></p>
 
-```{r, echo=FALSE, warning=FALSE}
-p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
-p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
-```
+Mirando los datos me di cuenta de cuatro eventos importantes que llamaron la atención de los ecuatorianos.
 
-```{r, include=FALSE}
-library(gtrendsR)
-library(reshape2)
-google.trends = gtrends(c("coronavirus", "sintomas"), geo = c("EC"),gprop = "web", time = "2019-10-01 2020-04-15")[[1]]
-google.trends = dcast(google.trends, date ~ keyword + geo, value.var = "hits")
-rownames(google.trends) = google.trends$date
-google.trends$date = as.Date(as.character(as.POSIXct(google.trends$date)))
-google.trends$coronavirus_EC <- as.numeric(google.trends$coronavirus_EC)
-```
+**27 de enero – Primer caso sospechoso:** Se trata del primer ciudadano de nacionalidad china que llegó al país con síntomas de neumonía y que tuvo preocupado a la población durante algún tiempo dado que su diagnóstico de hepatitis B tardó aproximadamente dos semanas.
 
-Ahora veamos coronavirus y síntomas. Es una tendencia muy similar a solo coronavirus. 
-```{r, echo=FALSE, warning=FALSE}
-p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
-p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
-```
+**29 de febrero – Primer caso confirmado:** En Ecuador se recordará aún más este año bisiesto ya que fue el 29 de febrero que se confirmó el primer caso de coronavirus. Se trataba de una mujer que llegó de España el 14 de febrero. Posteriormente, ella también se convertiría en la primera fallecida por coronavirus el 13 de marzo.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=FALSE}
-library(gtrendsR)
-library(reshape2)
-google.trends = gtrends(c("coronavirus", "muerte"), geo = c("EC"),gprop = "web", time = "2019-10-01 2020-04-15")[[1]]
-google.trends = dcast(google.trends, date ~ keyword + geo, value.var = "hits")
-rownames(google.trends) = google.trends$date
-google.trends$date = as.Date(as.character(as.POSIXct(google.trends$date)))
-google.trends$coronavirus_EC <- as.numeric(google.trends$coronavirus_EC)
-```
+**14 de marzo – Se anuncia el cierre de las fronteras:** Con ya 28 casos positivos confirmados, el vicepresidente Otto Sonnenholzner anunció en cadena nacional que cerraría las fronteras para evitar el ingreso de nuevos casos. La noticia tomó por sorpresa a la población ya que esto demostraba la gravedad de la pandemia que luego cambiaría nuestras vidas.
 
-El siguiente gráfico es coronavirus con muerte. Se parece mucho a los anteriores.
-```{r, echo=FALSE, warning=FALSE}
-p <- ggplot(google.trends, aes(x=date, y=coronavirus_EC)) + geom_line() + xlab("")
-p+scale_x_date(date_labels = "%b", date_breaks = "2 week") + geom_area(fill="#69b3a2", alpha=0.5) + geom_line(color="#69b3a2") + ylab("Interés a lo largo del tiempo") + theme_ipsum() 
-```
+**8 de abril – Se reportan muertos en las calles de Guayaquil:** Sin duda el momento más culminante de esta tragedia hasta ahora. Lo que más temíamos finalmente aconteció. Los servicios de salud y funerarios de la capital económica del Ecuador, Guayaquil, colapsaron completamente. El hecho llamó la atención de la presa a nivel mundial. Incluso el New York Times resaltó diciendo: *“El aumento de las muertes en Guayaquil, y las imágenes que circulan en las redes sociales de los cuerpos envueltos en plástico en las puertas, han expuesto el potencial impacto de la pandemia en los pobres de los países en desarrollo, donde el acceso a la atención médica y otros recursos es defectuoso incluso en el mejor de los momentos.”*
 
-Esta es una herramienta fácil de usar e interesante. ¿Qué otras palabras claves crees que se buscaron más en este tiempo?
+Google Trends es una herramienta fácil de usar e interesante. ¿Qué otras palabras claves crees que se buscaron más en este tiempo?
 
 *Gracias a Pablo Crespo por enseñarme la herramienta.*
