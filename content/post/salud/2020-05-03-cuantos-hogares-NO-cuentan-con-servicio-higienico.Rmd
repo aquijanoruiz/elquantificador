@@ -12,7 +12,7 @@ tags:
 description: 'Estaba pensando que con el coronavirus y el aislamiento muchas personas preferirán usar su propio baño y ningún baño más. ¿Todo el mundo en Ecuador puede hacerlo? En otras palabras, ¿todas las viviendas habitadas tienen baño propio? En este mapa lo muestro.'
 thumbnail: '/post/salud/2020-05-03-cuantos-hogares-NO-cuentan-con-servicio-higienico.jpg'
 images: 
-  - 'https://elquantificador.org/post/socioeconomia2020-05-03-cuantos-hogares-NO-cuentan-con-servicio-higienico.jpg'
+  - 'https://elquantificador.org/post/salud/2020-05-03-cuantos-hogares-NO-cuentan-con-servicio-higienico.jpg'
 ---
 Parte  de mis proyectos de investigación están relacionados a la defecación al aire libre. Sí, así mismo. "Hacer" el número 1 o número 2 al aire libre es un factor causal de desnutrición y muchos otros males.
 
