@@ -1,0 +1,110 @@
+---
+title: ¿Cuántos hogares NO cuentan con servicio higiénico?
+authors: 
+- Marco Faytong
+date: '2020-05-03'
+slug: cuantos-hogares-NO-cuentan-con-servicio-higienico
+categories:
+  - Salud
+tags:
+  - Desigualdad
+  - Mapas
+description: 'Estaba pensando que con el coronavirus y el aislamiento muchas personas preferirán usar su propio baño y ningún baño más. ¿Todo el mundo en Ecuador puede hacerlo? En otras palabras, ¿todas las viviendas habitadas tienen baño propio? En este mapa lo muestro.'
+thumbnail: '/post/salud/2020-05-03-cuantos-hogares-NO-cuentan-con-servicio-higienico.jpg'
+images: 
+  - 'https://elquantificador.org/post/socioeconomia2020-05-03-cuantos-hogares-NO-cuentan-con-servicio-higienico.jpg'
+---
+Parte  de mis proyectos de investigación están relacionados a la defecación al aire libre. Sí, así mismo. "Hacer" el número 1 o número 2 al aire libre es un factor causal de desnutrición y muchos otros males.
+
+En [India](https://www.nytimes.com/es/2017/09/07/espanol/india-banos-salud.html)  mucha gente aún no tiene o no usa letrina, servicios higiénicos, excusados, como mejor quieras llamarle (El gobierno dice que eso no es verdad, pero no hay cómo creerle, eso es discusión para otro día). Las razones en India son mayoritariamente culturales más que económicas y nos imaginaríamos que en Ecuador todos los hogares tienen servicios higiénicos. ¿Será cierto?
+
+Aquí te muestro un mapa por provincia de cuántas viviendas NO tienen servicios higiénicos (de ningún tipo: ni letrinas). Ojo, no estoy asumiendo que todas las personas que viven en estas viviendas lo hacen al aire libre, a lo mejor van a la casa del vecino? 11% de hogares en Ecuador comparten su excusado con varias otras familias según el INEC; sin embargo, en época de aislamiento no estoy seguro cómo esto está funcionando eso. Igual, este mapa nos permite observar cuántos hogares no tienen el privilegio de un baño exclusivo para ellos.  
+
+```{r, include=FALSE}
+
+#Este es todo el código usado para realizar los mapas.
+
+library(tidyverse)
+library(sf)
+library(rmapshaper)
+library(tmap)
+library(RColorBrewer)
+library(grid)
+
+setwd("C:/Users/mfayt/Google Drive/Quantificador Marco/Porcentaje hogares sin latrina")
+
+
+# --------- preparing the st data ---------
+# Ecuador's political division (*.shp) data
+ecu_map <- st_read("ECU_adm1.shp")
+head(ecu_map)
+
+# We simplify the data
+ecu_map <- ms_simplify(ecu_map, keep=0.01) # We keep the 0.4% of the polygon
+
+# We keep only the variables we need
+ecu_map <- ecu_map %>% select(-c(ID_0, ISO, NAME_0, ID_1, TYPE_1, ENGTYPE_1, NL_NAME_1, VARNAME_1)) %>%
+  rename(Provincia = NAME_1) # We only keep the province names and the geometry
+
+```
+
+```{r, include=FALSE}
+# --------- loading the input data ---------
+
+setwd("C:/Users/mfayt/Google Drive/Quantificador Marco/Porcentaje hogares sin latrina")
+
+hog_sinsshh <- read_csv("hog_sinsshh_03052020.csv")
+hog_sinsshh <- hog_sinsshh %>% mutate(porc_sl = porc_sl * 100)
+hog_sinsshh <- hog_sinsshh %>% mutate(porc_sl_per = as.character(paste0(formatC(hog_sinsshh$porc_sl,format = "f", digits = 0), " %")))
+hog_sinsshh$provincia<-ifelse(hog_sinsshh$provincia=="Canar","Cañar",hog_sinsshh$provincia)
+hog_sinsshh$provincia<-ifelse(hog_sinsshh$provincia=="Galapagos","Galápagos",hog_sinsshh$provincia)
+hog_sinsshh$provincia<-ifelse(hog_sinsshh$provincia=="Santo Domingo de los Tsachilas","Santo Domingo de los Tsáchilas",hog_sinsshh$provincia)
+hog_sinsshh_geom <- inner_join(ecu_map, hog_sinsshh, by = c("Provincia" = "provincia"))
+
+hog_sinsshh_geom$Provincia <- plyr::revalue(hog_sinsshh_geom$Provincia, 
+                                          c("Santo Domingo de los Tsáchilas" = "Sto Dom Tsáchilas", 
+                                            "Manabi" = "Manabí"))
+```
+
+```{r, include=FALSE}
+# --------- Creating the maps ---------
+hog_sinsshh_map_ecu <- # Continental Ecuador
+tm_shape(hog_sinsshh_geom %>% filter(!Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_fill(col = "porc_sl", palette = "Reds", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), 
+          title = "Hogares sin servicio higiénico",legend.show = TRUE) +
+  tm_text("porc_sl_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_sinsshh_geom) +
+  tm_fill(col = "porc_sl", palette = "Reds", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = F)
+
+hog_sinsshh_map_gal <- # Galapagos
+  tm_shape(hog_sinsshh_geom %>% filter(Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_shape(hog_sinsshh_geom) +
+  tm_fill(col = "porc_sl", palette = "Reds", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x, digits=0, format="f"), " %")), legend.show = FALSE) +
+  tm_text("porc_sl_per", size = 0.4, alpha = 0.6, just = "bottom") + # We add the number of cases
+  tm_shape(hog_sinsshh_geom) +
+  tm_fill(col = "porc_sl", palette = "Reds", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = "white")
+```
+
+
+```{r, echo=FALSE}
+grid.newpage()
+print(hog_sinsshh_map_ecu, vp = viewport(x = 0.6, y = 0.5,
+                                           height = 0.9))
+print(hog_sinsshh_map_gal, vp = viewport(x = 0.15, y = 0.8,
+                                           height = 0.22))
+```
+Por supuesto, esto es sumamento descriptivo y no estoy haciendo  división urbano/rural. Estoy casi seguro que los números altos en las provincias amazónicas son por la ruralidad (no significa que sea sano no tener servicios higiénicos en la casa). Ustedes saquen sus conclusiones con la Amazonía. Sin embargo, 22% de viviendas en Bolívar no tienen servicios higiénicos, eso es bastante. 
+
+El mapa habla por sí solo e invito a los lectores a reaccionar con el mismo. ¿Sabías de este problema?
+
+Saqué estas proporciones usando el Censo de Población y Vivienda recolectado por el INEC en el 2010. Puedes jugar con las variables en este [vínculo](http://redatam.inec.gob.ec/cgibin/RpWebEngine.exe/PortalAction?&MODE=MAIN&BASE=CPV2010&MAIN=WebServerMain.inl). ¿No hay bases más actualizadas? Sí las hay. Veremos en un próximo artículo si esto ha evolucionado o no, pero nos deja una idea de cómo está el Ecuador en este ámbito. Muchos amigos asumen que todas las viviendas tienen servicios higiénicos, la realidad es otra.
+
+Próximamente subiré la sintaxis del cálculo. Si hay alguna pregunta, me pueden escribir a marco@elquantificador.org
