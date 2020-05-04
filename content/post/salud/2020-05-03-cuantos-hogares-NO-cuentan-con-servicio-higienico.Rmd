@@ -14,11 +14,11 @@ thumbnail: '/post/salud/2020-05-03-cuantos-hogares-NO-cuentan-con-servicio-higie
 images: 
   - 'https://elquantificador.org/post/salud/2020-05-03-cuantos-hogares-NO-cuentan-con-servicio-higienico.jpg'
 ---
-Parte  de mis proyectos de investigación están relacionados a la defecación al aire libre. Sí, así mismo. "Hacer" el número 1 o número 2 al aire libre es un factor causal de desnutrición y muchos otros males.
+Parte  de mis proyectos de investigación están relacionados a la defecación al aire libre. Sí, así mismo. Defecar y orinar al aire libre son factores causales de desnutrición y muchos otros males.
 
 En [India](https://www.nytimes.com/es/2017/09/07/espanol/india-banos-salud.html)  mucha gente aún no tiene o no usa letrina, servicios higiénicos, excusados, como mejor quieras llamarle (El gobierno dice que eso no es verdad, pero no hay cómo creerle, eso es discusión para otro día). Las razones en India son mayoritariamente culturales más que económicas y nos imaginaríamos que en Ecuador todos los hogares tienen servicios higiénicos. ¿Será cierto?
 
-Aquí te muestro un mapa por provincia de cuántas viviendas NO tienen servicios higiénicos (de ningún tipo: ni letrinas). Ojo, no estoy asumiendo que todas las personas que viven en estas viviendas lo hacen al aire libre, a lo mejor van a la casa del vecino? 11% de hogares en Ecuador comparten su excusado con varias otras familias según el INEC; sin embargo, en época de aislamiento no estoy seguro cómo esto está funcionando eso. Igual, este mapa nos permite observar cuántos hogares no tienen el privilegio de un baño exclusivo para ellos.  
+Aquí te muestro un mapa por provincia de cuántas viviendas NO tienen servicios higiénicos (de ningún tipo: ni letrinas). Ojo, no estoy asumiendo que todas las personas que viven en estas viviendas lo hacen al aire libre, a lo mejor van a la casa del vecino? 11% de hogares en Ecuador comparten su excusado con varias otras familias según el INEC; sin embargo, en época de aislamiento no estoy seguro cómo esto está funcionando.  Igual, este mapa nos permite observar cuántos hogares no tienen el privilegio de un baño exclusivo para ellos.  
 
 ```{r, include=FALSE}
 
