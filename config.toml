@@ -9,7 +9,7 @@ theme = "Mainroad"
 # StaticmanComments = "true"
 
 disqusShortname = "" # Enable comments by entering your Disqus shortname
-googleAnalytics = "" # Enable Google Analytics by entering your tracking id
+googleAnalytics = "UA-165600373-1" # Enable Google Analytics by entering your tracking id
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 # rssLimit = 20 # max nbr of entries shown in rss feed
@@ -27,7 +27,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [Params]
   subtitle = "La verdad se cuenta con datos." # Subtitle of your site
-  description = "Analizamos temas coyunturales de ámbito social de forma sencilla, académica, y transparente." # Description of your site
+  description = "Analizamos temas coyunturales de ??mbito social de forma sencilla, acad??mica, y transparente." # Description of your site
   opengraph = true
   twitter_cards = true
   readmore = false # Show "Read more" button in list if true
