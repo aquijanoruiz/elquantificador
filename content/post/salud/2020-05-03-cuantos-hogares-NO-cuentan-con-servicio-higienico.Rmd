@@ -105,6 +105,8 @@ Por supuesto, esto es sumamento descriptivo y no estoy haciendo  división urban
 
 El mapa habla por sí solo e invito a los lectores a reaccionar con el mismo. ¿Sabías de este problema?
 
-Saqué estas proporciones usando el Censo de Población y Vivienda recolectado por el INEC en 2010. Puedes jugar con las variables en este [vínculo](http://redatam.inec.gob.ec/cgibin/RpWebEngine.exe/PortalAction?&MODE=MAIN&BASE=CPV2010&MAIN=WebServerMain.inl). ¿No hay bases más actualizadas? Sí las hay. Veremos en un próximo artículo si esto ha evolucionado o no, pero nos deja una idea de cómo está el Ecuador en este ámbito. Muchos amigos asumen que todas las viviendas tienen servicios higiénicos. La realidad es otra.
+Saqué estas proporciones usando el Censo de Población y Vivienda recolectado por el INEC en 2010. ¿No hay bases más actualizadas? Sí las hay. Veremos en un próximo artículo si esto ha evolucionado o no, pero nos deja una idea de cómo está el Ecuador en este ámbito. Muchos amigos asumen que todas las viviendas tienen servicios higiénicos. La realidad es otra.
+
+Puedes jugar con las variables del censo en este [vínculo](http://redatam.inec.gob.ec/cgibin/RpWebEngine.exe/PortalAction?&MODE=MAIN&BASE=CPV2010&MAIN=WebServerMain.inl).
 
 Próximamente subiré la sintaxis del cálculo. Si hay alguna pregunta, me pueden escribir a marco@elquantificador.org
