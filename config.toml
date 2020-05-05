@@ -2,7 +2,7 @@ baseurl = "https://elquantificador.org/"
 title = "El Quantificador"
 
 languageCode = "es-es"
-paginate = "10" # Number of posts per page
+paginate = "20" # Number of posts per page
 theme = "Mainroad"
 
 # enable staticman comments (staticman.net)
