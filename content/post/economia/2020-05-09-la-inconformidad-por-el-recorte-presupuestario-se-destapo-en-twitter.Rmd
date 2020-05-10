@@ -6,9 +6,9 @@ date: '2020-05-09'
 slug: 2020-05-09-inconformidad-recorte-presupuestario-twitter
 categories:
   - Economía
+  - Educación
 tags:
   - Twitter
-  - Educación
 description: 'En esta publicación utilizamos ciencia de datos para analizar la reacción en Twitter que generó el recorte presupuestario a la educación. Nos preguntamos cuáles fueron las cuentas que generaron más tendencia y cuáles fueron las más mencionadas en los tuits. Asimimo, Resumimos en una nube de palabras más de dicisiete mil tuits.'
 thumbnail: '/post/economia/2020-05-09-la-inconformidad-por-el-recorte-presupuestario-se-destapo-en-twitter.png'
 images: 
