@@ -1,26 +1,24 @@
 ---
-title: La inconformidad por el recorte presupuestario se destapó en Twitter
+title: Espol lidera rechazo al recorte presupuestario y genera tendencia en Twitter
+author: ''
+date: '2020-05-10'
+slug: espol-rechazo-recorte-presupuestario-tendencia-twitter
 authors: 
   - Alonso Quijano
-date: '2020-05-09'
-slug: 2020-05-09-inconformidad-recorte-presupuestario-twitter
 categories:
   - Economía
   - Educación
 tags:
-  - Twitter
+  - Redes sociales
 description: 'En esta publicación utilizamos ciencia de datos para analizar la reacción en Twitter que generó el recorte presupuestario a la educación. Nos preguntamos cuáles fueron las cuentas que generaron más tendencia y cuáles fueron las más mencionadas en los tuits. Asimimo, Resumimos en una nube de palabras más de dicisiete mil tuits.'
-thumbnail: '/post/economia/2020-05-09-la-inconformidad-por-el-recorte-presupuestario-se-destapo-en-twitter.png'
+thumbnail: '/post/economia/2020-05-10-espol-lidera-rechazo-al-recorte-presupuestario-y-genera-tendencia-en-twitter.png'
 images: 
-  - 'https://elquantificador.org/post/economia/2020-05-09-la-inconformidad-por-el-recorte-presupuestario-se-destapo-en-twitter.png'
-hidden: true
+  - 'https://elquantificador.org/post/economia/2020-05-10-espol-lidera-rechazo-al-recorte-presupuestario-y-genera-tendencia-en-twitter.png'
 ---
 
-Recién nos acercamos a la mitad de mayo, pero los acontecimientos políticos y económicos ya ha dado suficiente de qué hablar en Twitter. Los primeros días de mayo nos colmamos de entretenimiento con el hashtag #tinocoStyle. Sin embargo, en los últimos días la atención se concentró en las medidas presupuestarias anunciadas por el gobierno. En esta publicación usaremos ciencia de datos para analizar el hashtag #NoAlRecorte.
+Recién nos acercamos a la mitad de mayo, pero los acontecimientos políticos y económicos ya ha dado suficiente de qué hablar en Twitter. Los primeros días de mayo nos colmamos de entretenimiento con el hashtag #tinocoStyle. Sin embargo, en los últimos días la atención se concentró en el recorte presupuestario anunciado por el gobierno. Tras el anuncio, las universidades públicas no estuvieron rápidamente expresaron su rechazo e inconformidad. En esta publicación usaremos ciencia de datos para analizar la protesta en Twitter liderada por la Espol y otras universidades en contra de estas medidas.
 
-Empezamos descargando los tweets que contengan los hashtags #NoAlRecorte o #NoAlRecortePresupuestario a través de un API que nos ofrece Twitter para descargar gratuitamente tuits. En total, recolectamos 17924 tuits, excluyendo aquellos que fueron retuiteados para evitar duplicados.
-
-Contamos el número de palabras y hashtags utilizados y elaboramos la siguiente nube de palabras. Como podemos observar, los usuarios se concentraron en rechazar en contra del recorte presupuestario a la educación, principalmente la superior. #QuelaUnopaguelaCRISIS, #HuelgaEducativaEc y #IESsinRecorte fueron, entre otros, los hashtags que acompañaban la protesta en Twitter.
+Empezamos descargando todos los tuits que contengan los hashtags #NoAlRecorte o #NoAlRecortePresupuestario. En total, recolectamos y analizamos 17,924 tuits. Quisimos saber cuáles fueron las palabras y frases más tuiteadas. Una nube de palabras nos permite resumir e ilustrar la frecuencia de cada una de estas palabras o frases. Por ejemplo, la palabra educación fue la más tuiteada (7,393 veces), mientras que el hashtag #QueLaUNoPagueLaCrisis fue el segundo más tuiteado (2,453 veces).
 
 ```{r, eval=FALSE, include=FALSE}
 
@@ -33,7 +31,7 @@ recorte <- rbind(recorte_1, recorte_2)
 recorte <- unique(recorte)
 ```
 
-```{r, echo=FALSE, warning=FALSE, comment=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, comment=FALSE, message=FALSE, fig.height=4}
 library(tidyverse)
 library(stringr)
 library(tm)
@@ -85,8 +83,15 @@ texto_corpus <- tm_map(texto_corpus, removeWords, custom_stopwords)
 wordcloud(texto_corpus, colors = brewer.pal(6, "Dark2"), max.words = 60,
           scale = c(3.8,0.7), random.order = FALSE)
 ```
+Las nubes de palabras se alimentan de una gran cantidad de datos (en este caso texto) y sirven para identificar tendencias. A través de la nube de palabras podemos destacar los siguientes mensajes:
 
-¿Quiénes fueron los más retuiteados? Quisimos ver qué cuentas fueron el foco de la protesta. Sumamos el número de retuits por cada cuenta y hallamos que las cuentas más retuiteadas fueron las de la Espol, la Universidad Central y la Universidad de Cuenca.  También varios docentes universitarios generaron muchos retuits como la recotra de la Espol Cecilia Paredes, el profesor de la PUCE Santiago Ron y la profesora de la UDA Caroline Ávila. Los más mencionados fueron el presidente Lenín Moreno y el ministro de finanzas Richard Martínez.
+1. Se está llamando a una huelga educativa
+2. La universidad está pagando el costo de la crisis
+3. El recorte presupuestario es inconstitucional
+4. La calidad de la educación se verá afectada por el recorte
+5. Menos educación equivale a más pobreza
+
+¿Quiénes fueron los más retuiteados? Quisimos ver quiénes impulsaron esta protesta y a quiénes fue dirigida. Contamos el número de retuits por cada cuenta y hallamos que las cuentas más retuiteadas fueron las de la Espol, la Universidad Central y la Universidad de Cuenca.  También varios docentes universitarios generaron muchos retuits como la rectora de la Espol Cecilia Paredes, el profesor de la PUCE Santiago Ron y la profesora de la UDA Caroline Ávila. Los más mencionados (o acusados) fueron el presidente Lenín Moreno y el ministro de finanzas Richard Martínez.
 
 ```{r, echo=FALSE, warning=FALSE, comment=FALSE, message=FALSE}
 ## --------------------------------------------------------------------------- ##
@@ -119,7 +124,7 @@ plot_2 <- mencionados %>% arrange(desc(Freq)) %>% slice(1:10) %>%
 grid.arrange(plot_1, plot_2, ncol = 2)
 ```
 
-Finalmente, el tuit más retuiteado fue el de la rectora de la Espol Cecilia Paredes. 
+Finalmente, ¿cuál fue el tuit más retuiteado? Este fue el de la rectora de la Espol Cecilia Paredes. 
 
 <center><blockquote class="twitter-tweet"><p lang="es" dir="ltr">Por una educación pública de calidad; la que ofrece soluciones a los problemas de los sectores sociales y productivos; la que ofrece oportunidades a los brillantes jóvenes con recursos limitados <a href="https://twitter.com/fepolespol?ref_src=twsrc%5Etfw">@fepolespol</a> <a href="https://twitter.com/hashtag/YoSoyESPOL?src=hash&amp;ref_src=twsrc%5Etfw">#YoSoyESPOL</a> <a href="https://twitter.com/hashtag/QuelaUNoPagueLaCrisis?src=hash&amp;ref_src=twsrc%5Etfw">#QuelaUNoPagueLaCrisis</a> <a href="https://twitter.com/hashtag/NoAlRecortePresupuestario?src=hash&amp;ref_src=twsrc%5Etfw">#NoAlRecortePresupuestario</a> <a href="https://t.co/1SUf54a0Bm">pic.twitter.com/1SUf54a0Bm</a></p>&mdash; Cecilia Paredes Verduga (@cparedesverduga) <a href="https://twitter.com/cparedesverduga/status/1257855359722688513?ref_src=twsrc%5Etfw">May 6, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></center>
 
