@@ -10,7 +10,7 @@ categories:
   - Educación
 tags:
   - Redes sociales
-description: 'En esta publicación utilizamos ciencia de datos para analizar la reacción en Twitter que generó el recorte presupuestario a la educación. Nos preguntamos cuáles fueron las cuentas que generaron más tendencia y cuáles fueron las más mencionadas en los tuits. Asimimo, Resumimos en una nube de palabras más de dicisiete mil tuits.'
+description: 'En esta publicación utilizamos ciencia de datos para analizar la reacción en Twitter que generó el recorte presupuestario a la educación. Nos preguntamos cuáles fueron las cuentas que generaron más tendencia y cuáles fueron las más mencionadas en los tuits.'
 thumbnail: '/post/economia/2020-05-10-espol-lidera-rechazo-al-recorte-presupuestario-y-genera-tendencia-en-twitter.png'
 images: 
   - 'https://elquantificador.org/post/economia/2020-05-10-espol-lidera-rechazo-al-recorte-presupuestario-y-genera-tendencia-en-twitter.png'
