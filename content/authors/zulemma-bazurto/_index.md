@@ -1,0 +1,4 @@
+---
+name: Zulemma Bazurto Blacio
+bio: Zulemma Bazurto Blacio es Magíster en Estadística por la Pontificia Universidad Católica de Chile e Ingeniera Comercial de la ESPOL. Actualmente es Fundadora de R-Ladies Guayaquil, Co-founder de R-Ladies Galápagos y Docente Titular de Estadística en la Facultad de Ciencias Administrativas de la Universidad de Guayaquil. Su mayor pasión es organizar e impartir conferencias sobre R para análisis de datos. Ha formado parte del equipo traductor del famoso libro online “R for Data Science” de Hadley Wickham y Garret Golemund y forma parte de la Directiva del Núcleo Guayas de la Sociedad Ecuatoriana de Estadística. Las líneas de investigación de su interés se centran en Modelos Lineales Generalizados, Teaching Data Science, Text Mining, Investigación Reproducible y Visualización de Datos con R.
+---
