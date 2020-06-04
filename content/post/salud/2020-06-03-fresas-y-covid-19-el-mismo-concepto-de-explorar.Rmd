@@ -9,7 +9,7 @@ categories:
 tags: []
 description: ''
 thumbnail: ''
-hidden: true
+
 ---
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
@@ -18,16 +18,14 @@ library(ggplot2)
 library(coronavirus)
 ```
 
-**¿El por qué rebuscar entre las fresas te permite seleccionar las más frescas y mejores?**
-
+**¿El por qué rebuscar entre las fresas te permite seleccionar las más frescas y mejores?**  
 Cuando voy por fresas frescas al Supermercado, intento elegir las que se **vean** mejor: sin abolladuras, un tamaño gentil, color rojo fulgoroso. La forma en la que las elijo, al granel, es rebuscando entre el conjunto de ellas disponibles en la gaveta. Consigo, para mí, las mejores pero suele pasarse una que otra con algún detalle que va en contra de mi definición de "mejor". Sin embargo el resultado termina siendo satisfactorio para mí al 99.8%.
 
 ¿Qué fue lo importante para el resultado satisfactorio? El proceso de explorar adecuadamente al granel las fresas.
 
 Igual pasa con los datos, sólo un buen análisis exploratorio me permite obtener información que aporte desde la data que reviso. La diferencia es que acá el trabajo es aún más forzoso.
 
-**Fresas y COVID-19**
-
+**Fresas y COVID-19**  
 Piensa que las fresas individuales disponibles en el Supermercado son los datos de COVID-19 de nuestro país por parte de la Secretaría Nacional de Gestión de Riesgos (SNGR), ente que oficialmente los divulga. *(Yo también tengo la misma interrogante que tú: ¿por qué no lo hace el Instituto Nacional de Estadísticas y Censos? Eso es otro post pero gracias por preguntarte lo mismo porque hace mucho sentido)*.
 Son estos datos los que deben pasar por una exploración para realizar hallazgos relevantes en el contexto de estudio, el detalle es que lo que para la elección de las fresas requirió únicamente por nuestra parte removerlas en la gaveta donde se encontraban expuestas, en Ciencia de Datos aquello se traduce en importar, ordenar y transformar los datos para luego visualizarlos. Técnicamente ésto es parte del workflow de Tidyverse y fue propuesto por Hadley Wickham & Garret Golemund en su libro ["R for Data Science"](https://es.r4ds.hadley.nz/). Lo menciono para que sepas que los datos de la SNGR deben pasar por un proceso que me permita posteriormente mostrarte resultados.
 
@@ -35,7 +33,7 @@ Son estos datos los que deben pasar por una exploración para realizar hallazgos
 *El párrafo anterior, ¿en analogía  a las fresas?: para que encuentres disponibles las fresas en las gavetas del Supermercado éstas debieron ser compradas a algún proveedor nacional/internacional (Importar los datos); luego esas fresas compradas deben ser puestas en las bodegas del Supermercado para que su personal las revise y/o limpie de ser necesario (ordenar); hay casos en que las fresas que se ofertarán no irán con cálices verdes a las perchas y por tal, los empleados del Súper los retirarán de la fruta (transformar). Finalmente, luego de lo anterior, están disponibles en la percha de frutas para nuestra compra como consumidores finales (visualización).*
 
 
-**En una mano la cultura de datos  y en la otra las normas sanitarias**
+**En una mano la cultura de datos  y en la otra las normas sanitarias**  
 Para adoptar las medidas de aislamiento el Gobierno asumió que las cifras, desde el primer caso confirmado el 29 de febrero, aumentarían. Públicamente no definió cómo, ni por qué; sólo basó su discurso en lo que ocurría en otros países. Sin embargo, a lo anterior, deberían añadirse conceptos que están basados en ciencia para que los ciudadanos podamos tener una mejor apreciación de la información disponible.
 
 Por ejemplo, el número de casos acumulados que te muestran gráficamente es una función matemática y tiene por definición ciertas propiedades, entre esas que  siempre va a estar creciendo (non-decreasing function). Comparemos las curvas acumuladas de Ecuador vs Chile en base a datos oficiales recolectados hasta el 12 de mayo por Johns Hopkins University Center for Systems Science and Engineering que se encuentran alojados en R en el set de datos *coronavirus*. Nótese que el nombre del eje X de los gráficos que se presentan en este post es *n*, que representa *el número de días contados a partir del primer caso confirmado* en el país.
@@ -68,8 +66,7 @@ ggplot(.,aes(x=n,y=cum_cases))+geom_line(aes(color=country))+
 *¡Ecuador! ¿dejaste de ser una función acumulada?* Lo ocurrido puede tener varias causas entre esas que el conteo de contagios aumentó drásticamente de un día para otro una vez que se actualizó el procesamiento de pruebas represadas.
 
 
-**La sorpresa de la gaveta de fresas**
-
+**La sorpresa de la gaveta de fresas**  
 Para saber sobre la evolución del virus en cifras oficiales quienes las manejan te hacen el cuento largo, chico: reportan el # de casos nuevos de COVID-19 en el país y con ésto toman decisiones como cambiar el color del semáforo, por ejemplo. Pero ¿dicen algo más esas cifras? ¡Claro que sí!:
 
 - Entre lo malo: Si se define que la variable de estudio reportada es el # de casos nuevos de COVID-19, ¿éstos podrían ser negativos? Definitivamente no, pues esta variable toma valores positivos incluyendo el cero. En Ecuador el 07, 08 y 11 de mayo reportan casos: -1583, -1480 y -50. ¿Curioso, cierto?
