@@ -1,0 +1,44 @@
+---
+title: 'Fresas y COVID-19: El mismo concepto de explorar'
+authors: 
+  - Zulemma Bazurto
+date: '2020-06-03'
+slug: covid-19-mismo-concepto-explorar
+categories:
+  - Salud
+tags: []
+description: ''
+thumbnail: ''
+hidden: true
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><strong>¿El por qué rebuscar entre las fresas te permite seleccionar las más frescas y mejores?</strong></p>
+<p>Cuando voy por fresas frescas al Supermercado, intento elegir las que se <strong>vean</strong> mejor: sin abolladuras, un tamaño gentil, color rojo fulgoroso. La forma en la que las elijo, al granel, es rebuscando entre el conjunto de ellas disponibles en la gaveta. Consigo, para mí, las mejores pero suele pasarse una que otra con algún detalle que va en contra de mi definición de “mejor”. Sin embargo el resultado termina siendo satisfactorio para mí al 99.8%.</p>
+<p>¿Qué fue lo importante para el resultado satisfactorio? El proceso de explorar adecuadamente al granel las fresas.</p>
+<p>Igual pasa con los datos, sólo un buen análisis exploratorio me permite obtener información que aporte desde la data que reviso. La diferencia es que acá el trabajo es aún más forzoso.</p>
+<p><strong>Fresas y COVID-19</strong></p>
+<p>Piensa que las fresas individuales disponibles en el Supermercado son los datos de COVID-19 de nuestro país por parte de la Secretaría Nacional de Gestión de Riesgos (SNGR), ente que oficialmente los divulga. <em>(Yo también tengo la misma interrogante que tú: ¿por qué no lo hace el Instituto Nacional de Estadísticas y Censos? Eso es otro post pero gracias por preguntarte lo mismo porque hace mucho sentido)</em>.
+Son estos datos los que deben pasar por una exploración para realizar hallazgos relevantes en el contexto de estudio, el detalle es que lo que para la elección de las fresas requirió únicamente por nuestra parte removerlas en la gaveta donde se encontraban expuestas, en Ciencia de Datos aquello se traduce en importar, ordenar y transformar los datos para luego visualizarlos. Técnicamente ésto es parte del workflow de Tidyverse y fue propuesto por Hadley Wickham &amp; Garret Golemund en su libro <a href="https://es.r4ds.hadley.nz/">“R for Data Science”</a>. Lo menciono para que sepas que los datos de la SNGR deben pasar por un proceso que me permita posteriormente mostrarte resultados.</p>
+<p><strong>NOTA TÉCNICA.-</strong>
+<em>El párrafo anterior, ¿en analogía a las fresas?: para que encuentres disponibles las fresas en las gavetas del Supermercado éstas debieron ser compradas a algún proveedor nacional/internacional (Importar los datos); luego esas fresas compradas deben ser puestas en las bodegas del Supermercado para que su personal las revise y/o limpie de ser necesario (ordenar); hay casos en que las fresas que se ofertarán no irán con cálices verdes a las perchas y por tal, los empleados del Súper los retirarán de la fruta (transformar). Finalmente, luego de lo anterior, están disponibles en la percha de frutas para nuestra compra como consumidores finales (visualización).</em></p>
+<p><strong>En una mano la cultura de datos y en la otra las normas sanitarias</strong>
+Para adoptar las medidas de aislamiento el Gobierno asumió que las cifras, desde el primer caso confirmado el 29 de febrero, aumentarían. Públicamente no definió cómo, ni por qué; sólo basó su discurso en lo que ocurría en otros países. Sin embargo, a lo anterior, deberían añadirse conceptos que están basados en ciencia para que los ciudadanos podamos tener una mejor apreciación de la información disponible.</p>
+<p>Por ejemplo, el número de casos acumulados que te muestran gráficamente es una función matemática y tiene por definición ciertas propiedades, entre esas que siempre va a estar creciendo (non-decreasing function). Comparemos las curvas acumuladas de Ecuador vs Chile en base a datos oficiales recolectados hasta el 12 de mayo por Johns Hopkins University Center for Systems Science and Engineering que se encuentran alojados en R en el set de datos <em>coronavirus</em>. Nótese que el nombre del eje X de los gráficos que se presentan en este post es <em>n</em>, que representa <em>el número de días contados a partir del primer caso confirmado</em> en el país.</p>
+<p><img src="/post/salud/2020-06-03-fresas-y-covid-19-el-mismo-concepto-de-explorar_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" />
+<em>¡Ecuador! ¿dejaste de ser una función acumulada?</em> Lo ocurrido puede tener varias causas entre esas que el conteo de contagios aumentó drásticamente de un día para otro una vez que se actualizó el procesamiento de pruebas represadas.</p>
+<p><strong>La sorpresa de la gaveta de fresas</strong></p>
+<p>Para saber sobre la evolución del virus en cifras oficiales quienes las manejan te hacen el cuento largo, chico: reportan el # de casos nuevos de COVID-19 en el país y con ésto toman decisiones como cambiar el color del semáforo, por ejemplo. Pero ¿dicen algo más esas cifras? ¡Claro que sí!:</p>
+<ul>
+<li><p>Entre lo malo: Si se define que la variable de estudio reportada es el # de casos nuevos de COVID-19, ¿éstos podrían ser negativos? Definitivamente no, pues esta variable toma valores positivos incluyendo el cero. En Ecuador el 07, 08 y 11 de mayo reportan casos: -1583, -1480 y -50. ¿Curioso, cierto?</p></li>
+<li><p>Pero lo bueno: Se puede dar un mejor uso a los datos. Una manera de ver la evolución del virus en cifras es dando un vistazo a la tasa de contagio de un día determinado, definición que fue usada en el artículo <strong>“COVID-19 y la tasa de contactos infecciosos: una historia narrada a color”</strong> de investigadores de la Facultad de Matemáticas de la Pontificia Universidad Católica de Chile que puedes checar en el siguiente <a href="http://www.mat.uc.cl/~hector.pasten/preprints/TasaColor.pdf">enlace</a>.
+En dicho artículo se reseña que <em>la tasa de contagios de hoy que se define como la cantidad promedio de contagiados nuevos de hoy que fueron debidos a cada contagiado activo de ayer</em>; es decir, es la división del número de casos confirmados del día actual para el número de casos activos del día anterior.
+Asumiendo que la gran mayoría de la población del Ecuador no ha sido contagiada, podríamos ver gráficamente la evolución de la tasa en mención.</p></li>
+</ul>
+<p><img src="/post/salud/2020-06-03-fresas-y-covid-19-el-mismo-concepto-de-explorar_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Si lo anterior lo vemos en escala logarítmica (ésto es como hacerle un zoom al gráfico) para visualizar de mejor manera el comportamiento de la tasa entre los días 69 al 73 desde el primer caso confirmado, es decir entre el 07 y el 12 de mayo, se puede visualizar que la tasa de contagio va en aumento en base a los datos observados.</p>
+<p><img src="/post/salud/2020-06-03-fresas-y-covid-19-el-mismo-concepto-de-explorar_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Luego de visualizar tres gráficos basados en los datos de COVID-19 reportados oficialmente por los entes gubernamentales de nuestro país, surge una pregunta sobre los datos en analogía a nuestro caso de las fresas:</p>
+<p><em>Las fresas al granel disponibles para elección y consumo por parte del Supermercado, ¿serán las mejores?</em></p>
