@@ -148,3 +148,4 @@ Luego de visualizar tres gráficos basados en los datos de COVID-19 reportados o
 
 *Las fresas al granel disponibles para elección y consumo por parte del Supermercado, ¿serán las mejores?*
 
+El Quantificador se caracteriza por la transparencia de los datos y la reproducibilidad de sus artículos. Para reproducir los gráficos ilustrados en este artículo, revisa este [vínculo](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/salud/2020-06-03-fresas-y-covid-19-el-mismo-concepto-de-explorar/2020-06-03-fresas-y-covid-19-el-mismo-concepto-de-explorar.Rmd) en Github.
