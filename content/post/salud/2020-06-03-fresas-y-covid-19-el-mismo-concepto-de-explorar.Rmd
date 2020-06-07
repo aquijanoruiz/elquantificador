@@ -8,7 +8,7 @@ categories:
   - Salud
 tags: []
 thumbnail: '/post/salud/2020-06-03-fresas-y-covid-19-el-mismo-concepto-de-explorar.png'
-description: 'Los datos les sirven a las autoridades para tomar decisiones de si pasamos o no a semáforo amarillo o verde. Pero, ¿qué tan confiables son los datos que nos presentan? En este artículo nuestra nueva nueva quantificadora, Zulemma Bazurto, hace una analogía de los datos que usamos para tomar decisones con fresas en el supermercado. Si somos cuidadados para que las fresas que tomamos sean las que mejor se ven, ¿por qué no hacemos lo mismo con los datos para tomar decisiones importantes?'
+description: 'Los datos les sirven a las autoridades para tomar decisiones de si pasamos o no a semáforo amarillo o verde. Pero, ¿qué tan confiables son los datos que nos presentan? En este artículo nuestra nueva nueva quantificadora, Zulemma Bazurto, hace una analogía de los datos que usamos para tomar decisiones con fresas en el supermercado. Si somos cuidadosos para que las fresas que tomamos sean las que mejor se ven, ¿por qué no hacemos lo mismo con los datos para tomar decisiones importantes?'
 images: 
   - 'https://elquantificador.org/post/salud/2020-06-03-fresas-y-covid-19-el-mismo-concepto-de-explorar.png'
 ---
