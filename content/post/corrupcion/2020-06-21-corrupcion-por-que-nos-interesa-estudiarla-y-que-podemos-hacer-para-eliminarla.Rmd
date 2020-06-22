@@ -15,7 +15,7 @@ images:
   - 'https://elquantificador.org/post/corrupcion/2020-06-21-corrupcion-por-que-nos-interesa-estudiarla-y-que-podemos-hacer-para-eliminarla.jpg'
 hidden: true
 ---
-En las últimas dos semanas, la corrupción se ha vuelto el tema del que conversación de muchos ecuatorianos. Sin embargo, al parecer hablar de corrupción en el país parece ser algo de todos los días y de lo que ya nos hemos acostumbrado. Si ilustráramos en un mapa los países del mundo de acuerdo al Índice de Percepción de Corrupción (IPC), nos daríamos cuenta que los países más corruptos no se encuentran aleatoriamente ubicados en el mapa. Los países de América Los países de Europa son en promedio mucho menos corruptos que los países de América Latina y estos, a su vez, mucho menos que los de África. ¿Por qué? 
+En las últimas dos semanas, la corrupción se ha vuelto el tema del que conversación de muchos ecuatorianos. Sin embargo, al parecer hablar de corrupción en el país parece ser algo de todos los días y de lo que ya nos hemos acostumbrado. Si ilustráramos en un mapa los países del mundo de acuerdo al Índice de Percepción de Corrupción (IPC), nos daríamos cuenta que los países más corruptos no se encuentran aleatoriamente ubicados en el mapa. Los países de Europa son en promedio mucho menos corruptos que los países de América Latina y estos, a su vez, mucho menos que los de África. ¿Por qué? 
 
 ```{r, include=FALSE}
 ############################################
@@ -111,7 +111,7 @@ ggplot() +
         legend.position = "bottom",
         legend.direction = "horizontal")
 ```
-
+<p style="line-height:80%"><font size="1"><i>Fuente: Transparency International.</i></font></p>
 En este post quisiera comentar un poco sobre este tema desde un punto de vista económico. ¿Por qué es importante? ¿Cómo la medimos? ¿Y qué piensan los académicos sobre ella y su relación con el desarrollo?
 
 El Ecuador posee una puntuación de 38 en una escala de 0 (más corrupto) a 100 (menos corrupto) en el IPC, por debajo del promedio mundial, el cual se encuentra en 43.17. ¿Y por qué nos preocupa tanto? Pues, existe una fuerte correlación entre corrupción y desarrollo económico. No es coincidencia que los países más ricos sean menos corruptos y los más pobres sean más corruptos. Si graficamos el IPC de cada país con respecto a su PIB per cápita, la relación es bastante clara. A medida que el IPC es más alto, también lo es el PIB per cápita. 
@@ -142,7 +142,7 @@ ggplot(data = pib_co, aes(x = `CPI Score 2018`, y = value)) +
   labs(x = "Puntuación CPI 2018", y = "PIB per cápita (en log)", col = "Región") +
   theme(legend.position="bottom")
 ```
-
+<p style="line-height:80%"><font size="1"><i>Fuente: Transparency International y Banco Mundial.</i></font></p>
 Aunque dicha correlación no es suficiente para comprobar la relación causal entre corrupción y desarrollo, sí nos permite sospechar que la alta corrupción en nuestro país retrasa su crecimiento económico.
 
 **¿Cómo se mide la corrupción (con fines investigativos)?** Bueno, no podemos simplemente salir a la calle y preguntarle a la gente si es corrupta o no. Una de las formas más comunes es a través de los indicadores de percepción. Estos consisten en sondeo de opinión en las que se les realiza a empresas preguntas como ¿qué tal es hacer negocios en Ecuador? ¿Has tenido que pagar sobornos o propinas? Luego, estos resultados se valoran en una escala y así es como obtenemos ese 43.17. Bastante bajo, ¿no?
