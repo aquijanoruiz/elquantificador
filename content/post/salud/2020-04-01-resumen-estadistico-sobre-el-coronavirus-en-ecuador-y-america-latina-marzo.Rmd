@@ -12,6 +12,7 @@ description: 'La rápida propagación del Covid-19 en Ecuador y América Latina 
 thumbnail: '/post/salud/2020-04-01-resumen-estadistico-sobre-el-brote-de-coronavirus-en-ecuador-y-america-latina.png'
 images: 
   - 'https://elquantificador.org/post/salud/2020-04-01-resumen-estadistico-sobre-el-brote-de-coronavirus-en-ecuador-y-america-latina.png'
+hidden: true
 ---
 ```{r, echo=FALSE, include=FALSE}
 # --------- these are the packages used to create the map ---------
