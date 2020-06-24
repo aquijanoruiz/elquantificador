@@ -13,7 +13,6 @@ description: 'En las últimas dos semanas, la corrupción se ha vuelto el tema d
 thumbnail: '/post/corrupcion/2020-06-21-corrupcion-por-que-nos-interesa-estudiarla-y-que-podemos-hacer-para-eliminarla.jpg'
 images: 
   - 'https://elquantificador.org/post/corrupcion/2020-06-21-corrupcion-por-que-nos-interesa-estudiarla-y-que-podemos-hacer-para-eliminarla.jpg'
-hidden: true
 ---
 En las últimas dos semanas, la corrupción se ha vuelto el tema del que conversación de muchos ecuatorianos. Sin embargo, al parecer hablar de corrupción en el país parece ser algo de todos los días y de lo que ya nos hemos acostumbrado. Si ilustráramos en un mapa los países del mundo de acuerdo al Índice de Percepción de Corrupción (IPC), nos daríamos cuenta que los países más corruptos no se encuentran aleatoriamente ubicados en el mapa. Los países de Europa son en promedio mucho menos corruptos que los países de América Latina y estos, a su vez, mucho menos que los de África. ¿Por qué? 
 
