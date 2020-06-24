@@ -138,7 +138,7 @@ ggplot(data = pib_co, aes(x = `CPI Score 2018`, y = value)) +
   geom_text(aes(label = ISO3, col = Region), size = 2.5, show.legend = F) +
   geom_point(aes(x = x, y = y, col = Region)) +
   scale_y_log10(breaks = corte, labels = corte) +
-  labs(x = "Puntuación CPI 2018", y = "PIB per cápita (en log)", col = "Región") +
+  labs(x = "Puntuación CPI 2018", y = "PIB per cápita 2018", col = "Región") +
   theme(legend.position="bottom")
 ```
 <p style="line-height:80%"><font size="1"><i>Fuente: Transparency International y Banco Mundial.</i></font></p>
