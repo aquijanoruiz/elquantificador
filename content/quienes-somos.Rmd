@@ -1,13 +1,6 @@
 ---
 title: ¿Quiénes somos?
-author: ''
-date: ''
-slug: quienes-somos
-categories: []
-tags: []
-description: ''
-thumbnail: ''
-hidden: true
+sidebar: true
 menu: 
   main: 
     name: ¿Quiénes somos?
@@ -18,10 +11,10 @@ Actualmente, nos encontramos rodeados de una enorme cantidad de información, ma
 
 Creemos que a través del correcto análisis e presentación de datos podemos crear un antídoto en contra de la desinformación y las noticias cuyo fin único es alarmar a la población a través de rumores. En la práctica, observamos que en muchas ocasiones tomadores de decisiones en varios ámbitos (político, empresarial, académico, e incluso familiar) no son capaces de plantear soluciones que van más allá de las fronteras impuestas por ideologías, creencias e ideas preconcebidas. Nosotros queremos cambiar dicha forma de pensar y establecer un criterio basado en los datos interpretados sin sesgos y con rigurosidad metodológica.
 
-##Misión
+## Misión
 
 Nuestra misión es informar la verdad de forma sencilla, académica, transparente y reproducible, con el fin de atacar la predominante desinformación que existe. Queremos influenciar a diversos públicos para que concienticen del uso de información basada en datos y no en creencias. Adicionalmente, queremos motivar a la población para que exija a los hacedores de política pública el uso de evidencia científica y que realicen estudios y planifiquen antes de proponer políticas. 
 
-##Visión
+## Visión
 
 Nuestra visión es ser referentes del análisis social en Ecuador. Nos vemos como un grupo líder en investigación social del cual los ciudadanos pueden informarse de ciertos temas con veracidad y sin contaminación de sesgos ideológicos. También nos vemos como educadores de análisis de datos dotando a la ciudadanía de herramientas para que hagan sus propios análisis.

@@ -1,13 +1,6 @@
 ---
 title: Contáctanos
-author: ''
-date: ''
-slug: contactanos
-categories: []
-tags: []
-description: 'Si tienes preguntas o comentarios o simplemente deseas saber máss sobre lo que hacemos, no dudes en contactarnos.'
-thumbnail: ''
-hidden: true
+sidebar: true
 menu: 
   main: 
     name: Contáctanos

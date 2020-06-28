@@ -1,13 +1,6 @@
 ---
 title: Los quantificadores
-author: ''
-date: ''
-slug: los-quantificadores
-categories: []
-tags: []
-description: ''
-hidden: true
-thumbnail: ''
+sidebar: true
 menu: 
   main: 
     name: Los quantificadores
