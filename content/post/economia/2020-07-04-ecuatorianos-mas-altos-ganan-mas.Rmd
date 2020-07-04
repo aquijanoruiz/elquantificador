@@ -236,6 +236,6 @@ Pero para entender la importancia de este tema, nos falta un dato crucial. Segú
 
 Otra manera de decir lo mismo es que 1 de cada 5 niños y niñas en el país no alcanzará su potencial genético en cuanto a altura y habilidades cognitivas por no tener una alimentación adecuada. Ellos son (más o menos) 7 centímetros más pequeños que el promedio de su misma edad a los 2 años, son 9 centímetros más pequeños a cumplir los 5 años y pueden ser cerca de 11 centímetros más pequeños al alcanzar su estatura máxima. Si todo sigue como hasta ahora y según los cálculos que he hecho en este post, esos niños y niñas tendrán hasta 2 años menos de educación y ganarán 3/4 partes de lo que gana la ecuatoriana/o promedio.
 
-Revisa el código de este post haciendo click [aquí](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/economia/2020-07-03-ecuatorianos-mas-altos-ganan-mas/2020-07-03-ecuatorianos-mas-altos-ganan-mas.Rmd). 
+Revisa el código de este post haciendo click [aquí](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/economia/2020-07-03-ecuatorianos-mas-altos-ganan-mas/2020-07-03-ecuatorianos-mas-altos-ganan-mas.Rmd). Si tienes preguntas o comentarios escribe a lab372@cornell.edu.
 
 ### Referencias
