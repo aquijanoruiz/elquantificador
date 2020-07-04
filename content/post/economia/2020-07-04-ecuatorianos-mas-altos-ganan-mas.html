@@ -1,0 +1,72 @@
+---
+title: 'Los ecuatorianos más altos ganan más: el cuánto, el porqué y ''¿a mí qué?'''
+date: '2020-07-04'
+slug: ecuatorianos-mas-altos-ganan-mas
+categories:
+  - Economía
+  - Salud
+tags:
+  - Desigualdad
+description: ''
+bibliography: bibliography.bib
+thumbnail: '/post/economia/2020-07-05-ecuatorianos-mas-altos-ganan-mas.png'
+images: 
+  - 'https://elquantificador.org/post/economia/2020-07-05-ecuatorianos-mas-altos-ganan-mas.png'
+---
+
+
+
+<p>Las personas más altas ganan más. De hecho, la correlación positiva entre ingresos y estatura se ha descrito como uno de los más consistentes descubrimientos en las ciencias sociales. Se ha encontrado una y otra vez en varios países, tanto desarrollados como en vías de desarrollo, con datos modernos y antiguos, y sin hacer comparaciones entre distintas etnias.</p>
+<p>¿Será igual para el Ecuador? Pues sí.</p>
+<p>En este post analizo:</p>
+<ol style="list-style-type: decimal">
+<li>El cuánto: ¿cuánto más gana un ecuatoriano por cada centímetro extra de estatura?<br />
+</li>
+<li>El porqué: ¿por qué los más altos ganan más?<br />
+</li>
+<li>El `¿a mí que?': ¿por qué es este tema importante?</li>
+</ol>
+<p>Empecemos.</p>
+<div id="el-cuánto" class="section level3">
+<h3>El Cuánto</h3>
+<p>En el gráfico de abajo vemos en el eje horizontal la estatura de ecuatorianos mestizos de 41 a 49 años, y en el eje vertical el ingreso laboral en escala logarítmica (la escala logarítmica nos ayuda a visualizar mejor los datos, además de tener otras propiedades convenientes que veremos más adelante). Los datos son de la Encuesta Nacional de Salud y Nutrición 2018.</p>
+<p><img src="/post/economia/2020-07-04-ecuatorianos-mas-altos-ganan-mas_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>En el gráfico se puede ver ya una relación positiva. Sin embargo, tenemos tantos puntos (y bastante variación en el ingreso) que es difícil verla &quot;al ojo&quot;. En estas situaciones, quienes trabajamos con datos, nos vemos obligados a usar algunos trucos. Por eso en el siguiente gráfico ajusto una línea que trata de pasar lo más cerca posible de todos los puntos. Lo hago separado para hombres y mujeres.</p>
+<p><img src="/post/economia/2020-07-04-ecuatorianos-mas-altos-ganan-mas_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>¡Ahora sí! En el nuevo gráfico podemos ver que, tanto para mujeres como para hombres, a mayor altura mayor ingreso. Pero, ¿cuánto más?</p>
+<p>Para responder esa pregunta voy a aplicar un truco más: voy a ajustar otras líneas a través de los puntos, pero esta vez voy a hacer que sean rectas. ¿De qué me sirve que la líneas sean rectas? La ventaja es que puedo responder a mi pregunta inicial, calculando las inclinaciones de las nuevas líneas (que ahora son constantes).</p>
+<p><img src="/post/economia/2020-07-04-ecuatorianos-mas-altos-ganan-mas_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Podemos ver en el gráfico (y con unos cálculos extra) que, para los hombres, el logaritmo del ingreso aumenta 0.022 por cada centímetro extra de estatura, mientras que para las mujeres el logaritmo del ingreso aumenta en 0.035 por cada centímetro extra. Aquí va la otra razón por la que usamos logaritmos: incrementos pequeños en la escala logarítmica se aproximan a cambios porcentuales. Es decir, acabamos de estimar que <strong>cada centímetro extra de estatura está relacionado con un aumento de ingreso de 2.2% para los hombres y de 3.5% para las mujeres.</strong></p>
+</div>
+<div id="el-porqué" class="section level3">
+<h3>El porqué</h3>
+<p>Como dije al principio de este post, la relación ingresos-estatura está en todos lados. Eso ha hecho que no pase desapercibida por los investigadores, quienes han ofrecido más de una explicación:</p>
+<p>Por un lado, está ampliamente documentado que las niñas y niños que crecen en un ambiente sano y con una buena nutrición (sobre todo desde el útero y hasta los 1000 días después del nacimiento) son más altos y tienen mejores habilidades cognitivas que aquellos que no tienen esa oportunidad. Y como los niños y niñas más altos se convierten, usualmente, en los adultos más altos, serían las habilidades cognitivas las responsables de la diferencia de ingresos entre altos y pequeños. Esa es la tesis del estudio de Case and Paxson <span class="citation">(2008)</span>.</p>
+<p>Por otro lado, la estatura es una característica valorada en la sociedad. Los adultos altos, probablemente, estuvieron expuestos a repetidas interacciones sociales positivas durante su adolescencia, lo que les permitió desarrollar mayor confianza en sí mismos y mejores habilidades sociales que después fueron recompensadas en el mercado laboral. No exactamente así, pero por ahí va el estudio de Persico y coautores <span class="citation">(2004)</span>. Otra explicación similar es que la sociedad discriminaría a las personas de menor estatura.</p>
+<p>También se ha sugerido que la fuerza física tiene algo que ver. En oficios donde la fuerza puede aumentar la productividad (la construcción, por ejemplo), las personas más altas serían más fuertes, más productivas y, por ende, recibirían mayores salarios. En países donde el trabajo es menos de escritorio y más de actividad física (léase: en vías de desarrollo) esta sería una posibilidad particularmente importante.</p>
+<p>Lo cierto es que estas explicaciones no son mutuamente excluyentes ni tampoco colectivamente exhaustivas. De hecho, un estudio (Lundborg y coautores, <span class="citation">(2014)</span>) realizado con datos de suecos, encuentra que todos los factores mencionados ayudan a explicar la relación entre altura e ingresos, pero no la explican por completo.</p>
+<p>¿Qué otras explicaciones se te ocurren/podrían existir? Por ejemplo, para el Ecuador -un país colonizado- podríamos lanzar una hipótesis relacionada con la persistencia de los grupos económicos y políticos en posiciones privilegiadas: los criollos ricos eran más altos que el resto de la población y los hijos de sus hijos siguen siendo más ricos y también más altos.</p>
+</div>
+<div id="el-a-mí-que" class="section level3">
+<h3>El &quot;a mí que?&quot;</h3>
+<p>¿Es este tema importante? Más de lo que crees.Veamos un último gráfico:</p>
+<p><img src="/post/economia/2020-07-04-ecuatorianos-mas-altos-ganan-mas_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>Utilicé el mismo truco que en el segundo gráfico, para mostrar que la estatura en la adultez también está muy relacionada con los años de educación. Parte de la relación estatura-ingresos, aunque ciertamente no del todo, se explica a través de la relación estatura-educación. Unos cálculos extras (que puedes chequear viendo el código de este post) sugieren que en las <strong>mujeres cada 10cm extra de estatura se relacionan con 1.7 años extra de educación; mientras que para los hombres 10cm más se relacionan con 1.5 años de educación extra</strong>.</p>
+<p>Pero para entender la importancia de este tema, nos falta un dato crucial. Según la última estimación oficial, en el Ecuador <strong>el 23% de los niños menores de 5 años sufren de desnutrición crónica por presentar un retardo severo en su crecimiento</strong>. Es de esperase, además, que la situación económica y de salud actual solo empeore esta estadística.</p>
+<p>Otra manera de decir lo mismo es que 1 de cada 5 niños y niñas en el país no alcanzará su potencial genético en cuanto a altura y habilidades cognitivas por no tener una alimentación adecuada. Ellos son (más o menos) 7 centímetros más pequeños que el promedio de su misma edad a los 2 años, son 9 centímetros más pequeños a cumplir los 5 años y pueden ser cerca de 11 centímetros más pequeños al alcanzar su estatura máxima. Si todo sigue como hasta ahora y según los cálculos que he hecho en este post, esos niños y niñas tendrán hasta 2 años menos de educación y ganarán 3/4 partes de lo que gana la ecuatoriana/o promedio.</p>
+<p>Revisa el código de este post haciendo click <a href="https://github.com/aquijanoruiz/elquantificador_posts/blob/master/economia/2020-07-03-ecuatorianos-mas-altos-ganan-mas/2020-07-03-ecuatorianos-mas-altos-ganan-mas.Rmd">aquí</a>.</p>
+</div>
+<div id="referencias" class="section level3 unnumbered">
+<h3>Referencias</h3>
+<div id="refs" class="references">
+<div id="ref-case2008stature">
+<p>Case, Anne, and Christina Paxson. 2008. “Stature and Status: Height, Ability, and Labor Market Outcomes.” <em>Journal of Political Economy</em> 116 (3). The University of Chicago Press: 499–532.</p>
+</div>
+<div id="ref-lundborg2014height">
+<p>Lundborg, Petter, Paul Nystedt, and Dan-Olof Rooth. 2014. “Height and Earnings: The Role of Cognitive and Noncognitive Skills.” <em>Journal of Human Resources</em> 49 (1). University of Wisconsin Press: 141–66.</p>
+</div>
+<div id="ref-persico2004effect">
+<p>Persico, Nicola, Andrew Postlewaite, and Dan Silverman. 2004. “The Effect of Adolescent Experience on Labor Market Outcomes: The Case of Height.” <em>Journal of Political Economy</em> 112 (5). The University of Chicago Press: 1019–53.</p>
+</div>
+</div>
+</div>
