@@ -36,3 +36,12 @@ La idea de este sitio web surge cuando, sorprendidos por la creciente propagaci�
 </figure>
 <div class="authorbox__description">Zulemma Bazurto Blacio es Magíster en Estadística por la Pontificia Universidad Católica de Chile e Ingeniera Comercial de la ESPOL. Actualmente es Fundadora de R-Ladies Guayaquil, Co-founder de R-Ladies Galápagos y Docente Titular de Estadística en la Facultad de Ciencias Administrativas de la Universidad de Guayaquil. Su mayor pasión es organizar e impartir conferencias sobre R para análisis de datos. Ha formado parte del equipo traductor del famoso libro online “R for Data Science” de Hadley Wickham y Garret Golemund y forma parte de la Directiva del Núcleo Guayas de la Sociedad Ecuatoriana de Estadística. Las líneas de investigación de su interés se centran en Modelos Lineales Generalizados, Teaching Data Science, Text Mining, Investigación Reproducible y Visualización de Datos con R. Lee los artículos de Zulemma <a href= "https://elquantificador.org/authors/zulemma-bazurto/">aquí</a>.</div>
 </div>
+
+<h3>Leonel Borja Plaza <a href= "https://twitter.com/Leonel_Borja">@Leonel_Borja</a></h3>
+
+<div class="authorbox clearfix">
+<figure class="authorbox__avatar">
+<img src="/img/authors/leonel-borja-plaza.jpg" class="avatar" height="90" width="90"/>
+</figure>
+<div class="authorbox__description">Leonel Borja Plaza es estudiante de Doctorado en el departamento de Economía Aplicada de la Universidad de Cornell. Tiene una maestría en Economía de Northeastern University y un título de Economista de la USFQ. Sus líneas de investigación son la microeconomía del desarrollo, la econometría aplicada, y la economía laboral. En su tiempo libre, disfruta de tocar la guitarra. Lee los artículos de Leonel <a href= "https://elquantificador.org/authors/leonel-borja-plaza/">aquí</a>.</div>
+</div>
