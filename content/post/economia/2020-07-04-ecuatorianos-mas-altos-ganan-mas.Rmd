@@ -1,5 +1,7 @@
 ---
 title: 'Los ecuatorianos más altos ganan más: el cuánto, el porqué y ''¿a mí qué?'''
+authors:
+  - Leonel Borja Plaza
 date: '2020-07-04'
 slug: ecuatorianos-mas-altos-ganan-mas
 categories:
