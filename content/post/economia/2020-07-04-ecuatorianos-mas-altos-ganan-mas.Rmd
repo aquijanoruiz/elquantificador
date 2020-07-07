@@ -9,7 +9,7 @@ categories:
   - Salud
 tags:
   - Desigualdad
-description: ' Los ecuatorianos más altos tienen ingresos  más altos. En este post vemos cuánto más gana un ecuatoriano por cada centímetro extra de estatura, porqué los más altos ganan más, y por qué es importante (particularmente para el Ecuador) esta relación.'
+description: ' Los ecuatorianos más altos tienen ingresos  más altos. En este post vemos cuánto más gana un ecuatoriano por cada centímetro extra de estatura, por qué los más altos ganan más, y por qué es importante (particularmente para el Ecuador) esta relación.'
 
 bibliography: bibliography.bib
 thumbnail: '/post/economia/2020-07-05-ecuatorianos-mas-altos-ganan-mas.png'
@@ -226,7 +226,7 @@ Lo cierto es que estas explicaciones no son mutuamente excluyentes ni tampoco co
 ```{r message=FALSE, echo=FALSE, fig.pos= "h",fig.align='center', out.width='80%'}
 ggplot(grafico,aes(x=estatura, y=yoe, group=sexo)) +
   geom_smooth(method = "loess" , se=FALSE, aes(linetype = sexo, color = sexo)) + theme_bw() + 
-  labs(x = "Años de educación", y = "Estatura en cm.", title = "Relación años de eduación Vs estatura")  +
+  labs(x = "Estatura en cm.", y = "Años de educación", title = "Relación años de eduación Vs estatura")  +
   theme(plot.title = element_text(color="black", size=14, face="bold.italic"))
 ```
 
