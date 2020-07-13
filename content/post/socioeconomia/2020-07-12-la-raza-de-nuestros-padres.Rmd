@@ -13,7 +13,7 @@ thumbnail: '/post/socioeconomia/2020-07-12-la-raza-de-nuestros-padres.jpeg'
 images: 
   - 'https://raw.githubusercontent.com/aquijanoruiz/elquantificador/master/themes/Mainroad/static/img/la-raza-de-nuestros-padres.jpg'
 ---
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=FALSE, warning=FALSE}
 library(RStata)
 options("RStata.StataVersion" = 14)
 options("RStata.StataPath" = "\"C:\\Program Files (x86)\\Stata14\\StataSE-64\"")
@@ -32,7 +32,7 @@ El racismo es muy difícil de medir, pero en este artículo voy a hacer un inten
 Usando datos de la última Encuesta disponible de Empleo, Desempleo, y Subempleo (Diciembre 2019), me pregunté, ¿los hijos o hijas comparten la autoidentificación de sus padres o madres? Separé este análisis por autoidentificación del padre. ¿Quiénes son más propensos a compartir la identificación del padre o madre?
 
 Observemos el siguiente gráfico:
-```{r, echo=FALSE, message = FALSE, fig.height=8}
+```{r, echo=FALSE, message = FALSE, fig.height=8, warning=FALSE}
 if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.us.r-project.org")
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
 if(!require(scales)) install.packages("scales", repos = "http://cran.us.r-project.org")

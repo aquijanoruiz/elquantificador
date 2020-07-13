@@ -17,24 +17,14 @@ images:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<pre class="r"><code>library(RStata)
-options(&quot;RStata.StataVersion&quot; = 14)
-options(&quot;RStata.StataPath&quot; = &quot;\&quot;C:\\Program Files (x86)\\Stata14\\StataSE-64\&quot;&quot;)</code></pre>
 <pre class="r"><code>#Lamentablemente mis habilidades para manipula datos en R son muy limitadas, uso Stata en su mayoría. Por eso, todo el &quot;data management&quot; lo he hecho en Stata. Solo la última parte que es una visualización está en R. 
 stata(&quot;C:\\Users\\mfayt\\Google Drive\\Quantificador Marco\\Desempleo y autoidentificación étnica\\Autoidentificación étnica padres a hijos.do&quot;)
 #El do file correspondiente está en Github tmbn =)</code></pre>
 <p>Si en el mundo hablar de raza es complicado, en Ecuador lo es mucho más. En este artículo no voy a hablar de qué es raza y cómo se mide a nivel internacional. En las encuestas ecuatorianas se pregunta a casi cada encuestado cómo se identifica según sus tradiciones y costumbres, y las seis posibles respuestas son: <strong>indígenas</strong> , <strong>afroecuatorianos</strong> o <strong>afrodescendientes</strong> , <strong>mulatos</strong> , <strong>montubios</strong> , <strong>mestizos</strong> , o <strong>blancos</strong> (al final del artículo, puedes encontrar las definiciones de estas etiquetas). Ecuador es tan diverso que es mejor preguntarle a la gente cómo ellos se autoidentifican. Autoidentificarse es complicado porque es una construcción social, no solo del color de piel. Hay probablemente personas que están más cómodas diciendo que son mestizas a decir que son negras, ¿por qué? Puede ser que encuentren menos sanciones bajo una categoría específica. Eso indirectamente es racismo implícito. Es implícito porque no es algo que se ve tan fácilmente, está escondido en las instituciones, en nuestras expectativas, en nuestra forma de pensar.</p>
 <p>El racismo es muy difícil de medir, pero en este artículo voy a hacer un intento (probablemente fallido). Si tu papá o mamá se identifica como mestizo, ¿qué tan probable es que el hijo o hija se identifique como mestizo? Creo que es un buen supuesto pensar que si tu papá o mamá son mestizos, tú te identificarías de la misma manera. Pero como fue mencionado antes, hay identidades de las que mucha gente prefiere salirse porque no les da más prestigio. <strong>El supuesto general es que existe un deseo de blanqueamiento. Mientras más claro tu tono de piel, menos injusticias tendrás</strong>. Hace poco estuve en India y es impresionante la cantidad de cremas blanqueadoras, especialmente para la cara. También muchas veces decimos “Me encantan tus ojos” cuando se tratan de ojos más claros (muy poco probable cuando los ojos son color café).</p>
 <p>Usando datos de la última Encuesta disponible de Empleo, Desempleo, y Subempleo (Diciembre 2019), me pregunté, ¿los hijos o hijas comparten la autoidentificación de sus padres o madres? Separé este análisis por autoidentificación del padre. ¿Quiénes son más propensos a compartir la identificación del padre o madre?</p>
-<p>Observemos el siguiente gráfico:</p>
-<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;stringr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;gtable&#39; was built under R version 3.5.2</code></pre>
-<p><img src="/post/socioeconomia/2020-07-12-la-raza-de-nuestros-padres_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Observemos el siguiente gráfico:
+<img src="/post/socioeconomia/2020-07-12-la-raza-de-nuestros-padres_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Voy a ponerlos en orden (de los que más comparten identificación con los padres o madres hasta los que menos lo hacen).</p>
 <ol style="list-style-type: decimal">
 <li><strong>Mestizos</strong>. 99.48% de mestizos tienen padres que se identifican como tal. Tiene sentido, si eres mestizo, eres parte de la mayoría de Ecuador, y no hay sanciones muy grandes por no identificarte como blanco.</li>
