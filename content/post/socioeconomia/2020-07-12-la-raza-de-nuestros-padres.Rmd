@@ -11,15 +11,15 @@ tags:
 description: '¿Existe racismo en Ecuador? No hay estudios que lo demuestren directamente. Este artículo es una primera aproximación a contestar esta pregunta. Analizo si los hijos deciden autoidentificarse con la misma etiqueta étnica de sus padres. Podemos observar por ejemplo que casi un cuarto de hijos de afroecuatorianos deciden desligarse de esa etiqueta e identificarse como mestizos'
 thumbnail: '/post/socioeconomia/2020-07-12-la-raza-de-nuestros-padres.jpeg'
 images: 
-  - 'https://elquantificador.org/post/socioeconomia/2020-07-12-la-raza-de-nuestros-padres.jpeg'
+  - 'https://raw.githubusercontent.com/aquijanoruiz/elquantificador/master/themes/Mainroad/static/img/la-raza-de-nuestros-padres.jpg'
 ---
-```{r, include=FALSE}
+```{r, eval=FALSE}
 library(RStata)
 options("RStata.StataVersion" = 14)
 options("RStata.StataPath" = "\"C:\\Program Files (x86)\\Stata14\\StataSE-64\"")
 ```
 
-```{r, include=FALSE}
+```{r, eval=FALSE}
 #Lamentablemente mis habilidades para manipula datos en R son muy limitadas, uso Stata en su mayoría. Por eso, todo el "data management" lo he hecho en Stata. Solo la última parte que es una visualización está en R. 
 stata("C:\\Users\\mfayt\\Google Drive\\Quantificador Marco\\Desempleo y autoidentificación étnica\\Autoidentificación étnica padres a hijos.do")
 #El do file correspondiente está en Github tmbn =)
