@@ -19,7 +19,7 @@ options("RStata.StataVersion" = 14)
 options("RStata.StataPath" = "\"C:\\Program Files (x86)\\Stata14\\StataSE-64\"")
 ```
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 #Lamentablemente mis habilidades para manipula datos en R son muy limitadas, uso Stata en su mayoría. Por eso, todo el "data management" lo he hecho en Stata. Solo la última parte que es una visualización está en R. 
 stata("C:\\Users\\mfayt\\Google Drive\\Quantificador Marco\\Desempleo y autoidentificación étnica\\Autoidentificación étnica padres a hijos.do")
 #El do file correspondiente está en Github tmbn =)
