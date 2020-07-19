@@ -23,6 +23,7 @@ images:
 
 if(!require(readstata13)) install.packages("data.table", repos = "http://cran.us.r-project.org")
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+if(!require(scales)) install.packages("scales", repos = "http://cran.us.r-project.org")
 
 # Le damos un nombre al url
 url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/economia/2020-07-03-ecuatorianos-mas-altos-ganan-mas/1_BDD_ENS2018_f1_personas.dta.zip"
@@ -71,19 +72,13 @@ Una de las herramientas que más utilizamos son los **histogramas**. Para observ
 
 Yo esperaba que la distribución del porcentaje de discapacidad sea “más o menos” uniforme, poco a poco disminuyendo a medida que aumentaba el porcentaje, dado que son menos [comunes](https://www.cdc.gov/ncbddd/disabilityandhealth/features/key-findings-community-prevalence.html) las personas con un muy alto grado de discapacidad (gente completamente dependiente y si ninguna autosuficiencia). En fin, no fue tanto así lo que encontré.
 
-Inicialmente usé la programación por defecto de mi programa estadístico y obtuve el primer gráfico. Para no dibujar tantas barras, mi programa agrupó los porcentajes y dibujó solamente treinta barras. Desde ahí, ya me di cuenta que no tenía la forma que yo esperaba ver. Sin embargo, quise ir más allá y pedirle a mi programa que dibuje una barrita para cada porcentaje; es decir, cien barritas. El resultado fue el segundo gráfico.
+En el eje vertical del histograma se muestra el porcentaje de discapacitados (con carné) dependiendo al grado de discapacidad. En el eje horizontal están los porcentajes de discapacidad.
 
-```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center', out.width='90%'}
-bin_default <- data %>% ggplot(aes(x = porcentaje)) + geom_histogram(fill = "white", col = "black") +
-  labs(y = "Frecuencia", title = "Número de discapacitados de acuerdo al % de discapacidad", x = "", subtitle = "30 barras") +
-  theme(plot.title = element_text(color="black", size=14, face="bold.italic"))
-
-bin1 <- data %>% ggplot(aes(x = porcentaje)) + geom_histogram(binwidth = 1, fill = "white", col = "black") +
-  labs(y = "Frecuencia", x = "Porcentaje de discapacidad", subtitle = "100 barritas") +
-  theme(plot.title = element_text(color="black", size=14, face="bold.italic"))
-
-library(gridExtra)
-grid.arrange(bin_default, bin1)
+```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center', fig.height= 4, out.width='90%'}
+data %>% ggplot(aes(x = porcentaje)) + geom_histogram(aes(y = stat(count) / sum(count)), binwidth = 1, fill = "white", col = "black") +
+  labs(y = "Porcentaje de discapacitados", x = "Grado de discapacidad", title = "Porcentaje de discapacitado de acuerdo al grado de discapacidad") +
+  scale_y_continuous(labels=percent) +
+  theme(plot.title = element_text(color="black", size=14, face="bold.italic")) 
 ```
 
 <p style="line-height:80%"><font size="1"><i>Cabe mencionar que en esta encuesta se entrevistaron aleatoriamente a 3260 discapacitados en todo el país, así que podemos decir que estamos representando en cierto grado el contexto nacional.</i></font></p>
@@ -94,27 +89,29 @@ Si todavía no notas nada extraño, te doy una pista. ¿No notas ciertos “pico
 
 Hace un par de años se hizo una [reforma](https://www.gob.ec/sites/default/files/regulations/2018-09/Documento_Reglamento-Ley-Organica-Discapacidades.pdf) a esta ley para incluir como discapacitados a todas las personas con un porcentaje a partir del 30%. De ahí también que en el gráfico no veamos a nadie con un porcentaje del 29%. ¿Quién quiere eso?
 
-En teoría, a quién valora la discapacidad del individuo no debería importarle lo que le a este le conviene, ¿o no? Si te tocó 39% ese fue. Sin embargo, según la encuesta hay tan pocas personas con 39% de discapacidad que casi ni se ven en el gráfico, mientras que con 40% hay muchos. Pero ahí no se acaba. Como dije antes, mientas mayor es tu porcentaje de discapacidad mayores son los beneficios. Tal vez logramos observar patrones iguales. Veamos si es así o no. He graficado el mismo histograma, pero esta vez he añadido unas leyendas para visualizarlo mejor.
+En teoría, a quien valora la discapacidad del individuo no debería importarle lo que le a este le conviene, ¿o no? Si te tocó 39% ese fue. Sin embargo, según la encuesta hay tan pocas personas con 39% de discapacidad que casi ni se ven en el gráfico, mientras que con 40% hay muchos. Pero ahí no se acaba. Como dije antes, mientas mayor es tu porcentaje de discapacidad mayores son los beneficios. Tal vez logramos observar patrones iguales. Veamos si es así o no. He graficado el mismo histograma, pero esta vez he añadido unas leyendas para visualizarlo mejor.
 
 ```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center', out.width='90%'}
-data %>% ggplot(aes(x = porcentaje)) + geom_histogram(binwidth = 1, fill = "white", col = "black") +
-  labs(y = "Frecuencia", x = "Porcentaje de discapacidad", title = "Número de discapacitados de acuerdo al % de discapacidad") +
+data %>% ggplot(aes(x = porcentaje)) + 
+  geom_histogram(aes(y = stat(count) / sum(count)), binwidth = 1, fill = "white", col = "black") +
+  scale_y_continuous(labels=percent) +
+  labs(y = "Porcentaje de discapacitados", x = "Grado de discapacidad", title = "Porcentaje de discapacitado de acuerdo al grado de discapacidad") +
   theme(plot.title = element_text(color="black", size=14, face="bold.italic")) + 
-  annotate("text", x = 32, y = 100, label = "bolditalic('30%: Se considera \n discapacitado \n (desde 2017) \n 60% de exone- \n ración')", 
-                  parse = TRUE, size = 2.8, hjust = 1) + 
-  annotate("text", x = 42, y = 270, label = "bolditalic('40%: Se considera \n discapacitado \n (hasta el 2017) \n 60% de exoneración')", 
+  annotate("text", x = 32, y = 0.03, label = "bolditalic('30%: Se considera \n discapacitado \n (desde 2017) \n 60% de exone- \n ración')", 
+           parse = TRUE, size = 2.8, hjust = 1) + 
+  annotate("text", x = 42, y = 0.08, label = "bolditalic('40%: Se considera \n discapacitado \n (hasta el 2017) \n 60% de exoneración')", 
            parse = TRUE, size = 2.8, hjust = 0) + 
-  annotate("text", x = 52, y = 180, label = "bolditalic('50%: 60% de \n exoneración')", 
+  annotate("text", x = 52, y = 0.055, label = "bolditalic('50%: 60% de \n exoneración')", 
            parse = TRUE, size = 2.8, hjust = 0) + 
-  annotate("text", x = 77, y = 160, label = "bolditalic('75%: 80% de \n exoneración')", 
+  annotate("text", x = 77, y = 0.045, label = "bolditalic('75%: 80% de \n exoneración')", 
            parse = TRUE, size = 2.8, hjust = 0) +
-  annotate("text", x = 87, y = 50, label = "bolditalic('85%: 100% de \n exoneración')", 
+  annotate("text", x = 87, y = 0.015, label = "bolditalic('85%: 100% de \n exoneración')", 
            parse = TRUE, size = 2.3, hjust = 0)
 ```
 
-¿Ya te convenciste que hay algo extraño en la valoración del porcentaje de discapacidad? Ahí se ve que los “picos” más altos coinciden con los porcentajes que otorgan más beneficios tributarios. Claro, mi teoría tampoco explica todos los picos. Aquí podríamos volver al argumento de que los múltiplos de 10 son más atractivos. Sin embargo, hay algo más interesante que cabe mencionar. Si bien el número de discapacitados con un porcentaje ligeramente inferior a 50% son muy pocos, también lo son los que tienen un porcentaje de 51% o 52%. Hacer una valoración médica toma tiempo, más aún si eres médico y estás muy atareado. Si ya puedes acceder al beneficio que deseas, qué importa si realmente tienes un porcentaje de discapacidad del 53%, simplemente te dejo en 50% y me evito el esfuerzo.
+¿Ya te convenciste que hay algo extraño en la valoración del porcentaje de discapacidad? Ahí se ve que los “picos” más altos coinciden con los porcentajes que otorgan más beneficios tributarios. Claro, mi teoría tampoco explica todos los picos. Aquí podríamos volver al argumento de que los múltiplos de 10 son más atractivos. Sin embargo, hay algo más interesante que cabe mencionar. Si bien el número de discapacitados con un porcentaje ligeramente inferior a 50% son muy pocos, también lo son los que tienen un porcentaje de 51% o 52%. ¿Se están inventando los médicos el grado de discapacidad? Según el gráfico, sin importar el grado de discapacidad (mayor o menor), los que valoran el porcentaje están en su mayoría asignando los porcentajes mínimos para que aquellos discapacitados accedan a ciertos beneficios.
 
-En ningún momento quise desprestigiar la labora ética de los servidores de salud encargados de valorar y asignar el porcentaje de discapacitados. Simplemente cogí los datos y vi que las cosas “no cuadraban”. El trabajo es ahora de usted, lector o lectora, de sacar sus propias conclusiones.
+El trabajo es ahora de usted, lector o lectora, de sacar sus propias conclusiones.
 
 **Un par de aclaraciones:**
 
