@@ -1,0 +1,125 @@
+---
+title: ¿Irregularidades en la emisión de carnés de discapacidad? ¿Qué cuentan los
+  datos?
+authors:
+  - Alonso Quijano
+date: '2020-07-19'
+slug: irregularidades-carnes-de-discapacidad
+categories:
+  - Corrupción
+  - Salud
+tags:
+  - Gobierno
+  - Discapacidad
+description: 'Según una encuesta nacional, muchos discapacitados tienen exactamente 40% de discapacidad. Revisé el manual de calificación de la discapacidad y es que tantas personas tengan exactamente 40%. Por sorpresa, 40% de discapacidad era el porcentaje mínimo para obtener beneficios tributarios.'
+thumbnail: '/post/corrupcion/2020-07-19-irregularidades-carnes-de-discapacidad.png'
+images: 
+  - 'https://elquantificador.org/post/corrupcion/2020-07-19-irregularidades-carnes-de-discapacidad.png'
+---
+```{r include =FALSE}
+###############################################################
+####                   Descargar los datos                 ####
+###############################################################
+
+if(!require(readstata13)) install.packages("data.table", repos = "http://cran.us.r-project.org")
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+
+# Le damos un nombre al url
+url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/economia/2020-07-03-ecuatorianos-mas-altos-ganan-mas/1_BDD_ENS2018_f1_personas.dta.zip"
+# Creamos un directorio temporal
+td <- tempdir()
+# Creamos una carpeta temporal
+tf <- tempfile(tmpdir=td, fileext = ".zip")
+# Descargamos los datos en la carpeta temporal
+download.file(url,tf)
+
+# Obtenemos el nombre del archivo dentro del archivo zip, lo descomprimimos (unzip), obtenemos el nombre del 
+# parche, y finalmente lo cargamos
+personas.f.name <- unzip(tf, list=TRUE)$Name[1] # El archivo dta personas es el primero
+unzip(tf, files=personas.f.name, exdir=td, overwrite=TRUE)
+personas.f.path <- file.path(td, personas.f.name)
+personas <- read.dta13(personas.f.path)
+
+data.key.personas <- data.frame(variable = names(personas), 
+                              label = attr(personas,"var.labels"))
+
+###########################################################
+####                   Crear variables                 ####
+####                    Discapacidad                   ####
+###########################################################
+
+discap <- select(personas, id_per, id_hogar, f1_s2_10_1, f1_s2_10_2, f1_s2_10_3, 
+                 f1_s2_10_4, f1_s2_10_5, f1_s2_10_6, f1_s2_11, f1_s2_12, f1_s2_13) %>%
+  rename(visual = f1_s2_10_1, auditiva = f1_s2_10_2, motriz = f1_s2_10_3, 
+         cognitiva = f1_s2_10_4, banarse = f1_s2_10_5, hablar = f1_s2_10_6,
+         carne = f1_s2_11, porcentaje = f1_s2_12, manuela = f1_s2_13) %>% 
+  filter(carne == "si") %>% droplevels() %>% # Escogemos solo las peronas con carné de discapacidad
+  filter(porcentaje <= 100 & porcentaje >= 4) # Eliminamos errores
+
+discap[, c(3:8)] <- sapply(discap[, c(3:8)], as.numeric)
+discap$grado <- apply(discap[, c(3:8)], 1, function(x) max(x))
+
+set.seed(2525)
+discap$tipo <- colnames(discap[,3:8])[max.col(discap[, c(3:8)], ties.method="random")]
+
+data <- select(discap, id_per:hablar, grado:tipo, carne:manuela) # solo reorganizamos las columnas
+```
+
+Me encontraba revisando las estadísticas en cuanto a discapacitados de la última Encuesta Nacional de Salud y Nutrición 2018 del INEC, “quantificando” uno que otro modelo, hasta que empecé a notar cosas raras, específicamente en los porcentajes de discapacidad. Es una práctica común en estadística ilustrar la dispersión de los datos a fin de verificar errores, valores atípicos (aquellos que se alejan bastante del promedio), entre otras cosas. 
+
+Una de las herramientas que más utilizamos son los **histogramas**. Para observar la distribución de porcentajes de discapacidad a través de un histograma, simplemente contamos el número de observaciones para cada porcentaje; es decir, cuántas personas tienen 40% de discapacidad, cuantas tienen 41%, cuántas 42% y así sucesivamente para luego dibujarlas en un gráfico.
+
+Yo esperaba que la distribución del porcentaje de discapacidad sea “más o menos” uniforme, poco a poco disminuyendo a medida que aumentaba el porcentaje, dado que son menos [comunes](https://www.cdc.gov/ncbddd/disabilityandhealth/features/key-findings-community-prevalence.html) las personas con un muy alto grado de discapacidad (gente completamente dependiente y si ninguna autosuficiencia). En fin, no fue tanto así lo que encontré.
+
+Inicialmente usé la programación por defecto de mi programa estadístico y obtuve el primer gráfico. Para no dibujar tantas barras, mi programa agrupó los porcentajes y dibujó solamente treinta barras. Desde ahí, ya me di cuenta que no tenía la forma que yo esperaba ver. Sin embargo, quise ir más allá y pedirle a mi programa que dibuje una barrita para cada porcentaje; es decir, cien barritas. El resultado fue el segundo gráfico.
+
+```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center', out.width='90%'}
+bin_default <- data %>% ggplot(aes(x = porcentaje)) + geom_histogram(fill = "white", col = "black") +
+  labs(y = "Frecuencia", title = "Número de discapacitados de acuerdo al % de discapacidad", x = "", subtitle = "30 barras") +
+  theme(plot.title = element_text(color="black", size=14, face="bold.italic"))
+
+bin1 <- data %>% ggplot(aes(x = porcentaje)) + geom_histogram(binwidth = 1, fill = "white", col = "black") +
+  labs(y = "Frecuencia", x = "Porcentaje de discapacidad", subtitle = "100 barritas") +
+  theme(plot.title = element_text(color="black", size=14, face="bold.italic"))
+
+library(gridExtra)
+grid.arrange(bin_default, bin1)
+```
+
+<p style="line-height:80%"><font size="1"><i>Cabe mencionar que en esta encuesta se entrevistaron aleatoriamente a 3260 discapacitados en todo el país, así que podemos decir que estamos representando en cierto grado el contexto nacional.</i></font></p>
+
+### ¿Hay irregularidades en los porcentajes de discapacidad? ¿Qué muestra el gráfico?
+
+Si todavía no notas nada extraño, te doy una pista. ¿No notas ciertos “picos” en el gráfico, especialmente en el 40%? Al parecer muchos discapacitados tienen exactamente 40% de discapacidad. ¿Por qué será? Yo pensaba que a los doctores que valoran el porcentaje de discapacidad les gustaban los números múltiplos de 10 o de 5 (no hay nada de malo en eso, a mí también me gustan). Sin embargo, luego de revisar la Ley Orgánica de Discapacidades pude descubrir que tal vez hay algo más. De acuerdo a esta [ley](file:///Users/elocarinista/Downloads/REGLAMENTO%20A%20LA%20LEY%20ORG%C3%81NICA%20DE%20DISCAPACIDADES.pdf), se consideraba hasta hace un par de años como discapacitado a cualquier persona con un porcentaje de 40 o superior. Ser considerado como discapacitado te otorga un abanico de beneficios, incluyendo beneficios tributarios que aumentan a medida que también aumenta tu porcentaje. En otras palabras, a ti no te servía tener un 39% de discapacidad si de todos modos no eras considerado discapacitado. A ti te convenía tener un 40% o más.
+
+Hace un par de años se hizo una [reforma](https://www.gob.ec/sites/default/files/regulations/2018-09/Documento_Reglamento-Ley-Organica-Discapacidades.pdf) a esta ley para incluir como discapacitados a todas las personas con un porcentaje a partir del 30%. De ahí también que en el gráfico no veamos a nadie con un porcentaje del 29%. ¿Quién quiere eso?
+
+En teoría, a quién valora la discapacidad del individuo no debería importarle lo que le a este le conviene, ¿o no? Si te tocó 39% ese fue. Sin embargo, según la encuesta hay tan pocas personas con 39% de discapacidad que casi ni se ven en el gráfico, mientras que con 40% hay muchos. Pero ahí no se acaba. Como dije antes, mientas mayor es tu porcentaje de discapacidad mayores son los beneficios. Tal vez logramos observar patrones iguales. Veamos si es así o no. He graficado el mismo histograma, pero esta vez he añadido unas leyendas para visualizarlo mejor.
+
+```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center', out.width='90%'}
+data %>% ggplot(aes(x = porcentaje)) + geom_histogram(binwidth = 1, fill = "white", col = "black") +
+  labs(y = "Frecuencia", x = "Porcentaje de discapacidad", title = "Número de discapacitados de acuerdo al % de discapacidad") +
+  theme(plot.title = element_text(color="black", size=14, face="bold.italic")) + 
+  annotate("text", x = 32, y = 100, label = "bolditalic('30%: Se considera \n discapacitado \n (desde 2017) \n 60% de exone- \n ración')", 
+                  parse = TRUE, size = 2.8, hjust = 1) + 
+  annotate("text", x = 42, y = 270, label = "bolditalic('40%: Se considera \n discapacitado \n (hasta el 2017) \n 60% de exoneración')", 
+           parse = TRUE, size = 2.8, hjust = 0) + 
+  annotate("text", x = 52, y = 180, label = "bolditalic('50%: 60% de \n exoneración')", 
+           parse = TRUE, size = 2.8, hjust = 0) + 
+  annotate("text", x = 77, y = 160, label = "bolditalic('75%: 80% de \n exoneración')", 
+           parse = TRUE, size = 2.8, hjust = 0) +
+  annotate("text", x = 87, y = 50, label = "bolditalic('85%: 100% de \n exoneración')", 
+           parse = TRUE, size = 2.3, hjust = 0)
+```
+
+¿Ya te convenciste que hay algo extraño en la valoración del porcentaje de discapacidad? Ahí se ve que los “picos” más altos coinciden con los porcentajes que otorgan más beneficios tributarios. Claro, mi teoría tampoco explica todos los picos. Aquí podríamos volver al argumento de que los múltiplos de 10 son más atractivos. Sin embargo, hay algo más interesante que cabe mencionar. Si bien el número de discapacitados con un porcentaje ligeramente inferior a 50% son muy pocos, también lo son los que tienen un porcentaje de 51% o 52%. Hacer una valoración médica toma tiempo, más aún si eres médico y estás muy atareado. Si ya puedes acceder al beneficio que deseas, qué importa si realmente tienes un porcentaje de discapacidad del 53%, simplemente te dejo en 50% y me evito el esfuerzo.
+
+En ningún momento quise desprestigiar la labora ética de los servidores de salud encargados de valorar y asignar el porcentaje de discapacitados. Simplemente cogí los datos y vi que las cosas “no cuadraban”. El trabajo es ahora de usted, lector o lectora, de sacar sus propias conclusiones.
+
+**Un par de aclaraciones:**
+
+1. Algún momento pensé que la forma de asignar el porcentaje de discapacidad favorecía ciertos números. Entonces, revisé el [Manual de Calificación de Discapacidad](https://www.salud.gob.ec/wp-content/uploads/downloads/2018/12/Manual_Calificaci%C3%B3n-de_Discapacidad_2018.pdf) emitido por el Ministerio de Salud Pública y me vi que utiliza un método muy riguroso y objetivo, por lo que alguien tendría que tener una combinación muy particular de condiciones para tener exactamente 40%. Por lo tanto, obtener dicho porcentaje de acuerdo al método descrito en el manual es muy poco probable.
+
+2. También me pregunté cómo los encuestadores recolectan información sobre el grado de discapacidad del encuestado. Puede ser que la gente simplemente recuerda múltiplos de 10, así tengan 46. El manual de la encuesta demuestra que para que el encuestador ingrese el porcentaje, el encuestado o cualquier persona auxiliar tiene que presentar el carné de discapacidad. El encuestador simplemente copiará el porcentaje del carné. Para revisar los manuales del encuestador, ingresa a este [link](https://www.ecuadorencifras.gob.ec/salud-salud-reproductiva-y-nutricion/).
+
+Puedes reproducir este análisis ingresando a nuestro [Github](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/corrupcion/2020-07-19-irregularidades-carnes-de-discapacidad.Rmd). Nuestra misión es ser 100% transparentes, permitiéndote acceder al código que genera el contenido en este post. Si tienes dudas sobre el cálculo o la metodología, escríbeme a alonso@elquantificador.org.
