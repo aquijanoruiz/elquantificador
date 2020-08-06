@@ -9,7 +9,7 @@ menu:
 La idea de este sitio web surge cuando, sorprendidos por la creciente propagación de información falsa y sesgada a través de medios de comunicación y redes sociales, nos propusimos desafiar la inadecuada cultura informativa del Ecuador y promover una basada en datos. Nosotros, de aquí en adelante "los quantificadores", aplicaremos el método científico para examinar temas coyunturales de ámbito social y proveer de análisis  libres de sesgos, con rigurosidad metodológica.
 
 
-<h3>Marco Faytong Haro <a href= "https://twitter.com/mafayto">@mafayto</a></h3> 
+<h3>Marco Faytong Haro  <a href= "https://twitter.com/mafayto"> @mafayto</a></h3> 
 
 
 <div class="authorbox clearfix">
