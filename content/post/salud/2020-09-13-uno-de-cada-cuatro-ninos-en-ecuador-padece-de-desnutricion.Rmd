@@ -317,13 +317,13 @@ missed_meals %>% filter(baja_talla == "si") %>%
                             "Disminuyó la cantidad de comida", "Sintió hambre pero no comió", 
                             "Solo comió una vez al día", "Dejó de comer durante todo el día")) %>%
   ggplot(aes(x = answer, y = reorder(question_label, answer), fill = question_label)) + geom_bar(stat="identity") + 
-  labs(title = "En los últimos 12 meses en su hogar, algún menor \n de 18 años, alguna vez por falta de dinero \n u otros recursos:)", x = "", y = "") + scale_x_continuous(label = percent) +
+  labs(title = "En los últimos 12 meses en su hogar, algún menor \n de 18 años, alguna vez por falta de dinero \n u otros recursos:", x = "", y = "") + scale_x_continuous(label = percent) +
   theme_ipsum() + theme(legend.position = "none") + scale_fill_brewer(palette = "Spectral") + 
   theme(axis.text.y = element_text(size = 9), axis.text.x = element_text(size = 9), plot.title = element_text(size=16))
 
 ```
 
-<p style="line-height:80%"><font size="1"><i>Esta es una pregunta donde el encuestado puede seleccionar múltiples respuestas. Por lo tanto, los porcentajes puedes sumar más de 100%.</i></font></p>
+<p style="line-height:80%"><font size="1"><i>Esta es una pregunta donde el encuestado puede seleccionar múltiples respuestas. Por lo tanto, los porcentajes pueden sumar más de 100%.</i></font></p>
 
 Como podrás observar, a al menos a un cuarto de niños desnutridos parece afectarles la falta de ingresos. Más impresionante que eso, un de cada diez dejó de recibir alguna comida del día o, peor aún, no comió en todo el día. **¡Ojo! No sabemos ni contamos con cifras para estimar cuánto ha impactado la crisis sanitaria del covid-19 a la salud alimentaria de los hogares más vulnerables del Ecuador.** Sin embargo, temo que el impacto es alto y, de ser así, acarreará grandes consecuencias a largo plazo. [Doug Almond](https://www.jstor.org/stable/10.1086/507154?seq=1#metadata_info_tab_contents) encontró que quienes estaban en el últero durante la pandemia de gripe de 1918 padecían más enferemedades y tenía una esperanza de vida más corta.
 
