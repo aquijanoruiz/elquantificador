@@ -1,0 +1,352 @@
+---
+title: Uno de cada cuatro niños en el Ecuador padece de desnutrición
+authors:
+  - Alonso Quijano
+date: '2020-09-13'
+slug: uno-de-cada-cuatro-ninos-en-ecuador-padece-de-desnutricion
+categories:
+  - Salud
+  - Socioeconomía
+tags:
+  - Nutrición
+  - Desigualdad
+  - Mapas
+description: 'Uno de cada cuatro niños menores de cinco años en el Ecuador tiene retardo en su crecimiento. Esto es una cifra bastante alarmante considerando que no hemos realizado grandes avances en las últimas dos décadas. La desnutrición esta correlacionada a una serie de problemas multidimensionales a corto y largo plazo. En este post hacemos un análisis de las posibles causas al problema.'
+thumbnail: '/post/salud/2020-09-13-uno-de-cada-cuatro-ninos-en-ecuador-padece-de-desnutricion.jpg'
+images: 
+  - 'https://elquantificador.org/post/salud/2020-09-13-uno-de-cada-cuatro-ninos-en-ecuador-padece-de-desnutricion.jpg'
+bibliography: Bibliografia.bib
+nocite: | 
+  @almond20061918, @miguel2004worms, @jensen2008giffen
+---
+
+Aunque las hambrunas y escasez de alimentos (al parecer) ya no son el gran problema mundial que solían ser, sí lo sigue siendo la desnutrición infantil. **Tomando la última Encuesta Nacional de Salud y Nutrición (ENSANUT) realizada por el INEC en 2018, calculamos que el 24% de lo niños menores de cinco años en el Ecuador presentan de un moderado a severo retraso en su crecimiento.** Más concretamente, uno de cada cuatro niños tiene una *baja talla para la edad*. En otras palabras, poseen una estatura mucho más baja que la esperada para el número de años y meses de vida.
+
+**Si desagregamos las cifras, podemos darnos cuenta que las regiones con mayor prevalencia de desnutrición infantil (en este caso, medida como retraso en el crecimiento) son la sierra y la Amazonía.** Morona Santiago es la provincia que posee el mayor porcentaje con 34% (es decir, uno de cada tres niños). El porcentaje de niños desnutridos parece relativamente menor en la región costa, pero no baja del 16.3%. Por otra parte, la provincia de Santa Elena parece ser la excepción en la costa, con una alta prevalencia del 33.6%.
+
+En siguiente mapa te mostramos el porcentaje de desnutrición infantil por provincia utilizando como método de medición la talla para la edad. Toma en cuenta que la talla para la estatura no es el único método de medir la desnutrición. Ya hablaremos de otros métodos al final.
+
+```{r include =FALSE}
+###############################################################
+####                   Descargar los datos                 ####
+###############################################################
+
+if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.us.r-project.org")
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+if(!require(scales)) install.packages("scales", repos = "http://cran.us.r-project.org")
+if(!require(zscorer)) install.packages("zscorer", repos = "http://cran.us.r-project.org")
+if(!require(sf)) install.packages("sf", repos = "http://cran.us.r-project.org")
+if(!require(rmapshaper)) install.packages("rmapshaper", repos = "http://cran.us.r-project.org")
+if(!require(tmap)) install.packages("tmap", repos = "http://cran.us.r-project.org")
+if(!require(RColorBrewer)) install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
+if(!require(grid)) install.packages("grid", repos = "http://cran.us.r-project.org")
+if(!require(hrbrthemes)) install.packages("hrbrthemes", repos = "http://cran.us.r-project.org")
+if(!require(RColorBrewer)) install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
+
+# Base de datos de personas ----------
+# Le damos un nombre al url
+url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/economia/2020-07-03-ecuatorianos-mas-altos-ganan-mas/1_BDD_ENS2018_f1_personas.dta.zip"
+# Creamos un directorio temporal
+td <- tempdir()
+# Creamos una carpeta temporal
+tf <- tempfile(tmpdir=td, fileext = ".zip")
+# Descargamos los discap en la carpeta temporal
+download.file(url,tf)
+
+# Obtenemos el nombre del archivo dentro del archivo zip, lo descomprimimos (unzip), obtenemos el nombre del 
+# parche, y finalmente lo cargamos
+personas.f.name <- unzip(tf, list=TRUE)$Name[1] # El archivo dta personas es el primero
+unzip(tf, files=personas.f.name, exdir=td, overwrite=TRUE)
+personas.f.path <- file.path(td, personas.f.name)
+personas <- read.dta13(personas.f.path)
+
+data.key.personas <- data.frame(variable = names(personas), 
+                                label = attr(personas,"var.labels"))
+
+# Base de datos de hogares ----------
+url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/salud/2020-06-30-desnutricion-infantil-ecuador-ensanut/2_BDD_ENS2018_f1_hogar.dta.zip"
+# Creamos un directorio temporal
+td <- tempdir()
+# Creamos una carpeta temporal
+tf <- tempfile(tmpdir=td, fileext = ".zip")
+# Descargamos los discap en la carpeta temporal
+download.file(url,tf)
+
+# Obtenemos el nombre del archivo dentro del archivo zip, lo descomprimimos (unzip), obtenemos el nombre del 
+# parche, y finalmente lo cargamos
+hogar.f.name <- unzip(tf, list=TRUE)$Name[1] # El archivo dta personas es el primero
+unzip(tf, files=hogar.f.name, exdir=td, overwrite=TRUE)
+hogar.f.path <- file.path(td, hogar.f.name)
+hogar <- read.dta13(hogar.f.path)
+
+hogar.key.hogar <- data.frame(variable = names(hogar), 
+                              label = attr(hogar,"var.labels"))
+
+###########################################
+####              Estatura             ####
+###########################################
+
+#Estatura (siguiendo el codigo del INEC que esta en STATA)
+#Longitud o talla
+personas <- mutate(personas, talla1 = coalesce(f1_s7_5_1,f1_s7_6_1), 
+                   talla2 = coalesce(f1_s7_5_2,f1_s7_6_2),
+                   talla3 = coalesce(f1_s7_5_3, f1_s7_6_3))
+
+#Diferencias en las medidas
+personas <- personas %>%
+  mutate(d1=abs(talla1-talla2), d2=abs(talla1-talla3), d3=abs(talla2-talla3))
+
+#La minima dsitancia en las medidas
+personas <- personas %>% mutate(dmin = min(d1,d2,d3))
+
+#Promedio entre talla1 y talla2 si su dif <0.5, sino la mínima diferencia determina de qué medidas se hace el promedio
+personas <- personas %>% 
+  mutate(estatura = case_when(d1 <= 0.5 ~ (talla1+talla2)/2,
+                              dmin==d3 ~ (talla2+talla3)/2,
+                              dmin==d2 ~ (talla1+talla3)/2,
+                              TRUE ~ (talla1+talla2)/2))
+
+#######################################
+####              Peso             ####
+#######################################
+
+personas <- personas %>% mutate(peso1 = f1_s7_4_1,
+                                peso2 = f1_s7_4_2,
+                                peso3 = f1_s7_4_3)
+
+#Diferencias en las medidas
+personas <- personas %>% mutate(d1 = abs(peso1 - peso2),
+                                d2 = abs(peso1 - peso3),
+                                d3 = abs(peso2 - peso3))
+
+#La mínima dsitancia en las medidas
+personas <- personas %>% mutate(dmin = min(d1,d2,d3))
+
+#Promedio entre peso1 y peso2 si su dif <0.5, sino la mínima diferencia determina de qué medidas se hace el promedio
+personas <- personas %>% 
+  mutate(peso = case_when(d1 <= 0.5 ~ (peso1+peso2)/2,
+                          dmin==d3 ~ (peso2+peso3)/2,
+                          dmin==d2 ~ (peso1+peso3)/2,
+                          TRUE ~ (peso1+peso2)/2))
+
+####################################################
+####              Weight for height             ####
+####################################################
+
+personas$sexo_binario <- as.numeric(personas$sexo) # 1 para hombre, 2 para mujer
+
+# Los indicadores de nutrición se calculan a niños de hasta 5 años, entonces remplazamos los datos calculados a mayores
+# de 5 años por NAs.
+personas <- personas %>% filter(edadanios <= 5)
+
+data <- 
+  personas %>% filter(edadanios <= 5) %>% 
+  select(id_per, id_hogar, sexo, sexo_binario, edadanios, edadmeses, edaddias, 
+         prov, area, etnia, estatura, peso, f1_s4_41) %>% rename(preventiva = f1_s4_41)
+
+# Weight for height (peso para estatura)
+wfh <- addWGSR(data = data, sex = "sexo_binario", firstPart = "peso",
+                    secondPart = "estatura", index = "wfh" ) %>% select(id_per, wfhz)
+
+# Height for age (estatura para edad)
+hfa <- addWGSR(data = data, sex = "sexo_binario", firstPart = "estatura",
+               secondPart = "edaddias", index = "hfa" ) %>% select(id_per, hfaz)
+
+# Weight for age (peso para edad)
+wfa <- addWGSR(data = data, sex = "sexo_binario", firstPart = "peso",
+               secondPart = "edaddias", index = "wfa" ) %>% select(id_per, wfaz)
+
+data <- left_join(data, wfh, by = "id_per") %>% left_join(hfa, by = "id_per") %>% left_join(wfa, by = "id_per") 
+
+# Si el niño tiene un valor de -2 en cualquiera de las tres medidas antropométricas, se lo puede clasificar como
+# baja talla, bajo peso y meaciado
+# Puedes revisar este manual de la OMS para interpretar mejor los datos https://www.who.int/childgrowth/training/c_interpretando.pdf
+
+data <- data %>% mutate(emaciado = ifelse(wfhz < -2, "si", "no"),
+                         baja_talla = ifelse(hfaz < -2, "si", "no"),
+                         bajo_peso = ifelse(wfaz < -2, "si", "no"))
+
+#################################################################################
+####              Niños que no desayunaron, almorzaron o cenaron             ####
+#################################################################################
+
+missed_meals <- hogar %>% select(id_hogar, f1_s6_2_1, f1_s6_2_2, f1_s6_2_3, f1_s6_2_4, 
+                                 f1_s6_2_5, f1_s6_2_6, f1_s6_2_7, f1_s6_2_8)
+head(missed_meals)
+ninetoNA <- function(x){ # Creamos una variable para cambiar los 9 por ceros
+  x = ifelse(x == 9, NA, x)
+  return(x)
+}
+
+sino <- function(x){ # Creamos una variable para cambiar 1 por "si"
+  x = ifelse(x == 1, "si", "no")
+  x = factor(x, levels = c("si", "no"))
+  return(x)
+}
+
+missed_meals[, c(2:9)] <- lapply(missed_meals[, c(2:9)], FUN = ninetoNA)
+missed_meals[, c(2:9)] <- lapply(missed_meals[, c(2:9)], FUN = sino)
+
+data <- left_join(data, missed_meals, by = "id_hogar")
+
+```
+
+```{r, include = FALSE, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center'}
+#############################################################
+####              Desnutrición por provincia             ####
+#############################################################
+class(data$prov)
+provincia <- data.frame(cod_prov = factor(c(1:24, 90)), provincia = c("Azuay", "Bolivar", "Cañar", "Carchi", "Cotopaxi", "Chimborazo", "El Oro",
+                        "Esmeraldas", "Guayas", "Imbabura", "Loja", "Los Rios", "Manabi", "Morona Santiago", "Napo", 
+                        "Pastaza", "Pichincha", "Tungurahua", "Zamora Chinchipe", "Galápagos", "Sucumbios", "Orellana", 
+                        "Santo Domingo de los Tsáchilas", "Santa Elena", "Zona no delimitada"))
+
+data <- data %>% mutate(prov = as.factor(as.numeric(prov))) %>% 
+  inner_join(provincia, by = c("prov" = "cod_prov"))
+
+desnutricion_prov <- data %>% group_by(provincia) %>% summarize(desnutricion = mean(baja_talla == "si", na.rm = TRUE))
+
+##############################################################################
+####              Mapa de desnutrición (baja talla para peso)             ####
+##############################################################################
+
+# Now, we need to load Ecuador's administrative division by province
+url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador/ECU_PROVINCE_SHAPEFILE.zip"
+td <- tempdir() # We create a temporary directory
+tf <- tempfile(tmpdir=td, fileext = ".zip") # We create the placeholder file
+download.file(url,tf) # We download the data into the placeholder file
+
+# We get the name of the file inside the zip file that contains the demographic data, 
+# unzip it, get the full path name of it, and finally load it
+shp.file.name <- unzip(tf, list=TRUE)$Name[4] # The shp file name
+shx.file.name <- unzip(tf, list=TRUE)$Name[6] # The shx file name
+dbf.fine.name <- unzip(tf, list=TRUE)$Name[8] # The dbf file name
+prf.fine.name <- unzip(tf, list=TRUE)$Name[10] # The prf file name
+
+unzip(tf, files=c(shp.file.name, shx.file.name, dbf.fine.name, prf.fine.name), exdir=td, overwrite=TRUE)
+shp.file.path <- file.path(td, shp.file.name)
+
+ecu_map <- st_read(shp.file.path) # Now we have loaded the shapefile
+
+# We simplify the map polygon data
+ecu_map <- ms_simplify(ecu_map, keep=0.01) # We keep the 0.4% of the polygon
+
+# We keep only the variables we need
+ecu_map <- ecu_map %>% select(-c(ID_0, ISO, NAME_0, ID_1, TYPE_1, ENGTYPE_1, NL_NAME_1, VARNAME_1)) %>%
+  rename(Provincia = NAME_1) # We only keep the province names and the geometry
+
+desnutricion_prov$provincia <- factor(desnutricion_prov$provincia, levels = levels(ecu_map$Provincia)) # Coverting provincia into factor
+desnutricion_prov <- inner_join(ecu_map, desnutricion_prov, by = c("Provincia" = "provincia"))
+
+desnutricion_prov$Provincia <- 
+  plyr::revalue(desnutricion_prov$Provincia, c("Santo Domingo de los Tsáchilas" = "Sto Dom Tsáchilas", 
+                                            "Manabi" = "Manabí"))
+
+# Porcentajes ---------
+desnutricion_prov <- desnutricion_prov %>% mutate(porc_desnutricion = desnutricion * 100)
+
+desnutricion_prov <- desnutricion_prov %>% mutate(porc_desnutricion = as.character(paste0(formatC(desnutricion_prov$porc_desnutricion,
+                                                                              format = "f", digits = 1), " %")))
+# porc_comp ---------
+
+desnutricion_prov_map <- # Continental Ecuador
+  tm_shape(desnutricion_prov %>% filter(!Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_fill(col = "desnutricion", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x * 100, digits=0, format="f"), " %")), 
+          title = "",legend.show = TRUE) + 
+  tm_layout(main.title = "Retraso en el crecimiento de \n menores de cinco años", legend.position = c("right","bottom"), fontface = "bold.italic",
+            main.title.size = 1.2) +
+  tm_text("porc_desnutricion", size = 0.6, alpha = 0.5, just = "bottom") + # We add the number of cases
+  tm_shape(desnutricion_prov) +
+  tm_fill(col = "desnutricion", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = F)
+
+desnutricion_prov_map_gal <- # Galapagos
+  tm_shape(desnutricion_prov %>% filter(Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
+  tm_shape(desnutricion_prov) +
+  tm_fill(col = "desnutricion", palette = "Blues", style = "cont",
+          legend.format = list(fun=function(x) paste0(formatC(x * 100, digits=0, format="f"), " %")), 
+          title = "",legend.show = FALSE) + 
+  tm_layout(fontface = "bold.italic") +
+  tm_text("porc_desnutricion", size = 0.6, alpha = 0.5, just = "bottom") + # We add the number of cases
+  tm_shape(desnutricion_prov) +
+  tm_fill(col = "desnutricion", palette = "Blues", legend.format = list(digits = 0), 
+          legend.show = FALSE, alpha = 0) + 
+  tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
+  tm_layout(frame = "white")
+```
+
+```{r, echo=FALSE, fig.align='center', out.width='150%'}
+grid.newpage()
+print(desnutricion_prov_map, vp = viewport(x = 0.6, y = 0.5,
+                                          height = 0.9))
+print(desnutricion_prov_map_gal, vp = viewport(x = 0.2, y = 0.70,
+                                          height = 0.15))
+```
+
+### ¿Por qué prevalencia de desnutrición infantil en nuestro país es tan alta?
+
+Tal vez para algunos les es difícil concebir o entender cómo tal cifra puede ser tan alta, si alimentos, por así decir, sí hay. Uno puede ir al mercado o la tienda del barrio a comprar carne y verduras sin necesidad de hacer fila y pelear para poder conseguir comida. Tal como mencioné al principio, escasez de alimentos en sí no hay (al menos en nuestro país), por lo que las causas deben estar en otra parte. Intentaré apoyar mi explicación en lo más que pueda en estadísticas, pero dado que el INEC no recolecta datos para todas las variables que quizá nos interese, haré algunas conjeturas, por lo que acepto cualquier crítica o retroalimentación.
+
+##### Desigualdad ingresos
+
+[Amartya Sen](https://en.wikipedia.org/wiki/Amartya_Sen#Research_work) argumenta que las hambrunas no solo ocurren por la escasez de alimentos, sino también por las desigualdades en la distribución de alimentos y al alza de precios. Este segundo, en concreto, afecta significativamente a los pobres, especialmente cuando los precios de los alimentos suben, pero no los ingresos. Esto se debe a que los más pobres asignan una mayor porción de sus ingresos en comida.
+
+En la encuesta ENSANUT se pregunta al jefe o la jefa de hogar si por falta de ingresos algún menor de 18 años dejó de comer o sintió hambre en los últimos 12 meses. A continuación, mostramos los resultados para los hogares de los menores de cinco años con retraso en su crecimiento (baja talla para la edad). Toma también en cuenta que estos porcentajes agrupan a cualquier menor de 18 años y no solamente a nuestra población de interés por lo que los porcentajes pueden estar sobreestimados.
+
+```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center', out.width='90%'}
+
+trueORfalse <- function(x) {
+  x = ifelse(x == "si", TRUE, FALSE)
+  return(x)
+}
+
+missed_meals <- data
+missed_meals[,20:27] <- as.data.frame(lapply(missed_meals[,20:27], FUN = trueORfalse))
+
+# Seguridad alimentaria ----------
+# Baja talla para la edad
+
+missed_meals %>% filter(baja_talla == "si") %>% 
+  summarize_at(vars(f1_s6_2_1, f1_s6_2_2, f1_s6_2_3, f1_s6_2_4, f1_s6_2_5, 
+                    f1_s6_2_6, f1_s6_2_7, f1_s6_2_8), mean, na.rm = TRUE) %>% gather(question, answer) %>% 
+  mutate(question_label = c("Dejó de tener una alimentación saludable", "No tuvo una alimentación variada", 
+                            "Dejó de desayunar, almorzar, o cenar", "Comió menos de lo que debía", 
+                            "Disminuyó la cantidad de comida", "Sintió hambre pero no comió", 
+                            "Solo comió una vez al día", "Dejó de comer durante todo el día")) %>%
+  ggplot(aes(x = answer, y = reorder(question_label, answer), fill = question_label)) + geom_bar(stat="identity") + 
+  labs(title = "Seguridad alimentaria (baja talla para la edad)", x = "", y = "") + scale_x_continuous(label = percent) +
+  theme_ipsum() + theme(legend.position = "none") + scale_fill_brewer(palette = "Spectral") + 
+  theme(axis.text.y = element_text(size = 9), axis.text.x = element_text(size = 9), plot.title = element_text(size=16))
+
+```
+
+Como podrás observar, a al menos a un cuarto de niños desnutridos parece afectarles la falta de ingresos. Más impresionante que eso, un de cada diez dejó de recibir alguna comida del día o, peor aún, no comió en todo el día. **¡Ojo! No sabemos ni contamos con cifras para estimar cuánto ha impactado la crisis sanitaria del covid-19 a la salud alimentaria de los hogares más vulnerables del Ecuador.** Sin embargo, temo que el impacto es alto y, de ser así, acarreará grandes consecuencias a largo plazo. [Doug Almond](https://www.jstor.org/stable/10.1086/507154?seq=1#metadata_info_tab_contents) encontró que quienes estaban en el últero durante la pandemia de gripe de 1918 padecían más enferemedades y tenía una esperanza de vida más corta [@almond20061918].
+
+##### Dieta
+
+Retomando el mapa donde se muestra el porcentaje de niños con desnutrición por provincia, ahora haré un intento de explicar el patrón geográfico.
+
+Creo que no es novedad que la dieta en la costa es mucho más calórica que en la sierra. El banano, plátano verde, el pescado, entre otros son alimentos bastante nutritivos y, tal vez a excepción del pescado, no tan costosos. Esta puede ser una ventaja comparativa de nacer o crecer en la costa en relación a otras provincias. Sería bueno que el INEC incluya en su próxima encuesta preguntas sobre el consumo específico de alimentos para así estimar el consumo de calorías y poder hacer mejores inferencias.
+
+Ya habíamos mencionado que los ingresos influían, pero no lo explicaban todo. También puede ser que los hogares de mayores ingresos gasten más en alimentación, pero no necesariamente en una mejor dieta. [Robert Jensen y Nolan Miller](https://www.aeaweb.org/articles?id=10.1257/aer.98.4.1553) en un experimento en China encontraron que cuando el precio del arroz era subsidiado a los más pobres, estos no compraban más arroz. Al contrario, consumían menos arroz, pero sí consumían más alimentos costosos y sabrosos como pescado y mariscos [@jensen2008giffen].
+
+##### Salud
+
+Existe una evidente relación entre salud y nutrición. No solamente la mala nutrición provoca enfermedades, enfermarse también puede causar pérdida de peso. La salud preventiva en la infancia juega un papel importante en la salud y bienestar de los niños, ya que ayuda a prevenir enfermedades y fortalecer su sistema inmunológico. El INEC lamentablemente no recolecta suficiente información sobre este aspecto. Por ejemplo, la ENSANUT no incluye preguntas sobre tipo ni cantidad de vacunas. Solo pregunta si en los últimos 30 días el niño se hizo chequear por un médico o recibió algún servicio preventivo, pero no especifica ni cuál chequeo médico ni cuál servicio preventivo. La información estadística con la que contamos es muy vaga para sacar buenas conclusiones. **Tan solo podemos decir que del 24% de niños con malnutrición, solo el 17% recibió algún chequeo médico o algún servicio preventivo en los 30 días antes de se encuestados.**
+
+Otra posible causa de desnutrición son los parásitos. Los parásitos, a pesar de no matar y ser más inofensivos, compiten por la comida de los niños y causan varios malestares. Los niños con parásitos tienden a ser más delgados, sentirse débiles y faltar a clases. [Edward Miguel y Michael Kremer](http://cega.berkeley.edu/assets/cega_research_projects/1/Identifying-Impacts-on-Education-and-Health-in-the-Presence-of-Treatment-Externalities.pdf) en un experimento en Kenia hallaron que la desparasitación es una inversión poco costosa y de grandes beneficios, tanto en el corto como en el largo plazo, desde mejor un mejor rendimiento escolar hasta mayores ingresos en el futuro [@miguel2004worms].
+
+##### Un par de notas metodológicas
+
+En este post utilizamos la talla para la edad como indicador antropométrico de desnutrición. La talla para la edad es uno de los tres índices estándares de desnutrición. Esta toma en cuenta la talla (estatura) del niño y su edad en años y meses. Cuando un niño tiene una talla para la edad dos desviaciones estándar por debajo de la media se considera que tiene retardo en el crecimiento. Para calcular la talla para la edad de los niños del Ecuador, utilizamos `R` y un paquete estadístico llamado `zscorer`, el cual se basa en los lineamientos de la OMS para el cálculo de este índice. Para más información puedes consultar este [link](https://www.who.int/childgrowth/training/c_interpretando.pdf).
+
+Como había mencionado, existen otros indicadores antropométricos. Los otros dos más utilizados son el peso para la edad y la talla para el peso. Como sus nombres lo indican, el primero se calcula comparando el peso y la edad, mientras que el segundo compara la talla con el peso.
+
+Si te interesó este artículo, te invitamos a que leas la publicación del quantificador Leonel Borja sobre la [relación estatura e ingresos](https://elquantificador.org/post/economia/ecuatorianos-mas-altos-ganan-mas/). Si deseas reproducir los resultados de este pequeño estudio también te invitamos a revisar nuestra página en [Github](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/salud/2020-09-13-uno-de-cada-cuatro-ninos-en-ecuador-padece-de-desnutricion/2020-09-13-uno-de-cada-cuatro-ninos-en-ecuador-padece-de-desnutricion.Rmd), donde encontrarás el código que reproduce los resultados. Las bases de datos utilizadas se encuentran en el Github y también están publicadas en la página del [INEC](https://www.ecuadorencifras.gob.ec/salud-salud-reproductiva-y-nutricion/).
+
+Para más información puedes escribirme a mi corro alonso@elquantificador.org.
+
+##### Referencias
