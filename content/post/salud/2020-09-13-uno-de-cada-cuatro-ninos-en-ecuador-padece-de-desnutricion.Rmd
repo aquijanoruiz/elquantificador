@@ -317,7 +317,7 @@ missed_meals %>% filter(baja_talla == "si") %>%
                             "Disminuyó la cantidad de comida", "Sintió hambre pero no comió", 
                             "Solo comió una vez al día", "Dejó de comer durante todo el día")) %>%
   ggplot(aes(x = answer, y = reorder(question_label, answer), fill = question_label)) + geom_bar(stat="identity") + 
-  labs(title = "En los últimos 12 meses en su hogar, algún menor \n de 18 años, alguna vez por falta de dinero \n u otros recursos:", x = "", y = "") + scale_x_continuous(label = percent) +
+  labs(title = "En los últimos 12 meses en su hogar, algún menor \nde 18 años, alguna vez por falta de dinero \nu otros recursos:", x = "", y = "") + scale_x_continuous(label = percent) +
   theme_ipsum() + theme(legend.position = "none") + scale_fill_brewer(palette = "Spectral") + 
   theme(axis.text.y = element_text(size = 9), axis.text.x = element_text(size = 9), plot.title = element_text(size=16))
 
