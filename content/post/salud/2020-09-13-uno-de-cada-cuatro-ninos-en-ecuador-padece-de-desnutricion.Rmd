@@ -290,7 +290,7 @@ print(desnutricion_prov_map_gal, vp = viewport(x = 0.2, y = 0.70,
 
 Tal vez para algunos les es difícil concebir o entender cómo tal cifra puede ser tan alta, si alimentos, por así decir, sí hay. Uno puede ir al mercado o la tienda del barrio a comprar carne y verduras sin necesidad de hacer fila y pelear para poder conseguir comida. Tal como mencioné al principio, escasez de alimentos en sí no hay (al menos en nuestro país), por lo que las causas deben estar en otra parte. Intentaré apoyar mi explicación en lo más que pueda en estadísticas, pero dado que el INEC no recolecta datos para todas las variables que quizá nos interese, haré algunas conjeturas, por lo que acepto cualquier crítica o retroalimentación.
 
-##### Desigualdad ingresos
+##### Desigualdad de ingresos
 
 [Amartya Sen](https://en.wikipedia.org/wiki/Amartya_Sen#Research_work) argumenta que las hambrunas no solo ocurren por la escasez de alimentos, sino también por las desigualdades en la distribución de alimentos y al alza de precios. Este segundo, en concreto, afecta significativamente a los pobres, especialmente cuando los precios de los alimentos suben, pero no los ingresos. Esto se debe a que los más pobres asignan una mayor porción de sus ingresos en comida.
 
@@ -325,7 +325,7 @@ missed_meals %>% filter(baja_talla == "si") %>%
 
 <p style="line-height:80%"><font size="1"><i>Esta es una pregunta donde el encuestado puede seleccionar múltiples respuestas. Por lo tanto, los porcentajes pueden sumar más de 100%.</i></font></p>
 
-Como podrás observar, a al menos a un cuarto de niños desnutridos parece afectarles la falta de ingresos. Más impresionante que eso, un de cada diez dejó de recibir alguna comida del día o, peor aún, no comió en todo el día. **¡Ojo! No sabemos ni contamos con cifras para estimar cuánto ha impactado la crisis sanitaria del covid-19 a la salud alimentaria de los hogares más vulnerables del Ecuador.** Sin embargo, temo que el impacto es alto y, de ser así, acarreará grandes consecuencias a largo plazo. [Doug Almond](https://www.jstor.org/stable/10.1086/507154?seq=1#metadata_info_tab_contents) encontró que quienes estaban en el últero durante la pandemia de gripe de 1918 padecían más enferemedades y tenía una esperanza de vida más corta.
+Como podrás observar, a al menos a un cuarto de niños desnutridos parece afectarles la falta de ingresos. Más impresionante que eso, un de cada diez dejó de recibir alguna comida del día o, peor aún, no comió en todo el día. **¡Ojo! No sabemos ni contamos con cifras para estimar cuánto ha impactado la crisis sanitaria del covid-19 a la salud alimentaria de los hogares más vulnerables del Ecuador.** Sin embargo, temo que el impacto es alto y, de ser así, acarreará grandes consecuencias a largo plazo. [Doug Almond](https://www.jstor.org/stable/10.1086/507154?seq=1#metadata_info_tab_contents) encontró que quienes estaban en el últero durante la pandemia de gripe de 1918 padecían más enfermedades y tenían una esperanza de vida más corta.
 
 ##### Dieta
 
