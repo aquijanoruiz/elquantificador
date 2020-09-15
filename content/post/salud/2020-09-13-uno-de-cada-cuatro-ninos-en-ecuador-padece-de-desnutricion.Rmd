@@ -349,6 +349,6 @@ Como había mencionado, existen otros indicadores antropométricos. Los otros do
 
 Si te interesó este artículo, te invitamos a que leas la publicación del quantificador Leonel Borja sobre la [relación estatura e ingresos](https://elquantificador.org/post/economia/ecuatorianos-mas-altos-ganan-mas/). Si deseas reproducir los resultados de este pequeño estudio también te invitamos a revisar nuestra página en [Github](https://github.com/aquijanoruiz/elquantificador_posts/blob/master/salud/2020-09-13-uno-de-cada-cuatro-ninos-en-ecuador-padece-de-desnutricion/2020-09-13-uno-de-cada-cuatro-ninos-en-ecuador-padece-de-desnutricion.Rmd), donde encontrarás el código que reproduce los resultados. Las bases de datos utilizadas se encuentran en el Github y también están publicadas en la página del [INEC](https://www.ecuadorencifras.gob.ec/salud-salud-reproductiva-y-nutricion/).
 
-Para más información puedes escribirme a mi corro alonso@elquantificador.org.
+Para más información puedes escribirme a mi correo alonso@elquantificador.org.
 
 ##### Referencias
