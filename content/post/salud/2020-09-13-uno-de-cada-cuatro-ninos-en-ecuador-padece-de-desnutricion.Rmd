@@ -22,9 +22,9 @@ nocite: |
 
 Aunque las hambrunas y escasez de alimentos (al parecer) ya no son el gran problema mundial que solían ser, sí lo sigue siendo la desnutrición infantil. **Tomando la última Encuesta Nacional de Salud y Nutrición (ENSANUT) realizada por el INEC en 2018, calculamos que el 24% de lo niños menores de cinco años en el Ecuador presentan de un moderado a severo retraso en su crecimiento.** Más concretamente, uno de cada cuatro niños tiene una *baja talla para la edad*. En otras palabras, poseen una estatura mucho más baja que la esperada para el número de años y meses de vida.
 
-**Si desagregamos las cifras, podemos darnos cuenta que las regiones con mayor prevalencia de desnutrición infantil (en este caso, medida como retraso en el crecimiento) son la sierra y la Amazonía.** Morona Santiago es la provincia que posee el mayor porcentaje con 34% (es decir, uno de cada tres niños). El porcentaje de niños desnutridos parece relativamente menor en la región costa, pero no baja del 16.3%. Por otra parte, la provincia de Santa Elena parece ser la excepción en la costa, con una alta prevalencia del 33.6%.
+**Si desagregamos las cifras, podemos darnos cuenta que las regiones con mayor prevalencia de desnutrición infantil son la Sierra y la Amazonía.** Morona Santiago es la provincia que posee el mayor porcentaje con 34% (es decir, uno de cada tres niños). El porcentaje de niños desnutridos parece relativamente menor en la región costa, pero no baja del 16.3%. Por otra parte, la provincia de Santa Elena parece ser la excepción en la costa, con una alta prevalencia del 33.6%.
 
-En siguiente mapa te mostramos el porcentaje de desnutrición infantil por provincia utilizando como método de medición la talla para la edad. Toma en cuenta que la talla para la estatura no es el único método de medir la desnutrición. Ya hablaremos de otros métodos al final.
+En siguiente mapa te mostramos el porcentaje de desnutrición infantil por provincia utilizando como método de medición la talla para la edad. Toma en cuenta que la talla para la edad no es el único método de medir la desnutrición. Ya hablaremos de otros métodos al final.
 
 ```{r include =FALSE}
 ###############################################################
@@ -288,13 +288,13 @@ print(desnutricion_prov_map_gal, vp = viewport(x = 0.2, y = 0.70,
 
 ### ¿Por qué prevalencia de desnutrición infantil en nuestro país es tan alta?
 
-Tal vez para algunos les es difícil concebir o entender cómo tal cifra puede ser tan alta, si alimentos, por así decir, sí hay. Uno puede ir al mercado o la tienda del barrio a comprar carne y verduras sin necesidad de hacer fila y pelear para poder conseguir comida. Tal como mencioné al principio, escasez de alimentos en sí no hay (al menos en nuestro país), por lo que las causas deben estar en otra parte. Intentaré apoyar mi explicación en lo más que pueda en estadísticas, pero dado que el INEC no recolecta datos para todas las variables que quizá nos interese, haré algunas conjeturas, por lo que acepto cualquier crítica o retroalimentación.
+Tal vez para algunos les es difícil concebir o entender cómo tal cifra puede ser tan alta, si alimentos, por así decir, sí hay. Uno puede ir al mercado o la tienda del barrio a comprar carne y verduras sin necesidad de hacer fila y pelear para conseguir comida. Tal como mencioné al principio, escasez de alimentos en sí no hay (al menos en nuestro país), por lo que las causas deben estar en otra parte. Intentaré apoyar mi explicación en lo más que pueda en estadísticas, pero dado que el INEC no recolecta datos para todas las variables que quizá nos interese, haré algunas conjeturas, por lo que acepto cualquier crítica o retroalimentación.
 
 ##### Desigualdad de ingresos
 
 [Amartya Sen](https://en.wikipedia.org/wiki/Amartya_Sen#Research_work) argumenta que las hambrunas no solo ocurren por la escasez de alimentos, sino también por las desigualdades en la distribución de alimentos y al alza de precios. Este segundo, en concreto, afecta significativamente a los pobres, especialmente cuando los precios de los alimentos suben, pero no los ingresos. Esto se debe a que los más pobres asignan una mayor porción de sus ingresos en comida.
 
-En la encuesta ENSANUT se pregunta al jefe o la jefa de hogar si por falta de ingresos algún menor de 18 años dejó de comer o sintió hambre en los últimos 12 meses. A continuación, mostramos los resultados para los hogares de los menores de cinco años con retraso en su crecimiento (baja talla para la edad). Toma también en cuenta que estos porcentajes agrupan a cualquier menor de 18 años y no solamente a nuestra población de interés por lo que los porcentajes pueden estar sobreestimados.
+En la encuesta ENSANUT se pregunta al jefe o la jefa de hogar si por falta de ingresos algún menor de 18 años dejó de comer o sintió hambre en los últimos 12 meses. A continuación, mostramos los resultados para los hogares de aquellos menores de cinco años con retardo en su crecimiento (baja talla para la edad). Toma también en cuenta que estos porcentajes agrupan a cualquier menor de 18 años y no solamente a nuestra población de interés por lo que los porcentajes pueden estar sobreestimados.
 
 ```{r, echo=FALSE, message = FALSE, warning=FALSE, fig.pos= "h",fig.align='center', out.width='90%'}
 
