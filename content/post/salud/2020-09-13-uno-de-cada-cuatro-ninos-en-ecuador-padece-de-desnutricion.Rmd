@@ -251,14 +251,14 @@ desnutricion_prov <- desnutricion_prov %>% mutate(porc_desnutricion = as.charact
 
 desnutricion_prov_map <- # Continental Ecuador
   tm_shape(desnutricion_prov %>% filter(!Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
-  tm_fill(col = "desnutricion", palette = "Blues", style = "cont",
+  tm_fill(col = "desnutricion", palette = "YlOrRd", style = "cont",
           legend.format = list(fun=function(x) paste0(formatC(x * 100, digits=0, format="f"), " %")), 
           title = "",legend.show = TRUE) + 
   tm_layout(main.title = "Retraso en el crecimiento de \n menores de cinco años", legend.position = c("right","bottom"), fontface = "bold.italic",
             main.title.size = 1.2) +
   tm_text("porc_desnutricion", size = 0.6, alpha = 0.5, just = "bottom") + # We add the number of cases
   tm_shape(desnutricion_prov) +
-  tm_fill(col = "desnutricion", palette = "Blues", legend.format = list(digits = 0), 
+  tm_fill(col = "desnutricion", palette = "YlOrRd", legend.format = list(digits = 0), 
           legend.show = FALSE, alpha = 0) + 
   tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
   tm_layout(frame = F)
@@ -266,13 +266,13 @@ desnutricion_prov_map <- # Continental Ecuador
 desnutricion_prov_map_gal <- # Galapagos
   tm_shape(desnutricion_prov %>% filter(Provincia == "Galápagos")) + tm_borders(col = "grey25", lwd = 1, alpha = 0.4) +
   tm_shape(desnutricion_prov) +
-  tm_fill(col = "desnutricion", palette = "Blues", style = "cont",
+  tm_fill(col = "desnutricion", palette = "YlOrRd", style = "cont",
           legend.format = list(fun=function(x) paste0(formatC(x * 100, digits=0, format="f"), " %")), 
           title = "",legend.show = FALSE) + 
   tm_layout(fontface = "bold.italic") +
   tm_text("porc_desnutricion", size = 0.6, alpha = 0.5, just = "bottom") + # We add the number of cases
   tm_shape(desnutricion_prov) +
-  tm_fill(col = "desnutricion", palette = "Blues", legend.format = list(digits = 0), 
+  tm_fill(col = "desnutricion", palette = "YlOrRd", legend.format = list(digits = 0), 
           legend.show = FALSE, alpha = 0) + 
   tm_text("Provincia", size = 0.4, alpha = 0.6, just = "top") + # We add the pronvince names
   tm_layout(frame = "white")
