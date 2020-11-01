@@ -1,0 +1,28 @@
+---
+title: Pol??tica editorial
+sidebar: true
+menu: 
+  main: 
+    name: Pol??tica editorial
+    weight: 4
+---
+
+El Quantificador es un blog mensual que hace que la investigaci??n social de vanguardia sea accesible para los lectores en general. Somos la cara p??blica de las ciencias sociales en Ecuador.
+
+Este blog incluye art??culos de an??lisis y notas metodol??gicas, as?? como an??lisis de las ??ltimas investigaciones en ciencias sociales.
+
+**??Qui??n deber??a leer contextos?**
+
+Cualquiera interesado en las tendencias sociales , el cambio social y las implicaciones del conocimiento social para las pol??ticas y el debate p??blico.
+
+Docentes, estudiantes, periodistas, funcionarios p??blicos y legisladores que buscan avances importantes en la investigaci??n social.
+
+**En El Quantificador encontrar??s:**
+
+Las mejores ideas e investigaci??n social.
+
+Perspectivas recientes, claras, concisas, y con lenguaje accessible a todo el p??blico.
+
+**Editores**
+
+Luis Alonso Quijano Ruiz (Xiamen University, China) y Marco Faytong Haro (Pennsylvania State University)
