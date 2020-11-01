@@ -1,27 +1,27 @@
 ---
-title: Pol??tica editorial
+title: Política editorial
 sidebar: true
 menu: 
   main: 
-    name: Pol??tica editorial
+    name: Política editorial
     weight: 4
 ---
 
-El Quantificador es un blog mensual que hace que la investigaci??n social de vanguardia sea accesible para los lectores en general. Somos la cara p??blica de las ciencias sociales en Ecuador.
+El Quantificador es un blog mensual que hace que la investigación social de vanguardia sea accesible para los lectores en general. Somos la cara pública de las ciencias sociales en Ecuador.
 
-Este blog incluye art??culos de an??lisis y notas metodol??gicas, as?? como an??lisis de las ??ltimas investigaciones en ciencias sociales.
+Este blog incluye artículos de análisis y notas metodológicas, así como análisis de las últimas investigaciones en ciencias sociales.
 
-**??Qui??n deber??a leer contextos?**
+**¿Quién debería leer contextos?**
 
-Cualquiera interesado en las tendencias sociales , el cambio social y las implicaciones del conocimiento social para las pol??ticas y el debate p??blico.
+Cualquiera interesado en las tendencias sociales , el cambio social y las implicaciones del conocimiento social para las políticas y el debate público.
 
-Docentes, estudiantes, periodistas, funcionarios p??blicos y legisladores que buscan avances importantes en la investigaci??n social.
+Docentes, estudiantes, periodistas, funcionarios públicos y legisladores que buscan avances importantes en la investigación social.
 
-**En El Quantificador encontrar??s:**
+**En El Quantificador encontrarás:**
 
-Las mejores ideas e investigaci??n social.
+Las mejores ideas e investigación social.
 
-Perspectivas recientes, claras, concisas, y con lenguaje accessible a todo el p??blico.
+Perspectivas recientes, claras, concisas, y con lenguaje accessible a todo el público.
 
 **Editores**
 
