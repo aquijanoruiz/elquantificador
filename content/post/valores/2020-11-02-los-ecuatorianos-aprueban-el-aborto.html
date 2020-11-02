@@ -5,7 +5,7 @@ authors:
 date: '2020-11-02'
 slug: los-ecuatorianos-aprueban-el-aborto
 categories:
-  - Valores y Opinión
+  - Valores y Comportamiento
 tags:
   - Aborto
   - Valores
@@ -19,86 +19,23 @@ images:
 <script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
-<pre class="r"><code>if(!require(readstata13)) install.packages(&quot;readstata13&quot;, repos = &quot;http://cran.us.r-project.org&quot;)</code></pre>
-<pre><code>## Loading required package: readstata13</code></pre>
-<pre class="r"><code>if(!require(tidyverse)) install.packages(&quot;tidyverse&quot;, repos = &quot;http://cran.us.r-project.org&quot;)</code></pre>
-<pre><code>## Loading required package: tidyverse</code></pre>
-<pre><code>## -- Attaching packages --------------------------- tidyverse 1.3.0 --</code></pre>
-<pre><code>## v ggplot2 3.3.2     v purrr   0.3.4
-## v tibble  3.0.3     v dplyr   1.0.2
-## v tidyr   1.1.2     v stringr 1.4.0
-## v readr   1.4.0     v forcats 0.5.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------ tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code># La base de datos
-setwd(&quot;C:/Users/HP/Google Drive/Quantificador Marco/Actitudes hacia aborto&quot;)
-data &lt;- read.dta13(&quot;WV6_Data_Ecuador_2013_Stata_v20180912.dta&quot;, generate.factors=T, nonint.factors=T)
-
-# quitamos los niveles que no vamos a utilizar
-data &lt;- data %&gt;% mutate(V204 = droplevels(V204))
-
-# data frame de la tabla de frecuencia de la pregunta V204
-as.data.frame(table(data$V204))</code></pre>
-<pre><code>##                  Var1 Freq
-## 1   Never justifiable  772
-## 2                   2  151
-## 3                   3   66
-## 4                   4   42
-## 5                   5   71
-## 6                   6   32
-## 7                   7   19
-## 8                   8   19
-## 9                   9   11
-## 10 Always justifiable   19</code></pre>
-<pre class="r"><code># cambiamos los nombres a los lables
-data &lt;- data %&gt;% mutate(V248 = as.integer(V248))
-data &lt;- data %&gt;% mutate(V248 = case_when(V248 &lt;= 3 ~ &quot;sin educaci??n o primaria&quot;,
-                                         V248 &lt;= 6 ~ &quot;secundaria&quot;,
-                                         TRUE ~ &quot;universidad&quot;))</code></pre>
-<pre class="r"><code># data frame de la tabla de frecuencia de la pregunta V204
-table(data$V204, data$V248)</code></pre>
-<pre><code>##                     
-##                      secundaria sin educaci??n o primaria universidad
-##   Never justifiable         370                       174         228
-##   2                          95                        25          31
-##   3                          34                        13          19
-##   4                          24                         8          10
-##   5                          34                        16          21
-##   6                          18                         6           8
-##   7                          10                         7           2
-##   8                           9                         5           5
-##   9                           6                         0           5
-##   Always justifiable         11                         2           6</code></pre>
-<pre class="r"><code>as.data.frame(table(data$V204, data$V248))</code></pre>
-<pre><code>##                  Var1                      Var2 Freq
-## 1   Never justifiable                secundaria  370
-## 2                   2                secundaria   95
-## 3                   3                secundaria   34
-## 4                   4                secundaria   24
-## 5                   5                secundaria   34
-## 6                   6                secundaria   18
-## 7                   7                secundaria   10
-## 8                   8                secundaria    9
-## 9                   9                secundaria    6
-## 10 Always justifiable                secundaria   11
-## 11  Never justifiable sin educaci??n o primaria  174
-## 12                  2 sin educaci??n o primaria   25
-## 13                  3 sin educaci??n o primaria   13
-## 14                  4 sin educaci??n o primaria    8
-## 15                  5 sin educaci??n o primaria   16
-## 16                  6 sin educaci??n o primaria    6
-## 17                  7 sin educaci??n o primaria    7
-## 18                  8 sin educaci??n o primaria    5
-## 19                  9 sin educaci??n o primaria    0
-## 20 Always justifiable sin educaci??n o primaria    2
-## 21  Never justifiable               universidad  228
-## 22                  2               universidad   31
-## 23                  3               universidad   19
-## 24                  4               universidad   10
-## 25                  5               universidad   21
-## 26                  6               universidad    8
-## 27                  7               universidad    2
-## 28                  8               universidad    5
-## 29                  9               universidad    5
-## 30 Always justifiable               universidad    6</code></pre>
+<p>En estas últimas semanas se ha dicho mucho sobre el aborto. El nuevo Código Orgánico Integral Penal que fue vetado hace poco no habría las puertas a aborto por cualquier causa como muchos pensaban. Sé que la opinión de muchas está influenciada por su entorno. En mi caso, mis redes sociales reflejaban tal vez que 70% de mis allegados están a favor del aborto por toda causa y el resto en contra (sea cual sea la causa).</p>
+<p>La gente en general suele hacer juicios de valor de lo que piensa la población en relación a lo que piensa la gente a su alrededor y las redes sociales. En las siguientes semanas voy a sacar una serie de artículos llamada “¿Cómo piensan los ecuatorianos?”. Cada artículo va a ser sencillo, una tabulación rápida de una o dos encuestas de la World Values Survey del Ecuador del 2013 de cómo piensan los ecuatorianos con respecto a varios temas: aborto, religión, sexualidad, etc., etc.</p>
+<p>Según la entrada en <a href="https://es.wikipedia.org/wiki/Encuesta_Mundial_de_Valores">Wikipedia</a>, “la Encuesta Mundial de Valores (EMV) o World Values Survey (WVS) es un proyecto global de investigación social que explora los valores y opiniones de la gente, cómo estos cambian con el tiempo, y su impacto social y político. Desde 1981 una red mundial de científicos sociales y politólogos llevan a cabo esta investigación, haciendo encuestas nacionales representativas en casi 100 países. La WVS es la única fuente de datos empíricos sobre actitudes y valores humanos que abarca a la mayoría de la población mundial (casi el 90%)”.</p>
+<p>De forma afortunada, tenemos una EMV en 2013 para Ecuador (en 7 años los valores no cambian tanto en una población como se suele pensar). Con esta encuesta se muestreó a toda la población y por la cantidad de repsuestas los resultados no se pueden sacar por provincia o por región. Eso significa que los reusltados en general son representativos de la población de Ecuador en general.</p>
+<p>Ahora sí, el primer artículo de esta serie es sobre si los ecuatorianos aprueban el aborto. La pregunta usada fue esta: “Por favor dígame por cada una de las siguientes afirmaciones si usted cree que siempre puede justificarse, nunca puede justificarse, o si su opinión está en algún punto intermedio. Use esta tarjeta en donde 1 es “nunca se justifica” y 10 es “siempre se justifica”. Una de esas opciones es “Aborto”.</p>
+<p>Recordemos que 1 significa que el aborto nunca se justifica y 10 significa que siempre se justificaHe decidio dejarlo así tal cual del al 10 para que sea vea precisamente donde qué piensa la mayoría de la muestra sin agrupar opciones. Para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.</p>
+<pre class="r"><code>cbind(abortion.relfreq)</code></pre>
+<pre><code>##                    abortion.relfreq
+## Never justifiable             0.642
+## 2                             0.126
+## 3                             0.055
+## 4                             0.035
+## 5                             0.059
+## 6                             0.027
+## 7                             0.016
+## 8                             0.016
+## 9                             0.009
+## Always justifiable            0.016</code></pre>
+<p>En un análisis aparte que puedo compartir con quien lo desee, pensé, en ver quiénes son los ecuatorianos que más apoyan el aborto. Tal vez los más educados o los menores como es la realidad en promedio en países industrializados. La realidad es que no encontré variables que estuvieran fuertemente relacionadas con la actitud hacia el aborto (con ligeras tendencias en que los ateos y agnósticos favorecen el aborto un poco más pero no es una diferencia impacabte. ¿Qué significa esto? Hay similar número de personas que apoya o no apoya el aborto y la educación, religión, y edad no necesariamente determinan la aprobación de esta práctica.</p>
+<p>Como nota, este artículo tiene el objetivo de revelar esa información y no el de tomar alguna posición al respecto del tema.</p>
