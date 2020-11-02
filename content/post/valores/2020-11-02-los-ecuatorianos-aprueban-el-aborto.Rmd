@@ -1,0 +1,41 @@
+---
+title: '¿Los ecuatorianos aprueban el aborto?'
+authors: 
+- Marco Faytong
+date: '2020-11-02'
+slug: los-ecuatorianos-aprueban-el-aborto
+categories:
+  - Valores y Opinión
+tags:
+  - Aborto
+  - Valores
+description: '¿Existe racismo en Ecuador? No hay estudios que lo demuestren directamente. Este artículo es una primera aproximación a contestar esta pregunta. Analizo si los hijos deciden autoidentificarse con la misma etiqueta étnica de sus padres. Podemos observar por ejemplo que casi un cuarto de hijos de afroecuatorianos deciden desligarse de esa etiqueta e identificarse como mestizos'
+thumbnail: '/post/socioeconomia/2020-07-12-la-raza-de-nuestros-padres.jpeg'
+images: 
+  - 'https://raw.githubusercontent.com/aquijanoruiz/elquantificador/master/themes/Mainroad/static/img/la-raza-de-nuestros-padres.jpg'
+---
+```{r}
+if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.us.r-project.org")
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+# La base de datos
+setwd("C:/Users/HP/Google Drive/Quantificador Marco/Actitudes hacia aborto")
+data <- read.dta13("WV6_Data_Ecuador_2013_Stata_v20180912.dta", generate.factors=T, nonint.factors=T)
+
+# quitamos los niveles que no vamos a utilizar
+data <- data %>% mutate(V204 = droplevels(V204))
+
+# data frame de la tabla de frecuencia de la pregunta V204
+as.data.frame(table(data$V204))
+
+# cambiamos los nombres a los lables
+data <- data %>% mutate(V248 = as.integer(V248))
+data <- data %>% mutate(V248 = case_when(V248 <= 3 ~ "sin educaci??n o primaria",
+                                         V248 <= 6 ~ "secundaria",
+                                         TRUE ~ "universidad"))
+```
+
+```{r}
+# data frame de la tabla de frecuencia de la pregunta V204
+table(data$V204, data$V248)
+as.data.frame(table(data$V204, data$V248))
+```

@@ -1,0 +1,104 @@
+---
+title: '¿Los ecuatorianos aprueban el aborto?'
+authors: 
+- Marco Faytong
+date: '2020-11-02'
+slug: los-ecuatorianos-aprueban-el-aborto
+categories:
+  - Valores y Opinión
+tags:
+  - Aborto
+  - Valores
+description: '¿Existe racismo en Ecuador? No hay estudios que lo demuestren directamente. Este artículo es una primera aproximación a contestar esta pregunta. Analizo si los hijos deciden autoidentificarse con la misma etiqueta étnica de sus padres. Podemos observar por ejemplo que casi un cuarto de hijos de afroecuatorianos deciden desligarse de esa etiqueta e identificarse como mestizos'
+thumbnail: '/post/socioeconomia/2020-07-12-la-raza-de-nuestros-padres.jpeg'
+images: 
+  - 'https://raw.githubusercontent.com/aquijanoruiz/elquantificador/master/themes/Mainroad/static/img/la-raza-de-nuestros-padres.jpg'
+---
+
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<pre class="r"><code>if(!require(readstata13)) install.packages(&quot;readstata13&quot;, repos = &quot;http://cran.us.r-project.org&quot;)</code></pre>
+<pre><code>## Loading required package: readstata13</code></pre>
+<pre class="r"><code>if(!require(tidyverse)) install.packages(&quot;tidyverse&quot;, repos = &quot;http://cran.us.r-project.org&quot;)</code></pre>
+<pre><code>## Loading required package: tidyverse</code></pre>
+<pre><code>## -- Attaching packages --------------------------- tidyverse 1.3.0 --</code></pre>
+<pre><code>## v ggplot2 3.3.2     v purrr   0.3.4
+## v tibble  3.0.3     v dplyr   1.0.2
+## v tidyr   1.1.2     v stringr 1.4.0
+## v readr   1.4.0     v forcats 0.5.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code># La base de datos
+setwd(&quot;C:/Users/HP/Google Drive/Quantificador Marco/Actitudes hacia aborto&quot;)
+data &lt;- read.dta13(&quot;WV6_Data_Ecuador_2013_Stata_v20180912.dta&quot;, generate.factors=T, nonint.factors=T)
+
+# quitamos los niveles que no vamos a utilizar
+data &lt;- data %&gt;% mutate(V204 = droplevels(V204))
+
+# data frame de la tabla de frecuencia de la pregunta V204
+as.data.frame(table(data$V204))</code></pre>
+<pre><code>##                  Var1 Freq
+## 1   Never justifiable  772
+## 2                   2  151
+## 3                   3   66
+## 4                   4   42
+## 5                   5   71
+## 6                   6   32
+## 7                   7   19
+## 8                   8   19
+## 9                   9   11
+## 10 Always justifiable   19</code></pre>
+<pre class="r"><code># cambiamos los nombres a los lables
+data &lt;- data %&gt;% mutate(V248 = as.integer(V248))
+data &lt;- data %&gt;% mutate(V248 = case_when(V248 &lt;= 3 ~ &quot;sin educaci??n o primaria&quot;,
+                                         V248 &lt;= 6 ~ &quot;secundaria&quot;,
+                                         TRUE ~ &quot;universidad&quot;))</code></pre>
+<pre class="r"><code># data frame de la tabla de frecuencia de la pregunta V204
+table(data$V204, data$V248)</code></pre>
+<pre><code>##                     
+##                      secundaria sin educaci??n o primaria universidad
+##   Never justifiable         370                       174         228
+##   2                          95                        25          31
+##   3                          34                        13          19
+##   4                          24                         8          10
+##   5                          34                        16          21
+##   6                          18                         6           8
+##   7                          10                         7           2
+##   8                           9                         5           5
+##   9                           6                         0           5
+##   Always justifiable         11                         2           6</code></pre>
+<pre class="r"><code>as.data.frame(table(data$V204, data$V248))</code></pre>
+<pre><code>##                  Var1                      Var2 Freq
+## 1   Never justifiable                secundaria  370
+## 2                   2                secundaria   95
+## 3                   3                secundaria   34
+## 4                   4                secundaria   24
+## 5                   5                secundaria   34
+## 6                   6                secundaria   18
+## 7                   7                secundaria   10
+## 8                   8                secundaria    9
+## 9                   9                secundaria    6
+## 10 Always justifiable                secundaria   11
+## 11  Never justifiable sin educaci??n o primaria  174
+## 12                  2 sin educaci??n o primaria   25
+## 13                  3 sin educaci??n o primaria   13
+## 14                  4 sin educaci??n o primaria    8
+## 15                  5 sin educaci??n o primaria   16
+## 16                  6 sin educaci??n o primaria    6
+## 17                  7 sin educaci??n o primaria    7
+## 18                  8 sin educaci??n o primaria    5
+## 19                  9 sin educaci??n o primaria    0
+## 20 Always justifiable sin educaci??n o primaria    2
+## 21  Never justifiable               universidad  228
+## 22                  2               universidad   31
+## 23                  3               universidad   19
+## 24                  4               universidad   10
+## 25                  5               universidad   21
+## 26                  6               universidad    8
+## 27                  7               universidad    2
+## 28                  8               universidad    5
+## 29                  9               universidad    5
+## 30 Always justifiable               universidad    6</code></pre>
