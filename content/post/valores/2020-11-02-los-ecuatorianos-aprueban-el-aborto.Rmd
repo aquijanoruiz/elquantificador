@@ -14,9 +14,9 @@ thumbnail: '/post/valores/2020-11-02-los-ecuatorianos-aprueban-el-aborto.jpeg'
 images: 
   - 'https://raw.githubusercontent.com/aquijanoruiz/elquantificador/master/themes/Mainroad/static/img/2020-11-02-los-ecuatorianos-aprueban-el-aborto.jpg'
 ---
-En estas últimas semanas se ha dicho mucho sobre el aborto. El nuevo Código Orgánico Integral Penal que fue vetado hace poco no habría las puertas a aborto por cualquier causa como muchos pensaban. Sé que la opinión de muchas está influenciada por su entorno. En mi caso, mis redes sociales reflejaban tal vez que 70% de mis allegados están a favor del aborto por toda causa y el resto en contra (sea cual sea la causa).
+En el mes pasado se ha dicho mucho sobre el aborto. El nuevo Código Orgánico Integral Penal que fue vetado hace poco no habría las puertas a aborto por cualquier causa como muchos pensaban. habló mucho del aborto y muchas personas expresaron su opinión personal sobre el mismo. Algunos equivocadamente piensan que por el cambio generacional o el incremento desapego de los ecuatorianos hacia la religión, hay un importante y creciente apoyo hacia el aborto. Eso no es la realidad, casi 7 de cada 10 ecuatorianos no aprueban el aborto para nada bajo ninguna circuntancia (más os siguientes párrafos).  
 
-La gente en general suele hacer juicios de valor de lo que piensa la población en relación a lo que piensa la gente a su alrededor y las redes sociales. En las siguientes semanas voy a sacar una serie de artículos llamada "¿Cómo piensan los ecuatorianos?". Cada artículo va a ser sencillo, una tabulación rápida de una o dos encuestas de la World Values Survey del Ecuador del 2013 de cómo piensan los ecuatorianos con respecto a varios temas: aborto, religión, sexualidad, etc., etc.  
+La gente en general suele hacer juicios de valor de lo que piensa la población en relación a lo que piensa la gente a su alrededor y las redes sociales. En las siguientes semanas voy a sacar una serie de artículos llamada "¿Cómo piensan los ecuatorianos?". Cada artículo va a ser sencillo, una tabulación rápida de una o dos encuestas de la World Values Survey del Ecuador del 2013 de cómo piensan los ecuatorianos con respecto a varios temas: aborto, religión, sexualidad, etc.
 
 Según la entrada en [Wikipedia](https://es.wikipedia.org/wiki/Encuesta_Mundial_de_Valores), "la Encuesta Mundial de Valores (EMV) o World Values Survey (WVS) es un proyecto global de investigación social que explora los valores y opiniones de la gente, cómo estos cambian con el tiempo, y su impacto social y político. Desde 1981 una red mundial de científicos sociales y politólogos llevan a cabo esta investigación, haciendo encuestas nacionales representativas en casi 100 países. La WVS es la única fuente de datos empíricos sobre actitudes y valores humanos que abarca a la mayoría de la población mundial (casi el 90%)". 
 
@@ -43,6 +43,7 @@ abortion.freq = tibble(levels = c("Nunca se justifica", 2:9, "Siempre se justifi
 
 Recordemos que 1 significa que el aborto nunca se justifica y 10 significa que siempre se justificaHe decidio dejarlo así tal cual del al 10 para que sea vea precisamente donde qué piensa la mayoría de la muestra sin agrupar opciones. Para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.
 
+**Del 0 al 10 (0 siendo que nunca se justica y 10 siempre se justifica, ¿qué tanto usted justifica el aborto?)** [Porcentaje de respuesta de la encuesta]
 ```{r, echo=FALSE, fig.pos= "h",fig.align='center', out.width='80%'}
 abortion.freq %>% ggplot(aes(x = reorder(levels, 10:1), y = freq)) + geom_bar(stat = "identity", fill = "skyblue") + 
   coord_flip() + geom_text(aes(label= scales::percent(freq, accuracy = 0.1)), hjust=-0.1, size=3) + labs(x="", y="") +
