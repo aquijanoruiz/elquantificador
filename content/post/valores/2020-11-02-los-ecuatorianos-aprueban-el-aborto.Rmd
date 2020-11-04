@@ -27,25 +27,25 @@ Ahora sí, el primer artículo de esta serie es sobre si los ecuatorianos aprueb
 ```{r, include=FALSE}
 if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.us.r-project.org")
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+if(!require(scales)) install.packages("scales", repos = "http://cran.us.r-project.org")
+
 # La base de datos
-setwd("C:/Users/HP/Google Drive/Quantificador Marco/Actitudes hacia aborto")
-data <- read.dta13("WV6_Data_Ecuador_2013_Stata_v20180912.dta", generate.factors=T, nonint.factors=T)
-```
+data <- read.dta13("https://github.com/aquijanoruiz/elquantificador_posts/raw/master/valores/2020-11-02-los-ecuatorianos-aprueban-el-aborto/WV6_Data_Ecuador_2013_Stata_v20180912.dta", generate.factors=T, nonint.factors=T)
 
-```{r, include=FALSE}
-# quitamos los niveles que no vamos a utilizar
-data <- data %>% mutate(V204 = droplevels(V204))
-
-library(MASS) 
 abortion = data$V204
 abortion.freq = table(abortion)
 abortion.relfreq = abortion.freq / nrow(data)
 old = options(digits=1)
+
+abortion.freq = tibble(levels = c("Nunca se justifica", 2:9, "Siempre se justifica"), 
+                       freq = as.numeric(abortion.relfreq)[1:10])
 ```
 
-Recordemos que 1 significa que el aborto nunca se justifica y 10 significa que siempre se justificaHe decidio dejarlo así tal cual del al 10 para que sea vea precisamente donde qué piensa la mayoría de la muestra sin agrupar opciones. Para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.   
+Recordemos que 1 significa que el aborto nunca se justifica y 10 significa que siempre se justificaHe decidio dejarlo así tal cual del al 10 para que sea vea precisamente donde qué piensa la mayoría de la muestra sin agrupar opciones. Para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.
 ```{r}
-cbind(abortion.relfreq)
+abortion.freq %>% ggplot(aes(x = reorder(levels, 10:1), y = freq)) + geom_bar(stat = "identity", fill = "skyblue") + 
+  coord_flip() + geom_text(aes(label= scales::percent(freq, accuracy = 0.01)), hjust=-0.1, size=3) + labs(x="", y="") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) + theme(axis.text=element_text(size=10))
 ```
 
 En un análisis aparte que puedo compartir con quien lo desee, pensé, en ver quiénes son los ecuatorianos que más apoyan el aborto. Tal vez los más educados o los menores como es la realidad en promedio en países industrializados. La realidad es que no encontré variables que estuvieran fuertemente relacionadas con la actitud hacia el aborto (con ligeras tendencias en que los ateos y agnósticos favorecen el aborto un poco más pero no es una diferencia impacabte. ¿Qué significa esto? Hay similar número de personas que apoya o no apoya el aborto y la educación, religión, y edad no necesariamente determinan la aprobación de esta práctica.
