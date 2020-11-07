@@ -44,8 +44,8 @@ Recordemos que 1 significa que el aborto nunca se justifica y 10 significa que s
 
 ```{r, echo=FALSE, fig.pos= "h",fig.align='center', out.width='80%'}
 abortion.freq %>% ggplot(aes(x = reorder(levels, 10:1), y = freq)) + geom_bar(stat = "identity", fill = "skyblue") + 
-  coord_flip() + geom_text(aes(label= scales::percent(freq, accuracy = 0.1)), hjust=0.5, size=3) + labs(x="", y="", title="¿Qué piensan los ecuatorianos sobre el aborto") +
-  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) + theme(axis.text=element_text(size=10)) + theme(plot.title = element_text(color="black", size=14, face="bold.italic"))
+  coord_flip() + geom_text(aes(label= scales::percent(freq, accuracy = 0.1)), hjust=-0.2, size=3, fontface = "italic") + labs(x="", y="", title="¿Qué piensan los ecuatorianos sobre el aborto") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 0.7))  + theme(axis.text=element_text(size=10)) + theme(plot.title = element_text(color="black", size=14, face="bold.italic"))
 ```
 
 En este análisis, quise ver quiénes son los ecuatorianos que más apoyan el aborto. Tal vez los más educados o los menores como es la realidad en promedio en países industrializados. La realidad es que no encontré variables que estuvieran fuertemente relacionadas con la actitud hacia el aborto. Hubo ligeras tendencias en ateos y agnósticos a favor del aborto, pero no fue una diferencia significativa. ¿Qué significa esto? Hay similar número de personas que apoya o no apoya el aborto y la educación, religión, y edad no necesariamente determinan la aprobación de esta práctica.
