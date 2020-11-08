@@ -12,7 +12,7 @@ tags:
 description: 'El resumen de este artículo es muy corto. La mayoría de ecuatorianos y ecuatorianas no justifica el aborto bajo ninguna circunstancia. Este es el primer artículo de una serie sobre cómo piensan los ecuatorianos usando datos de la Encuesta Mundial de Valores.'
 thumbnail: '/post/valores/2020-11-02-los-ecuatorianos-aprueban-el-aborto.jpeg'
 images: 
-  - 'https://raw.githubusercontent.com/aquijanoruiz/elquantificador/master/themes/Mainroad/static/img/2020-11-02-los-ecuatorianos-aprueban-el-aborto.jpg'
+  - 'https://elquantificador.org/post/valores/2020-11-02-los-ecuatorianos-aprueban-el-aborto.jpeg'
 ---
 
 En el mes pasado se ha dicho mucho sobre el aborto. El nuevo Código Orgánico Integral Penal que fue vetado hace poco no habría las puertas al aborto por cualquier causa como muchos pensaban. Se habló mucho del aborto y muchas personas expresaron su opinión personal sobre el asunto. La gente en general suele hacer juicios de valor en relación a lo que piensa la gente a su alrededor y las redes sociales. Algunos equivocadamente piensan que, por el cambio generacional o el creciente desapego de los ecuatorianos hacia la religión, el apoyo hacia al aborto ha aumentado. **En realidad, casi 7 de cada 10 ecuatorianos no aprueban el aborto para nada bajo ninguna circunstancia**.
