@@ -40,7 +40,7 @@ abortion.freq = tibble(levels = c("Nunca se justifica", 2:9, "Siempre se justifi
                        freq = as.numeric(abortion.relfreq)[1:10])
 ```
 
-Recordemos que 1 significa que el aborto nunca se justifica y 10 significa que siempre se justificaHe decidio dejarlo así tal cual del al 10 para que sea vea precisamente donde qué piensa la mayoría de la muestra sin agrupar opciones. Para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.
+Recordemos que 1 significa que el aborto nunca se justifica y 10 significa que siempre se justifica. He decidio dejarlo así del 0 al 10 para que sea vea precisamente qué piensa la mayoría de la muestra sin agrupar opciones. Para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.
 
 ```{r, echo=FALSE, fig.pos= "h",fig.align='center', out.width='90%'}
 abortion.freq %>% ggplot(aes(x = reorder(levels, 10:1), y = freq)) + geom_bar(stat = "identity", fill = "skyblue") + 
