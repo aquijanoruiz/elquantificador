@@ -21,7 +21,7 @@ Para saber qué piensan los ecuatorianos sobre el aborto utilicé la Encuesta Mu
 
 Afortunadamente, tenemos una WVS para Ecuador hecha en el 2013 (en 7 años los valores no cambian tanto en una población como se suele pensar). Con esta encuesta se muestreó a toda la población. Esto significa que los resultados son representativos de la población de Ecuador en general. La pregunta usada fue: "Por favor, dígame por si usted cree el aborto siempre puede justificarse, nunca puede justificarse, o si su opinión está en algún punto intermedio”. 1 es “nunca se justifica” y 10 es “siempre se justifica”.
 
-Según el siguiente gráfico. Para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.
+Según el siguiente gráfico, para casi el 65% de la población en Ecuador el aborto DEFINITIVAMENTE NUNCA SE DEBE JUSTIFICAR. Los que justifican el aborto (digamos los que dijeron de 7 para arriba) son apenas el 6% aproximadamente de la población.
 
 ```{r, include=FALSE}
 if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.us.r-project.org")
