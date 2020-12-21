@@ -129,8 +129,8 @@ Si hablar de sexualidad es todavía es tabú en el Ecuador, recolectar datos sob
 data_plot_2 %>%
   ggplot(aes(x = anio_nacimiento, y = prev_sexo_precoz, color = sexo)) + geom_line() +
   scale_y_continuous(labels = percent_format(accuracy = 5L)) +
-  labs(x = "año de nacimiento", y = "", title = "Porcentaje de inciación sexual temprana en el Ecuador", 
-       subtitle = "2. Porcentaje de hombres y mujeres que tuvieron su primera relación a los 16 años o antes") +
+  labs(x = "año de nacimiento", y = "", title = "2. Porcentaje de inciación sexual temprana en el Ecuador", 
+       subtitle = "Porcentaje de hombres y mujeres que tuvieron su primera relación a los 16 años o antes") +
   theme_minimal() + theme(plot.title = element_text(color = "black", size = 14, face = "bold.italic"),
                           plot.subtitle = element_text(size = 10, face = "italic"))
 ```
