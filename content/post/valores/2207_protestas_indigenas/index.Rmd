@@ -9,7 +9,9 @@ categories:
 tags:
   - 'protestas'
 description: 'El Ecuador finalizó junio del 2022 con 18 días de fuertes protestas contra el gobierno, por lo que consideramos importante darle una mirada cuantitativa a los datos de protesta social. Nos encontramos con algunos hallazgos interesantes sobre cómo los ecuatorianos se comportan en los tiempos de protesta.'
-thumbnail: '/images/thumbnail-protestas.jpg'
+thumbnail: 'post/valores/thumbnail-protestas.jpg'
+images: 
+  - 'https://elquantificador.org/post/valores/thumbnail-protestas.jpg'
 csl: ieee.csl
 bibliography: refs-article-protests.bib
 ---
@@ -29,8 +31,6 @@ knitr::include_graphics("images/graf1-participacion-protestas.png")
 ```
 
 A mediados de junio 2022, la Confederación de Nacionalidades Indígenas del Ecuador (CONAIE) convocó a una movilización masiva en el país con el fin de que el presidente Guillermo Lasso incluya dentro de su plan de gobierno diez pedidos de índole económica y social [@Pazmino.2022]. Después de 18 días de manifestaciones, el paro terminó tras un acuerdo entre el gobierno nacional y la CONAIE [@GK.2022]. Las manifestaciones dejan al Ecuador con nueve muertos, millones de dólares en daños y pérdidas económicas así como varios heridos y aprehendidos por la policía [@Maria.2022; @Montalvo.2022; @Comercio.2022].
-
-Dada la importancia de las movilizaciones en el contexto político, social y económico del país, es imperante reflexionar sobre una reflexión objetiva sobre las protestas y el contexto que las rodea desde un punto de vista cuantitativo, el cual pueda aportar a la discusión post-paro
 
 El Ecuador parece haber perdido la relativa estabilidad política que tuvo durante los diez años de gobierno de Rafael Correa, especialmente considerando la protesta histórica de octubre 2019, también liderada por la CONAIE contra el gobierno del entonces presidente Lenín Moreno [@LAPOPReport.2022]. Sin embargo, en nuestro país los períodos de estabilidad han sido la excepción y no la norma. Históricamente Ecuador ha tenido un golpe de estado cada 6 años y un 50% de éstos fueron exitosos derrocando al gobierno de turno [@Loaiza.2022].
 
