@@ -1,7 +1,7 @@
 ---
 title: Una perspectiva cuantitativa sobre las protestas en Ecuador
 date: '2022-07-16'
-slug: 2207_protestas_indigenas
+slug: articulo
 categories:
   - Valores y Comportamiento
 tags:
