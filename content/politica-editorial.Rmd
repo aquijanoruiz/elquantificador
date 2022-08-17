@@ -7,22 +7,17 @@ menu:
     weight: 4
 ---
 
-El Quantificador es un blog mensual que hace que la investigación social de vanguardia sea accesible para los lectores en general. Somos la cara pública de las ciencias sociales en Ecuador.
+El Quantificador es un revista semestral publicada por el *Laboratorio de Investigación para el Desarrollo del Ecuador (LIDE)*. La revista incluye artículos de análisis y notas metodológicas, así como análisis de las últimas investigaciones en ciencias sociales.
 
-Este blog incluye artículos de análisis y notas metodológicas, así como análisis de las últimas investigaciones en ciencias sociales.
+El Quantificador está dirigido a personas interesadas en las tendencias sociales, el cambio social y las implicaciones del conocimiento social en las políticas y el debate público. Nuestros artículos permiten que la investigación social de vanguardia sea accesible para los lectores en general. Somos la cara pública de las ciencias sociales en Ecuador.
 
-**¿Quién debería leer contextos?**
+### El LIDE
 
-Cualquiera interesado en las tendencias sociales , el cambio social y las implicaciones del conocimiento social para las políticas y el debate público.
+El Laboratorio de Investigación para el Desarrollo del Ecuador (LIDE) es una ONG educativa ubicada en la ciudad de Guayaquil, Ecuador. El LIDE tiene como misión generar conocimiento científico en las áreas de las ciencias sociales y promover el uso de política pública basada en evidencia científica.
 
-Docentes, estudiantes, periodistas, funcionarios públicos y legisladores que buscan avances importantes en la investigación social.
+### Consejo editorial
 
-**En El Quantificador encontrarás:**
+*Editores en Jefe*
 
-Las mejores ideas e investigación social.
-
-Perspectivas recientes, claras, concisas, y con lenguaje accessible a todo el público.
-
-**Editores**
-
-Luis Alonso Quijano Ruiz (Xiamen University, China) y Marco Faytong Haro (Pennsylvania State University)
+Luis Alonso Quijano Ruiz — Xiamen University, China  
+Marco Faytong Haro — Pennsylvania State University, EEUU
